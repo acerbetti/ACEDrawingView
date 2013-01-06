@@ -17,8 +17,7 @@
 		7B5AD40F169A072800904C6B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD40E169A072800904C6B /* Default@2x.png */; };
 		7B5AD411169A072800904C6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD410169A072800904C6B /* Default-568h@2x.png */; };
 		7B5AD414169A072800904C6B /* ACEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AD413169A072800904C6B /* ACEViewController.m */; };
-		7B5AD417169A072800904C6B /* ACEViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD415169A072800904C6B /* ACEViewController_iPhone.xib */; };
-		7B5AD41A169A072800904C6B /* ACEViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD418169A072800904C6B /* ACEViewController_iPad.xib */; };
+		7B5AD417169A072800904C6B /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD415169A072800904C6B /* ACEViewController.xib */; };
 		7B5AD427169A077900904C6B /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AD426169A077900904C6B /* ACEDrawingView.m */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +37,7 @@
 		7B5AD410169A072800904C6B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7B5AD412169A072800904C6B /* ACEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewController.h; sourceTree = "<group>"; };
 		7B5AD413169A072800904C6B /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
-		7B5AD416169A072800904C6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController_iPhone.xib; sourceTree = "<group>"; };
-		7B5AD419169A072800904C6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController_iPad.xib; sourceTree = "<group>"; };
+		7B5AD416169A072800904C6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
 		7B5AD425169A077900904C6B /* ACEDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingView.h; sourceTree = "<group>"; };
 		7B5AD426169A077900904C6B /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,8 +91,7 @@
 				7B5AD40A169A072800904C6B /* ACEAppDelegate.m */,
 				7B5AD412169A072800904C6B /* ACEViewController.h */,
 				7B5AD413169A072800904C6B /* ACEViewController.m */,
-				7B5AD415169A072800904C6B /* ACEViewController_iPhone.xib */,
-				7B5AD418169A072800904C6B /* ACEViewController_iPad.xib */,
+				7B5AD415169A072800904C6B /* ACEViewController.xib */,
 				7B5AD401169A072800904C6B /* Supporting Files */,
 			);
 			path = ACEDrawingViewDemo;
@@ -179,8 +176,7 @@
 				7B5AD40D169A072800904C6B /* Default.png in Resources */,
 				7B5AD40F169A072800904C6B /* Default@2x.png in Resources */,
 				7B5AD411169A072800904C6B /* Default-568h@2x.png in Resources */,
-				7B5AD417169A072800904C6B /* ACEViewController_iPhone.xib in Resources */,
-				7B5AD41A169A072800904C6B /* ACEViewController_iPad.xib in Resources */,
+				7B5AD417169A072800904C6B /* ACEViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,20 +205,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		7B5AD415169A072800904C6B /* ACEViewController_iPhone.xib */ = {
+		7B5AD415169A072800904C6B /* ACEViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7B5AD416169A072800904C6B /* en */,
 			);
-			name = ACEViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		7B5AD418169A072800904C6B /* ACEViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7B5AD419169A072800904C6B /* en */,
-			);
-			name = ACEViewController_iPad.xib;
+			name = ACEViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -286,6 +274,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEDrawingViewDemo/ACEDrawingViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "ACEDrawingViewDemo/ACEDrawingViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -297,6 +286,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEDrawingViewDemo/ACEDrawingViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "ACEDrawingViewDemo/ACEDrawingViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

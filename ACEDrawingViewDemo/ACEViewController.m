@@ -9,6 +9,8 @@
 #import "ACEViewController.h"
 #import "ACEDrawingView.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface ACEViewController ()
 
 @end
@@ -23,6 +25,10 @@
     // start with red
     self.drawingView.lineColor = [UIColor redColor];
     self.lineWidthSlider.value = self.drawingView.lineWidth;
+    
+    // init the preview image
+    self.previewImageView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.previewImageView.layer.borderWidth = 2.0f;
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,7 +42,14 @@
 
 - (IBAction)takeScreenshot:(id)sender
 {
-    [self.drawingView image];
+    // show the preview image
+    self.previewImageView.image = self.drawingView.image;
+    self.previewImageView.hidden = NO;
+    
+    // close it after 3 seconds
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+        self.previewImageView.hidden = YES;
+    });
 }
 
 - (IBAction)undo:(id)sender

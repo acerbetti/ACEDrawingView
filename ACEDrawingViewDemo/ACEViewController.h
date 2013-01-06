@@ -14,6 +14,7 @@
 
 @property (nonatomic, unsafe_unretained) IBOutlet ACEDrawingView *drawingView;
 @property (nonatomic, unsafe_unretained) IBOutlet UISlider *lineWidthSlider;
+@property (nonatomic, unsafe_unretained) IBOutlet UIImageView *previewImageView;
 
 // actions
 - (IBAction)undo:(id)sender;
