@@ -41,6 +41,8 @@
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSMutableArray *bufferArray;
 @property (nonatomic, strong) UIColoredBezierPath *bezierPath;
+@property (nonatomic, assign) CGPoint currentPoint;
+@property (nonatomic, assign) CGPoint previousPoint;
 @end
 
 #pragma mark -
@@ -107,22 +109,24 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     
     // add the first touch
     UITouch *touch = [touches anyObject];
-    [self.bezierPath moveToPoint:[touch locationInView:self]];
+    self.currentPoint = self.previousPoint = [touch locationInView:self];
+    [self.bezierPath moveToPoint:self.currentPoint];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // save all the touches in the path
     UITouch *touch = [touches anyObject];
-    [self.bezierPath addLineToPoint:[touch locationInView:self]];
+    
+    // swith the point data
+    self.previousPoint = self.currentPoint;
+    self.currentPoint = [touch locationInView:self];
+    
+    // add the current point to the path
+    [self.bezierPath addQuadCurveToPoint:midPoint(self.currentPoint, self.previousPoint) controlPoint:self.previousPoint];
     
     // update the view
     [self setNeedsDisplay];
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
 }
 
 
