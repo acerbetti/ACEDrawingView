@@ -5,8 +5,8 @@ ACEDrawingView
 
 Purpose
 --------------
-ACEDrawingView is a sample project showing exactly how to create a nice and smooth drawing application. In few lines of codes it supports drawing with different colors and line width. 
-It also has included a full undo/redo stack and it can export the view as an UIImage
+ACEDrawingView is a sample project showing exactly how to create a nice and smooth drawing application. In a few lines of code it supports drawing with different colors and line width. 
+It also includes a full undo/redo stack and it can export the view as an UIImage.
 
 
 How-To
