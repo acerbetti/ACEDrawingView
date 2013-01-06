@@ -20,7 +20,7 @@ Features
 ------------------
 - Multi color lines
 - Multi width lines
-- Undo / Red stack
+- Undo / Redo stack
 - Create screenshot of your masterpiece
 
 
