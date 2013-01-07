@@ -26,6 +26,18 @@
 #import "ACEDrawingView.h"
 #import <QuartzCore/QuartzCore.h>
 
+
+#if __has_feature(objc_arc)
+#define ACE_AUTORELEASE(exp)
+#define ACE_RELEASE(exp)
+#define ACE_RETAIN(exp)
+#else
+#define ACE_AUTORELEASE(exp) [exp autorelease]
+#define ACE_RELEASE(exp) [exp release]
+#define ACE_RETAIN(exp) [exp retain]
+#endif
+
+
 @interface UIColoredBezierPath : UIBezierPath
 @property (nonatomic, strong) UIColor *lineColor;
 @end
@@ -106,6 +118,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     self.bezierPath.lineWidth = self.lineWidth;
     self.bezierPath.lineCapStyle = kCGLineCapRound;
     [self.pathArray addObject:self.bezierPath];
+    ACE_RELEASE(self.bezierPath);
     
     // add the first touch
     UITouch *touch = [touches anyObject];
@@ -188,5 +201,17 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         [self setNeedsDisplay];
     }
 }
+
+#if !__has_feature(objc_arc)
+
+- (void)dealloc
+{
+    self.pathArray = nil;
+    self.bufferArray = nil;
+    self.bezierPath = nil;
+    [super dealloc];
+}
+
+#endif
 
 @end

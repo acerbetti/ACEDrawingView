@@ -26,7 +26,7 @@ Features
 
 ARC Compatibility
 ------------------
-Full ARC support
+This component can be used in projects using ARC or not
 
 
 License
