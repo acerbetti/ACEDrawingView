@@ -30,10 +30,12 @@
 // public properties
 @property (nonatomic, assign) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
-@property (nonatomic, readonly) NSUInteger undoSteps;
+@property (nonatomic, assign) CGFloat lineAlpha;
+
 
 // get the current drawing
 @property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) NSUInteger undoSteps;
 
 // erase all
 - (void)clear;

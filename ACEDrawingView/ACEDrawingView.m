@@ -39,9 +39,14 @@
 #endif
 
 
+#define kDefaultLineColor       [UIColor blackColor]
+#define kDefaultLineWidth       10.0f;
+#define kDefaultLineAlpha       1.0f
+
 
 @interface UIColoredBezierPath : UIBezierPath
 @property (nonatomic, strong) UIColor *lineColor;
+@property (nonatomic, assign) CGFloat lineAlpha;
 @end
 
 #pragma mark -
@@ -99,8 +104,12 @@
     self.bufferArray = [NSMutableArray array];
     
     // set the default values for the public properties
-    self.lineColor = [UIColor blackColor];
-    self.lineWidth = 10.0f;
+    self.lineColor = kDefaultLineColor;
+    self.lineWidth = kDefaultLineWidth;
+    self.lineAlpha = kDefaultLineAlpha;
+    
+    // set the transparent background
+    self.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -116,7 +125,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     for (UIColoredBezierPath *path in self.pathArray)
     {
         [path.lineColor setStroke];
-        [path strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
+        [path strokeWithBlendMode:kCGBlendModeNormal alpha:path.lineAlpha];
     }
 }
 
@@ -127,9 +136,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     // init the bezier path
     self.bezierPath = [UIColoredBezierPath new];
-    self.bezierPath.lineColor = self.lineColor;
-    self.bezierPath.lineWidth = self.lineWidth;
     self.bezierPath.lineCapStyle = kCGLineCapRound;
+    self.bezierPath.lineWidth = self.lineWidth;
+    self.bezierPath.lineColor = self.lineColor;
+    self.bezierPath.lineAlpha = self.lineAlpha;
     [self.pathArray addObject:self.bezierPath];
     ACE_RELEASE(self.bezierPath);
     
