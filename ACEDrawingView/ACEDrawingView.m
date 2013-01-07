@@ -26,16 +26,18 @@
 #import "ACEDrawingView.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 #if __has_feature(objc_arc)
-#define ACE_AUTORELEASE(exp) exp
+#define ACE_HAS_ARC 1
+#define ACE_RETAIN(exp) (exp)
 #define ACE_RELEASE(exp)
-#define ACE_RETAIN(exp)
+#define ACE_AUTORELEASE(exp) (exp)
 #else
-#define ACE_AUTORELEASE(exp) [exp autorelease]
-#define ACE_RELEASE(exp) [exp release]
-#define ACE_RETAIN(exp) [exp retain]
+#define ACE_HAS_ARC 0
+#define ACE_RETAIN(exp) [(exp) retain]
+#define ACE_RELEASE(exp) [(exp) release]
+#define ACE_AUTORELEASE(exp) [(exp) autorelease]
 #endif
+
 
 
 @interface UIColoredBezierPath : UIBezierPath
@@ -46,7 +48,7 @@
 
 @implementation UIColoredBezierPath
 
-#if !__has_feature(objc_arc)
+#if !ACE_HAS_ARC
 
 - (void)dealloc
 {
@@ -213,7 +215,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     }
 }
 
-#if !__has_feature(objc_arc)
+#if !ACE_HAS_ARC
 
 - (void)dealloc
 {
