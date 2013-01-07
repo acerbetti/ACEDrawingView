@@ -70,12 +70,6 @@
 
 #pragma mark - Settings
 
-- (IBAction)toggleWidthSlider:(id)sender
-{
-    // toggle the slider
-    self.lineWidthSlider.hidden = !self.lineWidthSlider.hidden;
-}
-
 - (IBAction)colorChange:(UISegmentedControl *)sender
 {
     switch (sender.selectedSegmentIndex) {
@@ -97,9 +91,29 @@
     }
 }
 
+- (IBAction)toggleWidthSlider:(id)sender
+{
+    // toggle the slider
+    self.lineWidthSlider.hidden = !self.lineWidthSlider.hidden;
+    self.lineAlphaSlider.hidden = YES;
+}
+
+
 - (IBAction)widthChange:(UISlider *)sender
 {
     self.drawingView.lineWidth = sender.value;
+}
+
+- (IBAction)toggleAlphaSlider:(id)sender
+{
+    // toggle the slider
+    self.lineAlphaSlider.hidden = !self.lineAlphaSlider.hidden;
+    self.lineWidthSlider.hidden = YES;
+}
+
+- (IBAction)alphaChange:(UISlider *)sender
+{
+    self.drawingView.lineAlpha = sender.value;
 }
 
 @end

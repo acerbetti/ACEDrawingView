@@ -14,6 +14,7 @@
 
 @property (nonatomic, unsafe_unretained) IBOutlet ACEDrawingView *drawingView;
 @property (nonatomic, unsafe_unretained) IBOutlet UISlider *lineWidthSlider;
+@property (nonatomic, unsafe_unretained) IBOutlet UISlider *lineAlphaSlider;
 @property (nonatomic, unsafe_unretained) IBOutlet UIImageView *previewImageView;
 
 // actions
@@ -23,8 +24,10 @@
 - (IBAction)takeScreenshot:(id)sender;
 
 // settings
-- (IBAction)toggleWidthSlider:(id)sender;
 - (IBAction)colorChange:(UISegmentedControl *)sender;
+- (IBAction)toggleWidthSlider:(id)sender;
 - (IBAction)widthChange:(UISlider *)sender;
+- (IBAction)toggleAlphaSlider:(id)sender;
+- (IBAction)alphaChange:(UISlider *)sender;
 
 @end
