@@ -45,6 +45,17 @@
 #pragma mark -
 
 @implementation UIColoredBezierPath
+
+#if !__has_feature(objc_arc)
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+    [super dealloc];
+}
+
+#endif
+
 @end
 
 #pragma mark -
