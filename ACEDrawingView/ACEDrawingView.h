@@ -37,6 +37,7 @@
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSUInteger undoSteps;
 
+
 // erase all
 - (void)clear;
 

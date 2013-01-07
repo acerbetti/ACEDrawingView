@@ -18,9 +18,10 @@ How-To
 
 Features
 ------------------
-- Multi color lines
-- Multi width lines
 - Undo / Redo stack
+- Multiple color lines
+- Multiple width lines
+- Multiple alpha values
 - Create screenshot of your masterpiece
 
 
