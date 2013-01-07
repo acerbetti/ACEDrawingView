@@ -28,7 +28,7 @@
 
 
 #if __has_feature(objc_arc)
-#define ACE_AUTORELEASE(exp)
+#define ACE_AUTORELEASE(exp) exp
 #define ACE_RELEASE(exp)
 #define ACE_RETAIN(exp)
 #else
