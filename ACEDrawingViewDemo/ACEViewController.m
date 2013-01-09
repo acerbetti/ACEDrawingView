@@ -11,7 +11,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface ACEViewController ()
+@interface ACEViewController ()<ACEDrawingViewDelegate>
 
 @end
 
@@ -21,6 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // set the delegate
+    self.drawingView.delegate = self;
     
     // start with red
     self.drawingView.lineColor = [UIColor redColor];
@@ -40,6 +43,12 @@
 
 #pragma mark - Actions
 
+- (void)updateButtonStatus
+{
+    self.undoButton.enabled = [self.drawingView canUndo];
+    self.redoButton.enabled = [self.drawingView canRedo];
+}
+
 - (IBAction)takeScreenshot:(id)sender
 {
     // show the preview image
@@ -55,16 +64,27 @@
 - (IBAction)undo:(id)sender
 {
     [self.drawingView undoLatestStep];
+    [self updateButtonStatus];
 }
 
 - (IBAction)redo:(id)sender
 {
     [self.drawingView redoLatestStep];
+    [self updateButtonStatus];
 }
 
 - (IBAction)clear:(id)sender
 {
     [self.drawingView clear];
+    [self updateButtonStatus];
+}
+
+
+#pragma mark - ACEDrawing View Delegate
+
+- (void)drawingView:(ACEDrawingView *)view didEndDrawFreeformAtPoint:(CGPoint)point
+{
+    [self updateButtonStatus];
 }
 
 

@@ -172,6 +172,9 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    // clear the redo queue
+    [self.bufferArray removeAllObjects];
+    
     // call the delegate
     if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawFreeformAtPoint:)]) {
         [self.delegate drawingView:self didEndDrawFreeformAtPoint:self.currentPoint];

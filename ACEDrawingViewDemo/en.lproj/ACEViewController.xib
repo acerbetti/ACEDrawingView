@@ -52,12 +52,14 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<array class="NSMutableArray" key="IBUIItems">
 							<object class="IBUIBarButtonItem" id="488079967">
+								<bool key="IBUIEnabled">NO</bool>
 								<string key="IBUITitle">Undo</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="1006386096"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="401980295">
+								<bool key="IBUIEnabled">NO</bool>
 								<string key="IBUITitle">Redo</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
@@ -292,6 +294,22 @@
 					<int key="connectionID">67</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">redoButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="401980295"/>
+					</object>
+					<int key="connectionID">70</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">undoButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="488079967"/>
+					</object>
+					<int key="connectionID">71</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">toggleWidthSlider:</string>
 						<reference key="source" ref="567284952"/>
@@ -390,12 +408,12 @@
 						<int key="objectID">6</int>
 						<reference key="object" ref="774585933"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1006386096"/>
 							<reference ref="1036593928"/>
 							<reference ref="644189279"/>
 							<reference ref="811831583"/>
 							<reference ref="17785405"/>
 							<reference ref="650546923"/>
+							<reference ref="1006386096"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -526,7 +544,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">69</int>
+			<int key="maxID">71</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -595,6 +613,8 @@
 						<string key="lineAlphaSlider">UISlider</string>
 						<string key="lineWidthSlider">UISlider</string>
 						<string key="previewImageView">UIImageView</string>
+						<string key="redoButton">UIBarButtonItem</string>
+						<string key="undoButton">UIBarButtonItem</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="drawingView">
@@ -612,6 +632,14 @@
 						<object class="IBToOneOutletInfo" key="previewImageView">
 							<string key="name">previewImageView</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="redoButton">
+							<string key="name">redoButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="undoButton">
+							<string key="name">undoButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

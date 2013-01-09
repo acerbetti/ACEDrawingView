@@ -17,6 +17,9 @@
 @property (nonatomic, unsafe_unretained) IBOutlet UISlider *lineAlphaSlider;
 @property (nonatomic, unsafe_unretained) IBOutlet UIImageView *previewImageView;
 
+@property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *undoButton;
+@property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *redoButton;
+
 // actions
 - (IBAction)undo:(id)sender;
 - (IBAction)redo:(id)sender;
