@@ -147,6 +147,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     UITouch *touch = [touches anyObject];
     self.currentPoint = self.previousPoint = [touch locationInView:self];
     [self.bezierPath moveToPoint:self.currentPoint];
+    
+    // call the delegate
+    if ([self.delegate respondsToSelector:@selector(drawingView:willBeginDrawFreeformAtPoint:)]) {
+        [self.delegate drawingView:self willBeginDrawFreeformAtPoint:self.currentPoint];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -163,6 +168,14 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     
     // update the view
     [self setNeedsDisplay];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // call the delegate
+    if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawFreeformAtPoint:)]) {
+        [self.delegate drawingView:self didEndDrawFreeformAtPoint:self.currentPoint];
+    }
 }
 
 

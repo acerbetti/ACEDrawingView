@@ -25,7 +25,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ACEDrawingViewDelegate;
+
 @interface ACEDrawingView : UIView
+
+@property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
 
 // public properties
 @property (nonatomic, assign) UIColor *lineColor;
@@ -47,5 +51,15 @@
 
 - (BOOL)canRedo;
 - (void)redoLatestStep;
+
+@end
+
+#pragma mark -
+
+@protocol ACEDrawingViewDelegate <NSObject>
+
+@optional
+- (void)drawingView:(ACEDrawingView *)view willBeginDrawFreeformAtPoint:(CGPoint)point;
+- (void)drawingView:(ACEDrawingView *)view didEndDrawFreeformAtPoint:(CGPoint)point;
 
 @end
