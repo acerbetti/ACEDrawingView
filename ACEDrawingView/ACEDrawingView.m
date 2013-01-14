@@ -81,6 +81,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSMutableArray *bufferArray;
 @property (nonatomic, strong) UIColoredBezierPath *bezierPath;
+@property (nonatomic, strong) UIImage *image;
 @end
 
 #pragma mark -
@@ -125,11 +126,47 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (void)drawRect:(CGRect)rect
 {
-    for (UIColoredBezierPath *path in self.pathArray)
-    {
-        [path.lineColor setStroke];
-        [path strokeWithBlendMode:kCGBlendModeNormal alpha:path.lineAlpha];
+    [self.image drawInRect:rect];
+    [self drawPath];
+}
+
+- (void)drawPath
+{
+    // draw the latest line
+    UIColoredBezierPath *path = [self.pathArray lastObject];
+    [path.lineColor setStroke];
+    [path strokeWithBlendMode:kCGBlendModeNormal alpha:path.lineAlpha];
+}
+
+- (void)cacheImage
+{
+    // init a context
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
+    
+    // add the new line
+    [self.image drawAtPoint:CGPointZero];
+    
+    if (self.image == nil) {
+        // I need to redraw all the lines
+        for (UIColoredBezierPath *path in self.pathArray) {
+            [path.lineColor setStroke];
+            [path strokeWithBlendMode:kCGBlendModeNormal alpha:path.lineAlpha];
+        }
+        
+    } else {
+        // just draw the latest line
+        [self drawPath];
     }
+    
+    // store the image
+    self.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+}
+
+- (void)setNeedsDisplay
+{
+    [self cacheImage];
+    [super setNeedsDisplay];
 }
 
 
@@ -188,19 +225,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
+    self.image = nil;
     [self setNeedsDisplay];
-}
-
-- (UIImage *)image
-{
-    // create a snapshot
-    UIGraphicsBeginImageContext(self.bounds.size);
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    // return the image
-    return image;
 }
 
 
@@ -222,6 +248,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         UIColoredBezierPath *path = [self.pathArray lastObject];
         [self.bufferArray addObject:path];
         [self.pathArray removeLastObject];
+        self.image = nil;
         [self setNeedsDisplay];
     }
 }
@@ -237,6 +264,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         UIColoredBezierPath *path = [self.bufferArray lastObject];
         [self.pathArray addObject:path];
         [self.bufferArray removeLastObject];
+        self.image = nil;
         [self setNeedsDisplay];
     }
 }
@@ -248,6 +276,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     self.pathArray = nil;
     self.bufferArray = nil;
     self.bezierPath = nil;
+    self.image = nil;
     [super dealloc];
 }
 

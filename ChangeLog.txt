@@ -1,0 +1,13 @@
+01/13/2012 - v0.2
+-----------------
+- Performance improvements (use an image to cache the drawing)
+
+
+01/06/2013 - v0.1
+-----------------
++ Initial release
++ Undo / Redo stack
++ Multiple color lines
++ Multiple width lines
++ Multiple alpha values
++ Export screenshot

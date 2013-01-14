@@ -30,6 +30,16 @@ ARC Compatibility
 This component can be used in projects using ARC or not
 
 
+Change Log
+------------------
+01/13/2012 - v0.2
+- Performance improvements (use an image to cache the drawing)
+
+
+01/06/2013 - v0.1
+- Initial release
+
+
 License
 ------------------
 Copyright (c) 2013 Stefano Acerbetti

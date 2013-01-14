@@ -40,7 +40,7 @@
 
 
 // get the current drawing
-@property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, strong, readonly) UIImage *image;
 @property (nonatomic, readonly) NSUInteger undoSteps;
 
 
