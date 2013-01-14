@@ -43,6 +43,9 @@
 #define kDefaultLineWidth       10.0f;
 #define kDefaultLineAlpha       1.0f
 
+// experimental code
+#define PARTIAL_REDRAW          0
+
 
 @interface UIColoredBezierPath : UIBezierPath
 @property (nonatomic, strong) UIColor *lineColor;
@@ -126,8 +129,13 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (void)drawRect:(CGRect)rect
 {
-    [self.image drawInRect:rect];
+#if PARTIAL_REDRAW
+    // TODO: draw only the updated part of the image
     [self drawPath];
+#else
+    [self.image drawInRect:self.bounds];
+    [self drawPath];
+#endif
 }
 
 - (void)drawPath
@@ -138,15 +146,15 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     [path strokeWithBlendMode:kCGBlendModeNormal alpha:path.lineAlpha];
 }
 
-- (void)cacheImage
+- (void)updateCacheImage:(BOOL)redraw
 {
     // init a context
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
     
-    // add the new line
-    [self.image drawAtPoint:CGPointZero];
-    
-    if (self.image == nil) {
+    if (redraw) {
+        // erase the previous image
+        self.image = nil;
+        
         // I need to redraw all the lines
         for (UIColoredBezierPath *path in self.pathArray) {
             [path.lineColor setStroke];
@@ -154,19 +162,14 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         }
         
     } else {
-        // just draw the latest line
+        // set the draw point
+        [self.image drawAtPoint:CGPointZero];
         [self drawPath];
     }
     
     // store the image
     self.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-}
-
-- (void)setNeedsDisplay
-{
-    [self cacheImage];
-    [super setNeedsDisplay];
 }
 
 
@@ -198,16 +201,29 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     UITouch *touch = [touches anyObject];
     
     // add the current point to the path
-    [self.bezierPath addQuadCurveToPoint:[touch locationInView:self] fromPoint:[touch previousLocationInView:self]];
+    CGPoint currentLocation = [touch locationInView:self];
+    CGPoint previousLocation = [touch previousLocationInView:self];
+    [self.bezierPath addQuadCurveToPoint:currentLocation fromPoint:previousLocation];
     
-    // update the view
+#if PARTIAL_REDRAW
+    // calculate the dirty rect
+    CGFloat minX = fmin(previousLocation.x, currentLocation.x) - self.lineWidth * 0.5;
+    CGFloat minY = fmin(previousLocation.y, currentLocation.y) - self.lineWidth * 0.5;
+    CGFloat maxX = fmax(previousLocation.x, currentLocation.x) + self.lineWidth * 0.5;
+    CGFloat maxY = fmax(previousLocation.y, currentLocation.y) + self.lineWidth * 0.5;
+    [self setNeedsDisplayInRect:CGRectMake(minX, minY, (maxX - minX), (maxY - minY))];
+#else
     [self setNeedsDisplay];
+#endif
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // make sure a point is recorded
     [self touchesMoved:touches withEvent:event];
+    
+    // update the image
+    [self updateCacheImage:NO];
     
     // clear the redo queue
     [self.bufferArray removeAllObjects];
@@ -218,6 +234,12 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     }
 }
 
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    // make sure a point is recorded
+    [self touchesMoved:touches withEvent:event];
+}
+
 
 #pragma mark - Actions
 
@@ -225,7 +247,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
-    self.image = nil;
+    [self updateCacheImage:YES];
     [self setNeedsDisplay];
 }
 
@@ -248,7 +270,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         UIColoredBezierPath *path = [self.pathArray lastObject];
         [self.bufferArray addObject:path];
         [self.pathArray removeLastObject];
-        self.image = nil;
+        [self updateCacheImage:YES];
         [self setNeedsDisplay];
     }
 }
@@ -264,7 +286,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         UIColoredBezierPath *path = [self.bufferArray lastObject];
         [self.pathArray addObject:path];
         [self.bufferArray removeLastObject];
-        self.image = nil;
+        [self updateCacheImage:YES];
         [self setNeedsDisplay];
     }
 }
