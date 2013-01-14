@@ -169,6 +169,9 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    // make sure a point is recorded
+    [self touchesMoved:touches withEvent:event];
+    
     // clear the redo queue
     [self.bufferArray removeAllObjects];
     
