@@ -82,7 +82,7 @@
 
 #pragma mark - ACEDrawing View Delegate
 
-- (void)drawingView:(ACEDrawingView *)view didEndDrawFreeformAtPoint:(CGPoint)point
+- (void)drawingView:(ACEDrawingView *)view didEndDrawBezierPath:(UIBezierPath *)path
 {
     [self updateButtonStatus];
 }

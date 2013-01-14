@@ -53,6 +53,16 @@
 
 @implementation UIColoredBezierPath
 
+CGPoint midPoint(CGPoint p1, CGPoint p2)
+{
+    return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
+}
+
+- (void)addQuadCurveToPoint:(CGPoint)endPoint fromPoint:(CGPoint)startPoint
+{
+    [self addQuadCurveToPoint:midPoint(endPoint, startPoint) controlPoint:startPoint];
+}
+
 #if !ACE_HAS_ARC
 
 - (void)dealloc
@@ -71,8 +81,6 @@
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSMutableArray *bufferArray;
 @property (nonatomic, strong) UIColoredBezierPath *bezierPath;
-@property (nonatomic, assign) CGPoint currentPoint;
-@property (nonatomic, assign) CGPoint previousPoint;
 @end
 
 #pragma mark -
@@ -115,11 +123,6 @@
 
 #pragma mark - Drawing
 
-CGPoint midPoint(CGPoint p1, CGPoint p2)
-{
-    return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
-}
-
 - (void)drawRect:(CGRect)rect
 {
     for (UIColoredBezierPath *path in self.pathArray)
@@ -135,22 +138,20 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // init the bezier path
-    self.bezierPath = [UIColoredBezierPath new];
+    self.bezierPath = ACE_AUTORELEASE([UIColoredBezierPath new]);
     self.bezierPath.lineCapStyle = kCGLineCapRound;
     self.bezierPath.lineWidth = self.lineWidth;
     self.bezierPath.lineColor = self.lineColor;
     self.bezierPath.lineAlpha = self.lineAlpha;
     [self.pathArray addObject:self.bezierPath];
-    ACE_RELEASE(self.bezierPath);
     
     // add the first touch
     UITouch *touch = [touches anyObject];
-    self.currentPoint = self.previousPoint = [touch locationInView:self];
-    [self.bezierPath moveToPoint:self.currentPoint];
+    [self.bezierPath moveToPoint:[touch locationInView:self]];
     
     // call the delegate
-    if ([self.delegate respondsToSelector:@selector(drawingView:willBeginDrawFreeformAtPoint:)]) {
-        [self.delegate drawingView:self willBeginDrawFreeformAtPoint:self.currentPoint];
+    if ([self.delegate respondsToSelector:@selector(drawingView:willBeginDrawBezierPath:)]) {
+        [self.delegate drawingView:self willBeginDrawBezierPath:self.bezierPath];
     }
 }
 
@@ -159,12 +160,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     // save all the touches in the path
     UITouch *touch = [touches anyObject];
     
-    // swith the point data
-    self.previousPoint = self.currentPoint;
-    self.currentPoint = [touch locationInView:self];
-    
     // add the current point to the path
-    [self.bezierPath addQuadCurveToPoint:midPoint(self.currentPoint, self.previousPoint) controlPoint:self.previousPoint];
+    [self.bezierPath addQuadCurveToPoint:[touch locationInView:self] fromPoint:[touch previousLocationInView:self]];
     
     // update the view
     [self setNeedsDisplay];
@@ -176,8 +173,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     [self.bufferArray removeAllObjects];
     
     // call the delegate
-    if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawFreeformAtPoint:)]) {
-        [self.delegate drawingView:self didEndDrawFreeformAtPoint:self.currentPoint];
+    if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawBezierPath:)]) {
+        [self.delegate drawingView:self didEndDrawBezierPath:self.bezierPath];
     }
 }
 

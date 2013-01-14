@@ -25,6 +25,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define ACEDrawingViewVersion   0.2
+
 @protocol ACEDrawingViewDelegate;
 
 @interface ACEDrawingView : UIView
@@ -59,7 +61,7 @@
 @protocol ACEDrawingViewDelegate <NSObject>
 
 @optional
-- (void)drawingView:(ACEDrawingView *)view willBeginDrawFreeformAtPoint:(CGPoint)point;
-- (void)drawingView:(ACEDrawingView *)view didEndDrawFreeformAtPoint:(CGPoint)point;
+- (void)drawingView:(ACEDrawingView *)view willBeginDrawBezierPath:(UIBezierPath *)path;
+- (void)drawingView:(ACEDrawingView *)view didEndDrawBezierPath:(UIBezierPath *)path;
 
 @end
