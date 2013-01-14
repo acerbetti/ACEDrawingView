@@ -19,6 +19,8 @@
 
 @property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *undoButton;
 @property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *redoButton;
+@property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *colorButton;
+@property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *toolButton;
 
 // actions
 - (IBAction)undo:(id)sender;
@@ -27,7 +29,8 @@
 - (IBAction)takeScreenshot:(id)sender;
 
 // settings
-- (IBAction)colorChange:(UISegmentedControl *)sender;
+- (IBAction)colorChange:(id)sender;
+- (IBAction)toolChange:(id)sender;
 - (IBAction)toggleWidthSlider:(id)sender;
 - (IBAction)widthChange:(UISlider *)sender;
 - (IBAction)toggleAlphaSlider:(id)sender;

@@ -11,7 +11,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface ACEViewController ()<ACEDrawingViewDelegate>
+#define kActionSheetColor       100
+#define kActionSheetTool        101
+
+@interface ACEViewController ()<UIActionSheetDelegate, ACEDrawingViewDelegate>
 
 @end
 
@@ -25,8 +28,8 @@
     // set the delegate
     self.drawingView.delegate = self;
     
-    // start with red
-    self.drawingView.lineColor = [UIColor redColor];
+    // start with a black pen
+    self.drawingView.lineColor = [UIColor blackColor];
     self.lineWidthSlider.value = self.drawingView.lineWidth;
     
     // init the preview image
@@ -88,27 +91,72 @@
 }
 
 
+#pragma mark - Action Sheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.cancelButtonIndex != buttonIndex) {
+        if (actionSheet.tag == kActionSheetColor) {
+            switch (buttonIndex) {
+                case 0:
+                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.lineColor = [UIColor blackColor];
+                    break;
+                    
+                case 1:
+                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.lineColor = [UIColor redColor];
+                    break;
+                    
+                case 2:
+                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.lineColor = [UIColor greenColor];
+                    break;
+                    
+                case 3:
+                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.lineColor = [UIColor blueColor];
+                    break;
+            }
+            
+        } else {
+            switch (buttonIndex) {
+                case 0:
+                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    break;
+                    
+                case 1:
+                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    break;
+            }
+        }
+    }
+}
+
 #pragma mark - Settings
 
-- (IBAction)colorChange:(UISegmentedControl *)sender
+- (IBAction)colorChange:(id)sender
 {
-    switch (sender.selectedSegmentIndex) {
-        case 0:
-            self.drawingView.lineColor = [UIColor redColor];
-            break;
-            
-        case 1:
-            self.drawingView.lineColor = [UIColor greenColor];
-            break;
-            
-        case 2:
-            self.drawingView.lineColor = [UIColor blueColor];
-            break;
-            
-        default:
-            self.drawingView.lineColor = [UIColor blackColor];
-            break;
-    }
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Selet a color"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Black", @"Red", @"Green", @"Blue", nil];
+    
+    [actionSheet setTag:kActionSheetColor];
+    [actionSheet showInView:self.view];
+}
+
+- (IBAction)toolChange:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Selet a tool"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Pen", @"Line", nil];
+    
+    [actionSheet setTag:kActionSheetTool];
+    [actionSheet showInView:self.view];
 }
 
 - (IBAction)toggleWidthSlider:(id)sender
