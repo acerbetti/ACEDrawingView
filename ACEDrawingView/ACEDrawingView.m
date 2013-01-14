@@ -118,13 +118,24 @@
     UIGraphicsEndImageContext();
 }
 
+- (Class)toolClass
+{
+    switch (self.drawTool) {
+        case ACEDrawingToolTypePen:
+            return [ACEDrawingPenTool class];
+            
+        case ACEDrawingToolTypeLine:
+            return [ACEDrawingLineTool class];
+    }
+}
+
 
 #pragma mark - Touch Methods
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // init the bezier path
-    self.currentTool = ACE_AUTORELEASE([ACEDrawingLineTool new]);
+    self.currentTool = ACE_AUTORELEASE([[self toolClass] new]);
     self.currentTool.lineWidth = self.lineWidth;
     self.currentTool.lineColor = self.lineColor;
     self.currentTool.lineAlpha = self.lineAlpha;

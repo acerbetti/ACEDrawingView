@@ -25,12 +25,18 @@
 
 #import <UIKit/UIKit.h>
 
-#define ACEDrawingViewVersion   0.2
+#define ACEDrawingViewVersion   0.2.1
+
+typedef enum {
+    ACEDrawingToolTypePen,
+    ACEDrawingToolTypeLine,
+} ACEDrawingToolType;
 
 @protocol ACEDrawingViewDelegate, ACEDrawingTool;
 
 @interface ACEDrawingView : UIView
 
+@property (nonatomic, assign) ACEDrawingToolType drawTool;
 @property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
 
 // public properties

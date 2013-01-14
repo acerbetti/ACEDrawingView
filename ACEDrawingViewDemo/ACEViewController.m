@@ -29,7 +29,6 @@
     self.drawingView.delegate = self;
     
     // start with a black pen
-    self.drawingView.lineColor = [UIColor blackColor];
     self.lineWidthSlider.value = self.drawingView.lineWidth;
     
     // init the preview image
@@ -123,10 +122,12 @@
             switch (buttonIndex) {
                 case 0:
                     self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.drawTool = ACEDrawingToolTypePen;
                     break;
                     
                 case 1:
                     self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.drawTool = ACEDrawingToolTypeLine;
                     break;
             }
         }
