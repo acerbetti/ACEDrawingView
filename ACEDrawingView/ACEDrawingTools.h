@@ -23,45 +23,43 @@
  *
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-#define ACEDrawingViewVersion   0.2
 
-@protocol ACEDrawingViewDelegate, ACEDrawingTool;
+#if __has_feature(objc_arc)
+#define ACE_HAS_ARC 1
+#define ACE_RETAIN(exp) (exp)
+#define ACE_RELEASE(exp)
+#define ACE_AUTORELEASE(exp) (exp)
+#else
+#define ACE_HAS_ARC 0
+#define ACE_RETAIN(exp) [(exp) retain]
+#define ACE_RELEASE(exp) [(exp) release]
+#define ACE_AUTORELEASE(exp) [(exp) autorelease]
+#endif
 
-@interface ACEDrawingView : UIView
 
-@property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
+@protocol ACEDrawingTool <NSObject>
 
-// public properties
-@property (nonatomic, assign) UIColor *lineColor;
-@property (nonatomic, assign) CGFloat lineWidth;
+@property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineAlpha;
+@property (nonatomic, assign) CGFloat lineWidth;
 
+- (void)setInitialPoint:(CGPoint)firstPoint;
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
 
-// get the current drawing
-@property (nonatomic, strong, readonly) UIImage *image;
-@property (nonatomic, readonly) NSUInteger undoSteps;
-
-
-// erase all
-- (void)clear;
-
-// undo / redo
-- (BOOL)canUndo;
-- (void)undoLatestStep;
-
-- (BOOL)canRedo;
-- (void)redoLatestStep;
+- (void)draw;
 
 @end
 
 #pragma mark -
 
-@protocol ACEDrawingViewDelegate <NSObject>
+@interface ACEDrawingPenTool : UIBezierPath<ACEDrawingTool>
 
-@optional
-- (void)drawingView:(ACEDrawingView *)view willBeginDrawUsingTool:(id<ACEDrawingTool>)tool;
-- (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingTool>)tool;
+@end
+
+#pragma mark -
+
+@interface ACEDrawingLineTool : NSObject<ACEDrawingTool>
 
 @end

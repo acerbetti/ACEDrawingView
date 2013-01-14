@@ -24,20 +24,9 @@
  */
 
 #import "ACEDrawingView.h"
+#import "ACEDrawingTools.h"
+
 #import <QuartzCore/QuartzCore.h>
-
-#if __has_feature(objc_arc)
-#define ACE_HAS_ARC 1
-#define ACE_RETAIN(exp) (exp)
-#define ACE_RELEASE(exp)
-#define ACE_AUTORELEASE(exp) (exp)
-#else
-#define ACE_HAS_ARC 0
-#define ACE_RETAIN(exp) [(exp) retain]
-#define ACE_RELEASE(exp) [(exp) release]
-#define ACE_AUTORELEASE(exp) [(exp) autorelease]
-#endif
-
 
 #define kDefaultLineColor       [UIColor blackColor]
 #define kDefaultLineWidth       10.0f;
@@ -46,44 +35,10 @@
 // experimental code
 #define PARTIAL_REDRAW          0
 
-
-@interface UIColoredBezierPath : UIBezierPath
-@property (nonatomic, strong) UIColor *lineColor;
-@property (nonatomic, assign) CGFloat lineAlpha;
-@end
-
-#pragma mark -
-
-@implementation UIColoredBezierPath
-
-CGPoint midPoint(CGPoint p1, CGPoint p2)
-{
-    return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
-}
-
-- (void)addQuadCurveToPoint:(CGPoint)endPoint fromPoint:(CGPoint)startPoint
-{
-    [self addQuadCurveToPoint:midPoint(endPoint, startPoint) controlPoint:startPoint];
-}
-
-#if !ACE_HAS_ARC
-
-- (void)dealloc
-{
-    self.lineColor = nil;
-    [super dealloc];
-}
-
-#endif
-
-@end
-
-#pragma mark -
-
 @interface ACEDrawingView ()
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSMutableArray *bufferArray;
-@property (nonatomic, strong) UIColoredBezierPath *bezierPath;
+@property (nonatomic, strong) id<ACEDrawingTool> currentTool;
 @property (nonatomic, strong) UIImage *image;
 @end
 
@@ -134,16 +89,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     [self drawPath];
 #else
     [self.image drawInRect:self.bounds];
-    [self drawPath];
+    [self.currentTool draw];
 #endif
-}
-
-- (void)drawPath
-{
-    // draw the latest line
-    UIColoredBezierPath *path = [self.pathArray lastObject];
-    [path.lineColor setStroke];
-    [path strokeWithBlendMode:kCGBlendModeNormal alpha:path.lineAlpha];
 }
 
 - (void)updateCacheImage:(BOOL)redraw
@@ -156,15 +103,14 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         self.image = nil;
         
         // I need to redraw all the lines
-        for (UIColoredBezierPath *path in self.pathArray) {
-            [path.lineColor setStroke];
-            [path strokeWithBlendMode:kCGBlendModeNormal alpha:path.lineAlpha];
+        for (id<ACEDrawingTool> tool in self.pathArray) {
+            [tool draw];
         }
         
     } else {
         // set the draw point
         [self.image drawAtPoint:CGPointZero];
-        [self drawPath];
+        [self.currentTool draw];
     }
     
     // store the image
@@ -178,20 +124,19 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // init the bezier path
-    self.bezierPath = ACE_AUTORELEASE([UIColoredBezierPath new]);
-    self.bezierPath.lineCapStyle = kCGLineCapRound;
-    self.bezierPath.lineWidth = self.lineWidth;
-    self.bezierPath.lineColor = self.lineColor;
-    self.bezierPath.lineAlpha = self.lineAlpha;
-    [self.pathArray addObject:self.bezierPath];
+    self.currentTool = ACE_AUTORELEASE([ACEDrawingLineTool new]);
+    self.currentTool.lineWidth = self.lineWidth;
+    self.currentTool.lineColor = self.lineColor;
+    self.currentTool.lineAlpha = self.lineAlpha;
+    [self.pathArray addObject:self.currentTool];
     
     // add the first touch
     UITouch *touch = [touches anyObject];
-    [self.bezierPath moveToPoint:[touch locationInView:self]];
+    [self.currentTool setInitialPoint:[touch locationInView:self]];
     
     // call the delegate
-    if ([self.delegate respondsToSelector:@selector(drawingView:willBeginDrawBezierPath:)]) {
-        [self.delegate drawingView:self willBeginDrawBezierPath:self.bezierPath];
+    if ([self.delegate respondsToSelector:@selector(drawingView:willBeginDrawUsingTool:)]) {
+        [self.delegate drawingView:self willBeginDrawUsingTool:self.currentTool];
     }
 }
 
@@ -203,7 +148,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     // add the current point to the path
     CGPoint currentLocation = [touch locationInView:self];
     CGPoint previousLocation = [touch previousLocationInView:self];
-    [self.bezierPath addQuadCurveToPoint:currentLocation fromPoint:previousLocation];
+    [self.currentTool moveFromPoint:previousLocation toPoint:currentLocation];
     
 #if PARTIAL_REDRAW
     // calculate the dirty rect
@@ -225,19 +170,22 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     // update the image
     [self updateCacheImage:NO];
     
+    // clear the current tool
+    self.currentTool = nil;
+    
     // clear the redo queue
     [self.bufferArray removeAllObjects];
     
     // call the delegate
-    if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawBezierPath:)]) {
-        [self.delegate drawingView:self didEndDrawBezierPath:self.bezierPath];
+    if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawUsingTool:)]) {
+        [self.delegate drawingView:self didEndDrawUsingTool:self.currentTool];
     }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // make sure a point is recorded
-    [self touchesMoved:touches withEvent:event];
+    [self touchesEnded:touches withEvent:event];
 }
 
 
@@ -267,8 +215,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)undoLatestStep
 {
     if ([self canUndo]) {
-        UIColoredBezierPath *path = [self.pathArray lastObject];
-        [self.bufferArray addObject:path];
+        id<ACEDrawingTool>tool = [self.pathArray lastObject];
+        [self.bufferArray addObject:tool];
         [self.pathArray removeLastObject];
         [self updateCacheImage:YES];
         [self setNeedsDisplay];
@@ -283,8 +231,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)redoLatestStep
 {
     if ([self canRedo]) {
-        UIColoredBezierPath *path = [self.bufferArray lastObject];
-        [self.pathArray addObject:path];
+        id<ACEDrawingTool>tool = [self.bufferArray lastObject];
+        [self.pathArray addObject:tool];
         [self.bufferArray removeLastObject];
         [self updateCacheImage:YES];
         [self setNeedsDisplay];
