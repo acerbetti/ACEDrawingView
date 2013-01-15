@@ -144,6 +144,20 @@
             tool.fill = YES;
             return tool;
         }
+            
+        case ACEDrawingToolTypeEllipseStroke:
+        {
+            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
+            tool.fill = NO;
+            return tool;
+        }
+            
+        case ACEDrawingToolTypeEllipseFill:
+        {
+            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
+            tool.fill = YES;
+            return tool;
+        }
     }
 }
 

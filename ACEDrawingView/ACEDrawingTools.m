@@ -146,23 +146,71 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    // set the line properties
-    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
-    CGContextSetLineWidth(context, self.lineWidth);
+    // set the properties
     CGContextSetAlpha(context, self.lineAlpha);
     
     // draw the rectangle
-    CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
-    CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);
-    
+    CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);    
     if (self.fill) {
-        int offset = self.lineWidth / 2;
-        rectToFill = CGRectInset(rectToFill, offset, offset);
+        CGContextSetFillColorWithColor(context, self.lineColor.CGColor);
         CGContextFillRect(UIGraphicsGetCurrentContext(), rectToFill);
+        
+    } else {
+        CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+        CGContextSetLineWidth(context, self.lineWidth);
+        CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);        
     }
     
     CGContextStrokePath(context);
 }
 
+@end
+
+#pragma mark - ACEDrawingEllipseTool
+
+@interface ACEDrawingEllipseTool ()
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingEllipseTool
+
+@synthesize lineColor = _lineColor;
+@synthesize lineAlpha = _lineAlpha;
+@synthesize lineWidth = _lineWidth;
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    self.lastPoint = endPoint;
+}
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the properties
+    CGContextSetAlpha(context, self.lineAlpha);
+    
+    // draw the ellipse
+    CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
+    if (self.fill) {
+        CGContextSetFillColorWithColor(context, self.lineColor.CGColor);
+        CGContextFillEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
+        
+    } else {
+        CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+        CGContextSetLineWidth(context, self.lineWidth);
+        CGContextStrokeEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
+    }
+    
+    CGContextStrokePath(context);
+}
 
 @end

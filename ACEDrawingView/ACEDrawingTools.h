@@ -71,3 +71,11 @@
 @property (nonatomic, assign) BOOL fill;
 
 @end
+
+#pragma mark -
+
+@interface ACEDrawingEllipseTool : NSObject<ACEDrawingTool>
+
+@property (nonatomic, assign) BOOL fill;
+
+@end

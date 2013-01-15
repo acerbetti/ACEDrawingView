@@ -139,6 +139,16 @@
                     self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.drawTool = ACEDrawingToolTypeRectagleFill;
                     break;
+                    
+                case 4:
+                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseStroke;
+                    break;
+                    
+                case 5:
+                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseFill;
+                    break;
             }
         }
     }
@@ -164,7 +174,10 @@
                                                              delegate:self
                                                     cancelButtonTitle:@"Cancel"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Pen", @"Line", @"Rect (Stroke)", @"Rect (Fill)", nil];
+                                                    otherButtonTitles:@"Pen", @"Line",
+                                  @"Rect (Stroke)", @"Rect (Fill)",
+                                  @"Ellipse (Stroke)", @"Ellipse (Fill)",
+                                  nil];
     
     [actionSheet setTag:kActionSheetTool];
     [actionSheet showInView:self.view];
