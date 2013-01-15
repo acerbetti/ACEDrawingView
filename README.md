@@ -11,7 +11,7 @@ It also includes a full undo/redo stack and it can export the view as an UIImage
 
 How-To
 ------------------
-- Import the files "ACEDrawingView.m" and "ACEDrawingView.h" to your project
+- Import the files from the folder "ACEDrawingView" to your project
 - From IB create a view and set the class to "ACEDrawingView"
 - Programmatically use the initWithFrame: and add it as subview
 
@@ -23,6 +23,7 @@ Features
 - Multiple width lines
 - Multiple alpha values
 - Create screenshot of your masterpiece
+- Support for multiple tools (pen, line, rectangle, ellipse)
 
 
 ARC Compatibility
@@ -32,6 +33,10 @@ This component can be used in projects using ARC or not
 
 Change Log
 ------------------
+01/15/2012 - v1.0
+- Draw with multiple tools (pen, line, rectangle, ellipse)
+
+
 01/13/2012 - v0.2
 - Performance improvements (use an image to cache the drawing)
 

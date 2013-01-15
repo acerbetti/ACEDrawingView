@@ -1,3 +1,8 @@
+01/15/2012 - v1.0
+-----------------
++ Draw with multiple tools (pen, line, rectangle, ellipse)
+
+
 01/13/2012 - v0.2
 -----------------
 - Performance improvements (use an image to cache the drawing)
