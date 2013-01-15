@@ -25,11 +25,13 @@
 
 #import <UIKit/UIKit.h>
 
-#define ACEDrawingViewVersion   0.2.1
+#define ACEDrawingViewVersion   1.0.0
 
 typedef enum {
     ACEDrawingToolTypePen,
     ACEDrawingToolTypeLine,
+    ACEDrawingToolTypeRectagleStroke,
+    ACEDrawingToolTypeRectagleFill,
 } ACEDrawingToolType;
 
 @protocol ACEDrawingViewDelegate, ACEDrawingTool;

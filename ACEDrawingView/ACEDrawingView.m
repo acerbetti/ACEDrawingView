@@ -118,14 +118,32 @@
     UIGraphicsEndImageContext();
 }
 
-- (Class)toolClass
+- (id<ACEDrawingTool>)createTool
 {
     switch (self.drawTool) {
         case ACEDrawingToolTypePen:
-            return [ACEDrawingPenTool class];
+        {
+            return [ACEDrawingPenTool new];
+        }
             
         case ACEDrawingToolTypeLine:
-            return [ACEDrawingLineTool class];
+        {
+            return [ACEDrawingLineTool new];
+        }
+            
+        case ACEDrawingToolTypeRectagleStroke:
+        {
+            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
+            tool.fill = NO;
+            return tool;
+        }
+            
+        case ACEDrawingToolTypeRectagleFill:
+        {
+            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
+            tool.fill = YES;
+            return tool;
+        }
     }
 }
 
@@ -135,7 +153,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // init the bezier path
-    self.currentTool = ACE_AUTORELEASE([[self toolClass] new]);
+    self.currentTool = ACE_AUTORELEASE([self createTool]);
     self.currentTool.lineWidth = self.lineWidth;
     self.currentTool.lineColor = self.lineColor;
     self.currentTool.lineAlpha = self.lineAlpha;

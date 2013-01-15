@@ -30,7 +30,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     return CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5);
 }
 
-#pragma mark -
+#pragma mark - ACEDrawingPenTool
 
 @implementation ACEDrawingPenTool
 
@@ -74,12 +74,14 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 @end
 
-#pragma mark -
+#pragma mark - ACEDrawingLineTool
 
 @interface ACEDrawingLineTool ()
 @property (nonatomic, assign) CGPoint firstPoint;
 @property (nonatomic, assign) CGPoint lastPoint;
 @end
+
+#pragma mark -
 
 @implementation ACEDrawingLineTool
 
@@ -112,5 +114,55 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextAddLineToPoint(context, self.lastPoint.x, self.lastPoint.y);
     CGContextStrokePath(context);
 }
+
+@end
+
+#pragma mark - ACEDrawingRectangleTool
+
+@interface ACEDrawingRectangleTool ()
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingRectangleTool
+
+@synthesize lineColor = _lineColor;
+@synthesize lineAlpha = _lineAlpha;
+@synthesize lineWidth = _lineWidth;
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    self.lastPoint = endPoint;
+}
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the line properties
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetAlpha(context, self.lineAlpha);
+    
+    // draw the rectangle
+    CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
+    CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);
+    
+    if (self.fill) {
+        int offset = self.lineWidth / 2;
+        rectToFill = CGRectInset(rectToFill, offset, offset);
+        CGContextFillRect(UIGraphicsGetCurrentContext(), rectToFill);
+    }
+    
+    CGContextStrokePath(context);
+}
+
 
 @end

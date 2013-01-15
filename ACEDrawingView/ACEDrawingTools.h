@@ -63,3 +63,11 @@
 @interface ACEDrawingLineTool : NSObject<ACEDrawingTool>
 
 @end
+
+#pragma mark -
+
+@interface ACEDrawingRectangleTool : NSObject<ACEDrawingTool>
+
+@property (nonatomic, assign) BOOL fill;
+
+@end
