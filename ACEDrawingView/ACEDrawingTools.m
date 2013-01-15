@@ -115,6 +115,16 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextStrokePath(context);
 }
 
+#if !ACE_HAS_ARC
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+    [super dealloc];
+}
+
+#endif
+
 @end
 
 #pragma mark - ACEDrawingRectangleTool
@@ -160,9 +170,17 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         CGContextSetLineWidth(context, self.lineWidth);
         CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);        
     }
-    
-    CGContextStrokePath(context);
 }
+
+#if !ACE_HAS_ARC
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+    [super dealloc];
+}
+
+#endif
 
 @end
 
@@ -209,8 +227,16 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         CGContextSetLineWidth(context, self.lineWidth);
         CGContextStrokeEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
     }
-    
-    CGContextStrokePath(context);
 }
+
+#if !ACE_HAS_ARC
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+    [super dealloc];
+}
+
+#endif
 
 @end

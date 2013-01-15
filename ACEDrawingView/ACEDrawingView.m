@@ -118,43 +118,43 @@
     UIGraphicsEndImageContext();
 }
 
-- (id<ACEDrawingTool>)createTool
+- (id<ACEDrawingTool>)toolWithCurrentSettings
 {
     switch (self.drawTool) {
         case ACEDrawingToolTypePen:
         {
-            return [ACEDrawingPenTool new];
+            return ACE_AUTORELEASE([ACEDrawingPenTool new]);
         }
             
         case ACEDrawingToolTypeLine:
         {
-            return [ACEDrawingLineTool new];
+            return ACE_AUTORELEASE([ACEDrawingLineTool new]);
         }
             
         case ACEDrawingToolTypeRectagleStroke:
         {
-            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
+            ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);
             tool.fill = NO;
             return tool;
         }
             
         case ACEDrawingToolTypeRectagleFill:
         {
-            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
+            ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);
             tool.fill = YES;
             return tool;
         }
             
         case ACEDrawingToolTypeEllipseStroke:
         {
-            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
+            ACEDrawingEllipseTool *tool = ACE_AUTORELEASE([ACEDrawingEllipseTool new]);
             tool.fill = NO;
             return tool;
         }
             
         case ACEDrawingToolTypeEllipseFill:
         {
-            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
+            ACEDrawingEllipseTool *tool = ACE_AUTORELEASE([ACEDrawingEllipseTool new]);
             tool.fill = YES;
             return tool;
         }
@@ -167,7 +167,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // init the bezier path
-    self.currentTool = ACE_AUTORELEASE([self createTool]);
+    self.currentTool = [self toolWithCurrentSettings];
     self.currentTool.lineWidth = self.lineWidth;
     self.currentTool.lineColor = self.lineColor;
     self.currentTool.lineAlpha = self.lineAlpha;
@@ -288,7 +288,7 @@
 {
     self.pathArray = nil;
     self.bufferArray = nil;
-    self.bezierPath = nil;
+    self.currentTool = nil;
     self.image = nil;
     [super dealloc];
 }
