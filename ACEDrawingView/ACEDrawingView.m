@@ -35,7 +35,12 @@
 // experimental code
 #define PARTIAL_REDRAW          0
 
-@interface ACEDrawingView ()
+@interface ACEDrawingView () {
+    CGPoint currentPoint;
+    CGPoint previousPoint1;
+    CGPoint previousPoint2;
+}
+
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSMutableArray *bufferArray;
 @property (nonatomic, strong) id<ACEDrawingTool> currentTool;
@@ -175,7 +180,11 @@
     
     // add the first touch
     UITouch *touch = [touches anyObject];
-    [self.currentTool setInitialPoint:[touch locationInView:self]];
+    
+    previousPoint1 = [touch previousLocationInView:self];
+    currentPoint = [touch locationInView:self];
+    
+    [self.currentTool setInitialPoint:currentPoint];
     
     // call the delegate
     if ([self.delegate respondsToSelector:@selector(drawingView:willBeginDrawUsingTool:)]) {
@@ -188,21 +197,25 @@
     // save all the touches in the path
     UITouch *touch = [touches anyObject];
     
-    // add the current point to the path
-    CGPoint currentLocation = [touch locationInView:self];
-    CGPoint previousLocation = [touch previousLocationInView:self];
-    [self.currentTool moveFromPoint:previousLocation toPoint:currentLocation];
+    previousPoint2 = previousPoint1;
+    previousPoint1 = [touch previousLocationInView:self];
+    currentPoint = [touch locationInView:self];
     
-#if PARTIAL_REDRAW
-    // calculate the dirty rect
-    CGFloat minX = fmin(previousLocation.x, currentLocation.x) - self.lineWidth * 0.5;
-    CGFloat minY = fmin(previousLocation.y, currentLocation.y) - self.lineWidth * 0.5;
-    CGFloat maxX = fmax(previousLocation.x, currentLocation.x) + self.lineWidth * 0.5;
-    CGFloat maxY = fmax(previousLocation.y, currentLocation.y) + self.lineWidth * 0.5;
-    [self setNeedsDisplayInRect:CGRectMake(minX, minY, (maxX - minX), (maxY - minY))];
-#else
-    [self setNeedsDisplay];
-#endif
+    if ([self.currentTool isKindOfClass:[ACEDrawingPenTool class]]) {
+        CGRect bounds = [(ACEDrawingPenTool*)self.currentTool addPathPreviousPreviousPoint:previousPoint2 withPreviousPoint:previousPoint1 withCurrentPoint:currentPoint];
+        
+        CGRect drawBox = bounds;
+        drawBox.origin.x -= self.lineWidth * 2.0;
+        drawBox.origin.y -= self.lineWidth * 2.0;
+        drawBox.size.width += self.lineWidth * 4.0;
+        drawBox.size.height += self.lineWidth * 4.0;
+        
+        [self setNeedsDisplayInRect:drawBox];
+    }
+    else {
+        [self.currentTool moveFromPoint:previousPoint1 toPoint:currentPoint];
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

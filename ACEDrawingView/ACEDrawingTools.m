@@ -42,30 +42,54 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     self = [super init];
     if (self != nil) {
         self.lineCapStyle = kCGLineCapRound;
+        path = CGPathCreateMutable();
     }
     return self;
 }
 
 - (void)setInitialPoint:(CGPoint)firstPoint
 {
-    [self moveToPoint:firstPoint];
+    //[self moveToPoint:firstPoint];
 }
 
 - (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
-    [self addQuadCurveToPoint:midPoint(endPoint, startPoint) controlPoint:startPoint];
+    //[self addQuadCurveToPoint:midPoint(endPoint, startPoint) controlPoint:startPoint];
+}
+
+- (CGRect)addPathPreviousPreviousPoint:(CGPoint)p2Point withPreviousPoint:(CGPoint)p1Point withCurrentPoint:(CGPoint)cpoint {
+    
+    CGPoint mid1 = midPoint(p1Point, p2Point);
+    CGPoint mid2 = midPoint(cpoint, p1Point);
+    CGMutablePathRef subpath = CGPathCreateMutable();
+    CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
+    CGPathAddQuadCurveToPoint(subpath, NULL, p1Point.x, p1Point.y, mid2.x, mid2.y);
+    CGRect bounds = CGPathGetBoundingBox(subpath);
+    
+    CGPathAddPath(path, NULL, subpath);
+    CGPathRelease(subpath);
+    
+    return bounds;
 }
 
 - (void)draw
 {
-    [self.lineColor setStroke];
-    [self strokeWithBlendMode:kCGBlendModeNormal alpha:self.lineAlpha];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+	CGContextAddPath(context, path);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGContextSetAlpha(context, self.lineAlpha);
+    CGContextStrokePath(context);
 }
 
 #if !ACE_HAS_ARC
 
 - (void)dealloc
 {
+    CGPathRelease(path);
     self.lineColor = nil;
     [super dealloc];
 }
