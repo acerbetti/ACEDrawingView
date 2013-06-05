@@ -54,7 +54,12 @@
 
 #pragma mark -
 
-@interface ACEDrawingPenTool : UIBezierPath<ACEDrawingTool>
+@interface ACEDrawingPenTool : UIBezierPath<ACEDrawingTool> {
+    CGMutablePathRef path;
+}
+
+- (CGRect)addPathPreviousPreviousPoint:(CGPoint)p2Point withPreviousPoint:(CGPoint)p1Point withCurrentPoint:(CGPoint)cpoint;
+
 
 @end
 
