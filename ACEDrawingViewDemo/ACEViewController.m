@@ -96,60 +96,61 @@
 {
     if (actionSheet.cancelButtonIndex != buttonIndex) {
         if (actionSheet.tag == kActionSheetColor) {
+            
+            self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
             switch (buttonIndex) {
                 case 0:
-                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.lineColor = [UIColor blackColor];
                     break;
                     
                 case 1:
-                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.lineColor = [UIColor redColor];
                     break;
                     
                 case 2:
-                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.lineColor = [UIColor greenColor];
                     break;
                     
                 case 3:
-                    self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.lineColor = [UIColor blueColor];
                     break;
             }
             
         } else {
+            
+            self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
             switch (buttonIndex) {
                 case 0:
-                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.drawTool = ACEDrawingToolTypePen;
                     break;
                     
                 case 1:
-                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.drawTool = ACEDrawingToolTypeLine;
                     break;
                     
                 case 2:
-                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.drawTool = ACEDrawingToolTypeRectagleStroke;
                     break;
                     
                 case 3:
-                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.drawTool = ACEDrawingToolTypeRectagleFill;
                     break;
                     
                 case 4:
-                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.drawTool = ACEDrawingToolTypeEllipseStroke;
                     break;
                     
                 case 5:
-                    self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
                     self.drawingView.drawTool = ACEDrawingToolTypeEllipseFill;
                     break;
+                    
+                case 6:
+                    self.drawingView.drawTool = ACEDrawingToolTypeEraser;
+                    break;
             }
+        
+            // if eraser, disable color and alpha selection
+            self.colorButton.enabled = self.alphaButton.enabled = buttonIndex != 6;
         }
     }
 }
@@ -177,6 +178,7 @@
                                                     otherButtonTitles:@"Pen", @"Line",
                                   @"Rect (Stroke)", @"Rect (Fill)",
                                   @"Ellipse (Stroke)", @"Ellipse (Fill)",
+                                  @"Eraser",
                                   nil];
     
     [actionSheet setTag:kActionSheetTool];

@@ -85,8 +85,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextStrokePath(context);
 }
 
-
-
 - (void)dealloc
 {
     CGPathRelease(path);
@@ -96,9 +94,26 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     #endif
 }
 
+@end
 
+
+#pragma mark - ACEDrawingEraserTool
+
+@implementation ACEDrawingEraserTool
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+	CGContextAddPath(context, path);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetBlendMode(context, kCGBlendModeClear);
+    CGContextStrokePath(context);
+}
 
 @end
+
 
 #pragma mark - ACEDrawingLineTool
 
@@ -141,17 +156,16 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextStrokePath(context);
 }
 
-#if !ACE_HAS_ARC
-
 - (void)dealloc
 {
     self.lineColor = nil;
+#if !ACE_HAS_ARC
     [super dealloc];
+#endif
 }
 
-#endif
-
 @end
+
 
 #pragma mark - ACEDrawingRectangleTool
 
@@ -198,17 +212,16 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     }
 }
 
-#if !ACE_HAS_ARC
-
 - (void)dealloc
 {
     self.lineColor = nil;
+#if !ACE_HAS_ARC
     [super dealloc];
+#endif
 }
 
-#endif
-
 @end
+
 
 #pragma mark - ACEDrawingEllipseTool
 
@@ -255,14 +268,12 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     }
 }
 
-#if !ACE_HAS_ARC
-
 - (void)dealloc
 {
     self.lineColor = nil;
+#if !ACE_HAS_ARC
     [super dealloc];
-}
-
 #endif
+}
 
 @end

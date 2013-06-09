@@ -163,6 +163,11 @@
             tool.fill = YES;
             return tool;
         }
+            
+        case ACEDrawingToolTypeEraser:
+        {
+            return ACE_AUTORELEASE([ACEDrawingEraserTool new]);
+        }
     }
 }
 

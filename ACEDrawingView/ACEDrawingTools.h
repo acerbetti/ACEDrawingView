@@ -60,6 +60,11 @@
 
 - (CGRect)addPathPreviousPreviousPoint:(CGPoint)p2Point withPreviousPoint:(CGPoint)p1Point withCurrentPoint:(CGPoint)cpoint;
 
+@end
+
+#pragma mark -
+
+@interface ACEDrawingEraserTool : ACEDrawingPenTool
 
 @end
 
