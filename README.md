@@ -15,6 +15,11 @@ How-To
 - From IB create a view and set the class to "ACEDrawingView"
 - Programmatically use the initWithFrame: and add it as subview
 
+### Cocoapods(Recommended)
+
+1. Add `pod 'ACEDrawingView'` to your Podfile.
+2. Run `pod install`
+
 
 Features
 ------------------
@@ -24,6 +29,7 @@ Features
 - Multiple alpha values
 - Create screenshot of your masterpiece
 - Support for multiple tools (pen, line, rectangle, ellipse)
+- Eraser tool
 
 
 ARC Compatibility
@@ -33,6 +39,14 @@ This component can be used in projects using ARC or not
 
 Change Log
 ------------------
+06/09/2013 - v1.1
+- Added eraser tool #3
+
+
+06/05/2013 - v1.0.1
+- Performance improvements (thanks to [ozzie](https://github.com/oziee))
+
+
 01/15/2012 - v1.0
 - Draw with multiple tools (pen, line, rectangle, ellipse)
 
