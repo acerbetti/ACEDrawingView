@@ -45,7 +45,7 @@ typedef enum {
 @property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
 
 // public properties
-@property (nonatomic, assign) UIColor *lineColor;
+@property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
 
