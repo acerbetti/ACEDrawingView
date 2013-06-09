@@ -85,16 +85,18 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextStrokePath(context);
 }
 
-#if !ACE_HAS_ARC
+
 
 - (void)dealloc
 {
     CGPathRelease(path);
     self.lineColor = nil;
+    #if !ACE_HAS_ARC
     [super dealloc];
+    #endif
 }
 
-#endif
+
 
 @end
 
