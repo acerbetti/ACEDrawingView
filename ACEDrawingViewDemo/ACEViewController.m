@@ -8,6 +8,7 @@
 
 #import "ACEViewController.h"
 #import "ACEDrawingView.h"
+#import "ACEDrawingView+Archieve.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -53,6 +54,7 @@
 
 - (IBAction)takeScreenshot:(id)sender
 {
+    [self.drawingView saveDrawingAtPath:nil];
     // show the preview image
     self.previewImageView.image = self.drawingView.image;
     self.previewImageView.hidden = NO;

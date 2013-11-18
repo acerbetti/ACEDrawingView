@@ -25,6 +25,8 @@
 
 #import "ACEDrawingView.h"
 #import "ACEDrawingTools.h"
+#import "ACEDrawingView_Private.h"
+#import "ACEDrawingView+Archieve.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -35,17 +37,6 @@
 // experimental code
 #define PARTIAL_REDRAW          0
 
-@interface ACEDrawingView () {
-    CGPoint currentPoint;
-    CGPoint previousPoint1;
-    CGPoint previousPoint2;
-}
-
-@property (nonatomic, strong) NSMutableArray *pathArray;
-@property (nonatomic, strong) NSMutableArray *bufferArray;
-@property (nonatomic, strong) id<ACEDrawingTool> currentTool;
-@property (nonatomic, strong) UIImage *image;
-@end
 
 #pragma mark -
 
@@ -79,6 +70,8 @@
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
+    
+    [self loadDrawingFromPath:nil];
     
     // set the transparent background
     self.backgroundColor = [UIColor clearColor];
