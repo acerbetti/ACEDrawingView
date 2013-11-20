@@ -1,17 +1,17 @@
 //
-//  ACEDrawingView+Archieve.m
+//  ACEDrawingView+Archive.m
 //  ACEDrawingViewDemo
 //
 //  Created by Prashant Rane on 11/18/13.
 //  Copyright (c) 2013 Stefano Acerbetti. All rights reserved.
 //
 
-#import "ACEDrawingView+Archieve.h"
+#import "ACEDrawingView+Archive.h"
 #import "ACEDrawingView_Private.h"
 
 static NSString* const kDefaultDrawingPath = @"drawing.png";
 
-@implementation ACEDrawingView (Archieve)
+@implementation ACEDrawingView (Archive)
 
 - (void)saveDrawingAtPath:(NSString*)path
 {

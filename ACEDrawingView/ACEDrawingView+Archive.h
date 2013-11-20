@@ -1,5 +1,5 @@
 //
-//  ACEDrawingView+Archieve.h
+//  ACEDrawingView+Archive.h
 //  ACEDrawingViewDemo
 //
 //  Created by Prashant Rane on 11/18/13.
@@ -8,7 +8,7 @@
 
 #import "ACEDrawingView.h"
 
-@interface ACEDrawingView (Archieve)
+@interface ACEDrawingView (Archive)
 
 - (void)saveDrawingAtPath:(NSString*)path;
 - (void)loadDrawingFromPath:(NSString*)path;
