@@ -8,7 +8,7 @@
 
 #import "ACEViewController.h"
 #import "ACEDrawingView.h"
-#import "ACEDrawingView+Archieve.h"
+#import "ACEDrawingView+Archive.h"
 
 #import <QuartzCore/QuartzCore.h>
 

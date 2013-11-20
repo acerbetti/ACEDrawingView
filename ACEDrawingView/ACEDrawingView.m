@@ -26,7 +26,7 @@
 #import "ACEDrawingView.h"
 #import "ACEDrawingTools.h"
 #import "ACEDrawingView_Private.h"
-#import "ACEDrawingView+Archieve.h"
+#import "ACEDrawingView+Archive.h"
 
 #import <QuartzCore/QuartzCore.h>
 
