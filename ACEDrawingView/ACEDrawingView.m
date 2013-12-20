@@ -231,9 +231,6 @@
     // update the image
     [self updateCacheImage:NO];
     
-    // clear the current tool
-    self.currentTool = nil;
-    
     // clear the redo queue
     [self.bufferArray removeAllObjects];
     
@@ -241,12 +238,43 @@
     if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawUsingTool:)]) {
         [self.delegate drawingView:self didEndDrawUsingTool:self.currentTool];
     }
+    
+    // clear the current tool
+    self.currentTool = nil;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // make sure a point is recorded
     [self touchesEnded:touches withEvent:event];
+}
+
+
+#pragma mark - Load Image
+
+- (void)loadImage:(UIImage *)image
+{
+    self.image = image;
+    
+    // when loading an external image, I'm cleaning all the paths and the undo buffer
+    [self.bufferArray removeAllObjects];
+    [self.pathArray removeAllObjects];
+    [self updateCacheImage:NO];
+    [self setNeedsDisplay];
+}
+
+- (void)loadImageData:(NSData *)imageData
+{
+    CGFloat imageScale;
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        imageScale = [[UIScreen mainScreen] scale];
+        
+    } else {
+        imageScale = 1.0;
+    }
+    
+    UIImage *image = [UIImage imageWithData:imageData scale:imageScale];
+    [self loadImage:image];
 }
 
 

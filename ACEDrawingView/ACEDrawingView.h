@@ -54,6 +54,9 @@ typedef enum {
 @property (nonatomic, strong, readonly) UIImage *image;
 @property (nonatomic, readonly) NSUInteger undoSteps;
 
+// load external image
+- (void)loadImage:(UIImage *)image;
+- (void)loadImageData:(NSData *)imageData;
 
 // erase all
 - (void)clear;
