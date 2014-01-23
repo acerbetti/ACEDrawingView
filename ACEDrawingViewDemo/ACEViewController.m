@@ -119,36 +119,8 @@
         } else {
             
             self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
-            switch (buttonIndex) {
-                case 0:
-                    self.drawingView.drawTool = ACEDrawingToolTypePen;
-                    break;
-                    
-                case 1:
-                    self.drawingView.drawTool = ACEDrawingToolTypeLine;
-                    break;
-                    
-                case 2:
-                    self.drawingView.drawTool = ACEDrawingToolTypeRectagleStroke;
-                    break;
-                    
-                case 3:
-                    self.drawingView.drawTool = ACEDrawingToolTypeRectagleFill;
-                    break;
-                    
-                case 4:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseStroke;
-                    break;
-                    
-                case 5:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseFill;
-                    break;
-                    
-                case 6:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEraser;
-                    break;
-            }
-        
+            // ToolType is an enum, can assign buttonIndex directly
+            self.drawTool = buttonIndex;
             // if eraser, disable color and alpha selection
             self.colorButton.enabled = self.alphaButton.enabled = buttonIndex != 6;
         }
