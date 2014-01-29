@@ -30,12 +30,7 @@ Features
 - Create screenshot of your masterpiece
 - Support for multiple tools (pen, line, rectangle, ellipse)
 - Eraser tool
-
-
-ARC Compatibility
-------------------
-This component can be used in projects using ARC or not
-
+- Compatible with ARC
 
 Change Log
 ------------------
