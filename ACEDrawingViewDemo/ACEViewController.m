@@ -97,60 +97,19 @@
     if (actionSheet.cancelButtonIndex != buttonIndex) {
         if (actionSheet.tag == kActionSheetColor) {
             
-            self.colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
-            switch (buttonIndex) {
-                case 0:
-                    self.drawingView.lineColor = [UIColor blackColor];
-                    break;
-                    
-                case 1:
-                    self.drawingView.lineColor = [UIColor redColor];
-                    break;
-                    
-                case 2:
-                    self.drawingView.lineColor = [UIColor greenColor];
-                    break;
-                    
-                case 3:
-                    self.drawingView.lineColor = [UIColor blueColor];
-                    break;
-            }
+            NSDictionary *colorDictionary = [[NSDictionary alloc] initWithObjects:@[[UIColor blackColor], [UIColor redColor], [UIColor greenColor], [UIColor blueColor], [UIColor yellowColor], [UIColor purpleColor]]
+                                                                          forKeys:@[@0, @1, @2, @3, @4, @5]];
+            NSNumber *numberForColorDictionary = [NSNumber numberWithInteger:buttonIndex];
             
+            _drawingView.lineColor = [colorDictionary objectForKey:numberForColorDictionary];
+            _colorButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
         } else {
+            _drawingView.drawTool = buttonIndex; // ToolType is an enum, can assign the buttonIndex directly
             
-            self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
-            switch (buttonIndex) {
-                case 0:
-                    self.drawingView.drawTool = ACEDrawingToolTypePen;
-                    break;
-                    
-                case 1:
-                    self.drawingView.drawTool = ACEDrawingToolTypeLine;
-                    break;
-                    
-                case 2:
-                    self.drawingView.drawTool = ACEDrawingToolTypeRectagleStroke;
-                    break;
-                    
-                case 3:
-                    self.drawingView.drawTool = ACEDrawingToolTypeRectagleFill;
-                    break;
-                    
-                case 4:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseStroke;
-                    break;
-                    
-                case 5:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseFill;
-                    break;
-                    
-                case 6:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEraser;
-                    break;
-            }
-        
+            _toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
+            
             // if eraser, disable color and alpha selection
-            self.colorButton.enabled = self.alphaButton.enabled = buttonIndex != 6;
+            _colorButton.enabled = _alphaButton.enabled = buttonIndex != 6;
         }
     }
 }

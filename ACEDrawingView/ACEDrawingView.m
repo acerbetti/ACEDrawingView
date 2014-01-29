@@ -41,10 +41,10 @@
     CGPoint previousPoint2;
 }
 
-@property (nonatomic, strong) NSMutableArray *pathArray;
-@property (nonatomic, strong) NSMutableArray *bufferArray;
-@property (nonatomic, strong) id<ACEDrawingTool> currentTool;
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic) NSMutableArray *pathArray;
+@property (nonatomic) NSMutableArray *bufferArray;
+@property (nonatomic) id<ACEDrawingTool> currentTool;
+@property (nonatomic) UIImage *image;
 @end
 
 #pragma mark -
@@ -327,18 +327,5 @@
         [self setNeedsDisplay];
     }
 }
-
-#if !ACE_HAS_ARC
-
-- (void)dealloc
-{
-    self.pathArray = nil;
-    self.bufferArray = nil;
-    self.currentTool = nil;
-    self.image = nil;
-    [super dealloc];
-}
-
-#endif
 
 @end

@@ -45,13 +45,12 @@ typedef enum {
 @property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
 
 // public properties
-@property (nonatomic, strong) UIColor *lineColor;
+@property (nonatomic) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
 
-
 // get the current drawing
-@property (nonatomic, strong, readonly) UIImage *image;
+@property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSUInteger undoSteps;
 
 // load external image
