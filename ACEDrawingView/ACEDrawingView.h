@@ -49,7 +49,6 @@ typedef enum {
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
 
-
 // get the current drawing
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSUInteger undoSteps;
