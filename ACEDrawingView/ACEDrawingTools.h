@@ -38,7 +38,6 @@
 
 - (void)setInitialPoint:(CGPoint)firstPoint;
 - (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
-
 - (void)draw;
 
 @end
