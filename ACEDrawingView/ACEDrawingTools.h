@@ -25,19 +25,10 @@
 
 #import <Foundation/Foundation.h>
 
-
-#if __has_feature(objc_arc)
 #define ACE_HAS_ARC 1
 #define ACE_RETAIN(exp) (exp)
 #define ACE_RELEASE(exp)
 #define ACE_AUTORELEASE(exp) (exp)
-#else
-#define ACE_HAS_ARC 0
-#define ACE_RETAIN(exp) [(exp) retain]
-#define ACE_RELEASE(exp) [(exp) release]
-#define ACE_AUTORELEASE(exp) [(exp) autorelease]
-#endif
-
 
 @protocol ACEDrawingTool <NSObject>
 
