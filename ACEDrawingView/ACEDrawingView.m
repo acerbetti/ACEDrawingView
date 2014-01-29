@@ -328,17 +328,4 @@
     }
 }
 
-#if !ACE_HAS_ARC
-
-- (void)dealloc
-{
-    self.pathArray = nil;
-    self.bufferArray = nil;
-    self.currentTool = nil;
-    self.image = nil;
-    [super dealloc];
-}
-
-#endif
-
 @end
