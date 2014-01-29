@@ -13,7 +13,6 @@
 @interface ACEAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic) UIWindow *window;
-
 @property (nonatomic) ACEViewController *viewController;
 
 @end
