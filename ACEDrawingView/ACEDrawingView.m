@@ -107,6 +107,9 @@
         // erase the previous image
         self.image = nil;
         
+        // load previous image (if returning to screen)
+        [[self.prev_image copy] drawInRect:self.bounds];
+        
         // I need to redraw all the lines
         for (id<ACEDrawingTool> tool in self.pathArray) {
             [tool draw];
@@ -256,6 +259,9 @@
 {
     self.image = image;
     
+    //save the loaded image to persist after an undo step
+    self.prev_image = [image copy];
+    
     // when loading an external image, I'm cleaning all the paths and the undo buffer
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
@@ -284,6 +290,7 @@
 {
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
+    self.prev_image = nil;
     [self updateCacheImage:YES];
     [self setNeedsDisplay];
 }
@@ -336,6 +343,7 @@
     self.bufferArray = nil;
     self.currentTool = nil;
     self.image = nil;
+    self.prev_image = nil;
     [super dealloc];
 }
 
