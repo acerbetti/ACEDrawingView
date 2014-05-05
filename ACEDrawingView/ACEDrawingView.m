@@ -139,6 +139,11 @@
             return ACE_AUTORELEASE([ACEDrawingLineTool new]);
         }
             
+        case ACEDrawingToolTypeText:
+        {
+            return ACE_AUTORELEASE([ACEDrawingTextTool new]);
+        }
+            
         case ACEDrawingToolTypeRectagleStroke:
         {
             ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);

@@ -76,6 +76,12 @@
 
 #pragma mark -
 
+@interface ACEDrawingTextTool : NSObject<ACEDrawingTool>
+@property (strong, nonatomic) NSString* text;
+@end
+
+#pragma mark -
+
 @interface ACEDrawingRectangleTool : NSObject<ACEDrawingTool>
 
 @property (nonatomic, assign) BOOL fill;

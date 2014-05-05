@@ -34,7 +34,8 @@ typedef enum {
     ACEDrawingToolTypeRectagleFill,
     ACEDrawingToolTypeEllipseStroke,
     ACEDrawingToolTypeEllipseFill,
-    ACEDrawingToolTypeEraser
+    ACEDrawingToolTypeEraser,
+    ACEDrawingToolTypeText
 } ACEDrawingToolType;
 
 @protocol ACEDrawingViewDelegate, ACEDrawingTool;
