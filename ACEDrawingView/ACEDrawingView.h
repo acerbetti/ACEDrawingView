@@ -49,6 +49,7 @@ typedef enum {
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
+@property (nonatomic, strong) NSString *textToRender;
 
 
 // get the current drawing

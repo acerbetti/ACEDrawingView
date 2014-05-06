@@ -51,6 +51,8 @@
 
 @implementation ACEDrawingView
 
+@synthesize textToRender;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -141,7 +143,9 @@
             
         case ACEDrawingToolTypeText:
         {
-            return ACE_AUTORELEASE([ACEDrawingTextTool new]);
+            ACEDrawingTextTool *tool = ACE_AUTORELEASE([ACEDrawingTextTool new]);
+            tool.text = textToRender;
+            return tool;
         }
             
         case ACEDrawingToolTypeRectagleStroke:

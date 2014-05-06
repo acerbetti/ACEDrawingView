@@ -222,22 +222,10 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
                                    fabs(self.firstPoint.x - self.lastPoint.x),
                                    fabs(self.firstPoint.y - self.lastPoint.y)
                                    );
-    /*
-    NSLog(@"View Bounds: %f, %f, %f, %f",
-          viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height
-          );
-    CGContextTranslateCTM(context, 0, viewBounds.size.height);
-    CGContextScaleCTM(context, 1, -1);
-    CGContextSetFillColorWithColor(context, self.lineColor.CGColor);
-    CGContextSelectFont(context, "Helvetica", 17.0, kCGEncodingMacRoman);
-    CGContextSetCharacterSpacing(context, 1.7);
-    CGContextSetTextDrawingMode(context, kCGTextFill);
-    CGContextShowTextAtPoint(context, viewBounds.origin.x, viewBounds.origin.y, self.text.UTF8String, self.text.length);
-    */
+
     // Flip the context coordinates, in iOS only.
     CGContextTranslateCTM(context, 0, viewBounds.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
-
 
     // Set the text matrix.
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
@@ -261,7 +249,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     // Copy the textString into the newly created attrString
     CFAttributedStringReplaceString (attrString, CFRangeMake(0, 0), textString);
 
-    // Set the color of the first 12 chars to red.
+    // Set the color
     CFAttributedStringSetAttribute(attrString, CFRangeMake(0, self.text.length),
             kCTForegroundColorAttributeName, self.lineColor.CGColor);
 
