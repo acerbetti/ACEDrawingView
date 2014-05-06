@@ -39,6 +39,9 @@ This component can be used in projects using ARC or not
 
 Change Log
 ------------------
+05/06/2014 - v1.1
+- Added text tool #16
+
 06/09/2013 - v1.1
 - Added eraser tool #3
 
