@@ -24,6 +24,11 @@
  */
 
 #import "ACEDrawingTools.h"
+#if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
+#import <CoreText/CoreText.h>
+#else
+#import <AppKit/AppKit.h>
+#endif
 
 CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
@@ -154,6 +159,115 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextMoveToPoint(context, self.firstPoint.x, self.firstPoint.y);
     CGContextAddLineToPoint(context, self.lastPoint.x, self.lastPoint.y);
     CGContextStrokePath(context);
+}
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+#if !ACE_HAS_ARC
+    [super dealloc];
+#endif
+}
+
+@end
+
+#pragma mark - ACEDrawingTextTool
+
+@interface ACEDrawingTextTool ()
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingTextTool
+
+@synthesize lineColor = _lineColor;
+@synthesize lineAlpha = _lineAlpha;
+@synthesize lineWidth = _lineWidth;
+@synthesize text;
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.text = @"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+    }
+    return self;
+}
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    self.lastPoint = endPoint;
+}
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the line properties
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetAlpha(context, self.lineAlpha);
+
+    // draw the text
+    CGRect viewBounds = CGRectMake(MIN(self.firstPoint.x, self.lastPoint.x),
+                                   MIN(self.firstPoint.y, self.lastPoint.y),
+                                   fabs(self.firstPoint.x - self.lastPoint.x),
+                                   fabs(self.firstPoint.y - self.lastPoint.y)
+                                   );
+
+    // Flip the context coordinates, in iOS only.
+    CGContextTranslateCTM(context, 0, viewBounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+
+    // Set the text matrix.
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+
+    // Create a path which bounds the area where you will be drawing text.
+    // The path need not be rectangular.
+    CGMutablePathRef path = CGPathCreateMutable();
+
+    // In this simple example, initialize a rectangular path.
+    CGRect bounds = CGRectMake(viewBounds.origin.x, -viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
+    CGPathAddRect(path, NULL, bounds );
+
+    // Initialize a string.
+    CFStringRef textString = (__bridge CFStringRef)self.text;
+
+    // Create a mutable attributed string with a max length of 0.
+    // The max length is a hint as to how much internal storage to reserve.
+    // 0 means no hint.
+    CFMutableAttributedStringRef attrString = CFAttributedStringCreateMutable(kCFAllocatorDefault, 0);
+
+    // Copy the textString into the newly created attrString
+    CFAttributedStringReplaceString (attrString, CFRangeMake(0, 0), textString);
+
+    // Set the color
+    CFAttributedStringSetAttribute(attrString, CFRangeMake(0, self.text.length),
+            kCTForegroundColorAttributeName, self.lineColor.CGColor);
+
+    // Create the framesetter with the attributed string.
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attrString);
+    CFRelease(attrString);
+
+    // Create a frame.
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
+
+    // Draw the specified frame in the given context.
+    CTFrameDraw(frame, context);
+
+    // Release the objects we used.
+    CFRelease(frame);
+    CFRelease(path);
+    CFRelease(framesetter);
+
 }
 
 - (void)dealloc

@@ -20,7 +20,6 @@
 
 @implementation ACEViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -147,6 +146,10 @@
                 case 6:
                     self.drawingView.drawTool = ACEDrawingToolTypeEraser;
                     break;
+                    
+                case 7:
+                    self.drawingView.drawTool = ACEDrawingToolTypeText;
+                    break;
             }
         
             // if eraser, disable color and alpha selection
@@ -178,7 +181,7 @@
                                                     otherButtonTitles:@"Pen", @"Line",
                                   @"Rect (Stroke)", @"Rect (Fill)",
                                   @"Ellipse (Stroke)", @"Ellipse (Fill)",
-                                  @"Eraser",
+                                  @"Eraser", @"Text",
                                   nil];
     
     [actionSheet setTag:kActionSheetTool];
@@ -208,6 +211,16 @@
 - (IBAction)alphaChange:(UISlider *)sender
 {
     self.drawingView.lineAlpha = sender.value;
+}
+
+- (IBAction)textClicked:(id)sender {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"This is an example alert!" delegate:self cancelButtonTitle:@"Hide" otherButtonTitles:nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    self.drawingView.textToRender = [[alertView textFieldAtIndex:0] text];
 }
 
 @end
