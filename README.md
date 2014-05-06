@@ -39,7 +39,7 @@ This component can be used in projects using ARC or not
 
 Change Log
 ------------------
-05/06/2014 - v1.1
+05/06/2014 - v1.2
 - Added text tool #16
 
 06/09/2013 - v1.1
@@ -64,7 +64,7 @@ Change Log
 
 License
 ------------------
-Copyright (c) 2013 Stefano Acerbetti
+Copyright (c) 2014 Stefano Acerbetti
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
