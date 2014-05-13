@@ -109,12 +109,14 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)draw
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
+    CGContextSaveGState(context);
+
 	CGContextAddPath(context, path);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetBlendMode(context, kCGBlendModeClear);
     CGContextStrokePath(context);
+    CGContextRestoreGState(context);
 }
 
 @end
