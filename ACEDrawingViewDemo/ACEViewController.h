@@ -36,6 +36,5 @@
 - (IBAction)widthChange:(UISlider *)sender;
 - (IBAction)toggleAlphaSlider:(id)sender;
 - (IBAction)alphaChange:(UISlider *)sender;
-- (IBAction)textClicked:(id)sender;
 
 @end

@@ -89,11 +89,6 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="43"/>
-                        <barButtonItem title="Text" id="42">
-                            <connections>
-                                <action selector="textClicked:" destination="-1" id="hUZ-Au-wdd"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem title="Width" id="9Nh-bk-b8e">
                             <connections>
                                 <action selector="toggleWidthSlider:" destination="-1" id="Dx4-Dx-TQ1"/>

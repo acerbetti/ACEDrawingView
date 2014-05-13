@@ -151,7 +151,7 @@
                     self.drawingView.drawTool = ACEDrawingToolTypeText;
                     break;
             }
-        
+            
             // if eraser, disable color and alpha selection
             self.colorButton.enabled = self.alphaButton.enabled = buttonIndex != 6;
         }
@@ -211,16 +211,6 @@
 - (IBAction)alphaChange:(UISlider *)sender
 {
     self.drawingView.lineAlpha = sender.value;
-}
-
-- (IBAction)textClicked:(id)sender {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"This is an example alert!" delegate:self cancelButtonTitle:@"Hide" otherButtonTitles:nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    self.drawingView.textToRender = [[alertView textFieldAtIndex:0] text];
 }
 
 @end
