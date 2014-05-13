@@ -469,11 +469,20 @@
     [self loadImage:image];
 }
 
+- (void)resetTool
+{
+    if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
+        self.textView.text = @"";
+        [self commitAndHideTextEntry];
+    }
+    self.currentTool = nil;
+}
 
 #pragma mark - Actions
 
 - (void)clear
 {
+    [self resetTool];
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
     self.prev_image = nil;
@@ -497,6 +506,7 @@
 - (void)undoLatestStep
 {
     if ([self canUndo]) {
+        [self resetTool];
         id<ACEDrawingTool>tool = [self.pathArray lastObject];
         [self.bufferArray addObject:tool];
         [self.pathArray removeLastObject];
@@ -513,6 +523,7 @@
 - (void)redoLatestStep
 {
     if ([self canRedo]) {
+        [self resetTool];
         id<ACEDrawingTool>tool = [self.bufferArray lastObject];
         [self.pathArray addObject:tool];
         [self.bufferArray removeLastObject];
