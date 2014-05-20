@@ -39,7 +39,7 @@ This component can be used in projects using ARC or not
 
 Change Log
 ------------------
-??/??/???? - v1.3
+05/20/2014 - v1.3
 - Enhancements to text tool workflow
 - Fixed undo/redo with text tool
 
