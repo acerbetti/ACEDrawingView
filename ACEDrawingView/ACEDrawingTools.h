@@ -77,7 +77,7 @@
 #pragma mark -
 
 @interface ACEDrawingTextTool : NSObject<ACEDrawingTool>
-@property (strong, nonatomic) NSString* text;
+@property (strong, nonatomic) NSAttributedString* attributedText;
 @end
 
 #pragma mark -
