@@ -451,7 +451,7 @@
     // when loading an external image, I'm cleaning all the paths and the undo buffer
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
-    [self updateCacheImage:NO];
+    [self updateCacheImage:YES];
     [self setNeedsDisplay];
 }
 
