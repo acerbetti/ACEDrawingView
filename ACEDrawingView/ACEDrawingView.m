@@ -417,19 +417,42 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:nil];
-    textViewBottomPoint.y += self.textView.frame.size.height;
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    
+    if ( UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
+        [self landscapeChanges:notification];
+    } else {
+        [self portraitChanges:notification];
+    }
+}
+
+- (void)landscapeChanges:(NSNotification *)notification {
+    CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:self];
+    CGFloat textViewOriginY = textViewBottomPoint.y;
+    CGFloat textViewBottomY = textViewOriginY + self.textView.frame.size.height;
+
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    CGFloat offset = (screenRect.size.height - keyboardSize.height) - textViewBottomPoint.y;
-    
+
+    CGFloat offset = (self.frame.size.height - keyboardSize.width) - textViewBottomY;
+
     if (offset < 0) {
         CGFloat newYPos = self.frame.origin.y + offset;
-        self.frame = CGRectMake(self.frame.origin.x,newYPos,self.frame.size.width,self.frame.size.height);
-        
+        self.frame = CGRectMake(self.frame.origin.x,newYPos, self.frame.size.width, self.frame.size.height);
+
+    }
+}
+- (void)portraitChanges:(NSNotification *)notification {
+    CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:nil];
+    textViewBottomPoint.y += self.textView.frame.size.height;
+
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    CGFloat offset = (screenRect.size.height - keyboardSize.height) - textViewBottomPoint.y;
+
+    if (offset < 0) {
+        CGFloat newYPos = self.frame.origin.y + offset;
+        self.frame = CGRectMake(self.frame.origin.x,newYPos, self.frame.size.width, self.frame.size.height);
+
     }
 }
 
