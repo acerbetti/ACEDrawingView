@@ -34,6 +34,7 @@
 
 // experimental code
 #define PARTIAL_REDRAW          0
+#define IOS8_OR_ABOVE [[[UIDevice currentDevice] systemVersion] integerValue] >= 8.0
 
 @interface ACEDrawingView () {
     CGPoint currentPoint;
@@ -417,15 +418,16 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-    [self adjustFramePosition:notification];
-#else
-   if ( UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
-        [self landscapeChanges:notification];
-    } else {
+    if (IOS8_OR_ABOVE) {
         [self adjustFramePosition:notification];
     }
-#endif
+    else {
+        if (UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
+            [self landscapeChanges:notification];
+        } else {
+            [self adjustFramePosition:notification];
+        }
+    }
 }
 
 - (void)landscapeChanges:(NSNotification *)notification {
