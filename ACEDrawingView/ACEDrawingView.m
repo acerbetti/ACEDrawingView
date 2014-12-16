@@ -417,11 +417,15 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
-    if ( UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    [self adjustFramePosition:notification];
+#else
+   if ( UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
         [self landscapeChanges:notification];
     } else {
-        [self portraitChanges:notification];
+        [self adjustFramePosition:notification];
     }
+#endif
 }
 
 - (void)landscapeChanges:(NSNotification *)notification {
@@ -439,7 +443,7 @@
 
     }
 }
-- (void)portraitChanges:(NSNotification *)notification {
+- (void)adjustFramePosition:(NSNotification *)notification {
     CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:nil];
     textViewBottomPoint.y += self.textView.frame.size.height;
 
