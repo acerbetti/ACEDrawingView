@@ -429,7 +429,7 @@
         [self adjustFramePosition:notification];
     }
     else {
-        if (UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
+        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             [self landscapeChanges:notification];
         } else {
             [self adjustFramePosition:notification];
