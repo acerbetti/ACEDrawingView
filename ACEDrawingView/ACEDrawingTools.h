@@ -80,6 +80,9 @@
 @property (strong, nonatomic) NSAttributedString* attributedText;
 @end
 
+@interface ACEDrawingMultilineTextTool : ACEDrawingTextTool
+@end
+
 #pragma mark -
 
 @interface ACEDrawingRectangleTool : NSObject<ACEDrawingTool>

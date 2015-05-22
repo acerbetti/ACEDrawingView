@@ -168,7 +168,12 @@
         {
             return ACE_AUTORELEASE([ACEDrawingTextTool new]);
         }
-            
+
+        case ACEDrawingToolTypeMultilineText:
+        {
+            return ACE_AUTORELEASE([ACEDrawingMultilineTextTool new]);
+        }
+
         case ACEDrawingToolTypeRectagleStroke:
         {
             ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);
@@ -225,10 +230,11 @@
     self.currentTool.lineColor = self.lineColor;
     self.currentTool.lineAlpha = self.lineAlpha;
     
-    if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
-        [self initializeTextBox: currentPoint];
-    }
-    else {
+    if ([self.currentTool class] == [ACEDrawingTextTool class]) {
+        [self initializeTextBox:currentPoint WithMultiline:NO];
+    } else if([self.currentTool class] == [ACEDrawingMultilineTextTool class]) {
+        [self initializeTextBox:currentPoint WithMultiline:YES];
+    } else {
         [self.pathArray addObject:self.currentTool];
         
         [self.currentTool setInitialPoint:currentPoint];
@@ -291,12 +297,13 @@
 
 #pragma mark - Text Entry
 
-- (void) initializeTextBox: (CGPoint)startingPoint {
-    
+- (void)initializeTextBox:(CGPoint)startingPoint WithMultiline:(BOOL)multiline {
     if (!self.textView) {
         self.textView = [[UITextView alloc] init];
         self.textView.delegate = self;
-        self.textView.returnKeyType = UIReturnKeyDone;
+        if(!multiline) {
+            self.textView.returnKeyType = UIReturnKeyDone;
+        }
         self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
         self.textView.backgroundColor = [UIColor clearColor];
         self.textView.layer.borderWidth = 1.0f;
@@ -333,7 +340,7 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]) {
+    if(([self.currentTool class] == [ACEDrawingTextTool  class]) && [text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
     }
