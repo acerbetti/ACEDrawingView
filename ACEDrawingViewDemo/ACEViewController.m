@@ -150,6 +150,10 @@
                 case 7:
                     self.drawingView.drawTool = ACEDrawingToolTypeText;
                     break;
+
+                case 8:
+                    self.drawingView.drawTool = ACEDrawingToolTypeMultilineText;
+                    break;
             }
             
             // if eraser, disable color and alpha selection
@@ -181,7 +185,7 @@
                                                     otherButtonTitles:@"Pen", @"Line",
                                   @"Rect (Stroke)", @"Rect (Fill)",
                                   @"Ellipse (Stroke)", @"Ellipse (Fill)",
-                                  @"Eraser", @"Text",
+                                  @"Eraser", @"Text", @"Text (Multiline)",
                                   nil];
     
     [actionSheet setTag:kActionSheetTool];

@@ -257,6 +257,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 @end
 
 
+#pragma mark - ACEDrawingMultilineTextTool
+
+@implementation ACEDrawingMultilineTextTool
+@end
+
 #pragma mark - ACEDrawingRectangleTool
 
 @interface ACEDrawingRectangleTool ()
