@@ -230,7 +230,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGPathAddRect(path, NULL, bounds );
     
     // Create the framesetter with the attributed string.
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge_retained CFAttributedStringRef)self.attributedText);
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedText);
     
     // Create a frame.
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
