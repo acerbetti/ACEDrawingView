@@ -425,6 +425,8 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
+    self.originalFrameYPos = self.frame.origin.y;
+
     if (IOS8_OR_ABOVE) {
         [self adjustFramePosition:notification];
     }
