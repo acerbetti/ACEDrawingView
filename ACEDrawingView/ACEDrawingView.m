@@ -115,7 +115,7 @@
         self.image = nil;
         
         // load previous image (if returning to screen)
-        [[self.prev_image copy] drawInRect:self.bounds];
+        [[self.backgroundImage copy] drawInRect:self.bounds];
         
         // I need to redraw all the lines
         for (id<ACEDrawingTool> tool in self.pathArray) {
@@ -484,7 +484,7 @@
     self.image = image;
     
     //save the loaded image to persist after an undo step
-    self.prev_image = [image copy];
+    self.backgroundImage = [image copy];
     
     // when loading an external image, I'm cleaning all the paths and the undo buffer
     [self.bufferArray removeAllObjects];
@@ -523,7 +523,7 @@
     [self resetTool];
     [self.bufferArray removeAllObjects];
     [self.pathArray removeAllObjects];
-    self.prev_image = nil;
+    self.backgroundImage = nil;
     [self updateCacheImage:YES];
     [self setNeedsDisplay];
 }
@@ -577,7 +577,7 @@
     self.bufferArray = nil;
     self.currentTool = nil;
     self.image = nil;
-    self.prev_image = nil;
+    self.backgroundImage = nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
