@@ -82,6 +82,8 @@
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
+
+    self.drawMode = ACEDrawingModeOriginalSize;
     
     // set the transparent background
     self.backgroundColor = [UIColor clearColor];
@@ -100,9 +102,22 @@
     // TODO: draw only the updated part of the image
     [self drawPath];
 #else
-    [self.image drawInRect:self.bounds];
+    switch (self.drawMode) {
+        case ACEDrawingModeOriginalSize:
+            [self.image drawAtPoint:CGPointZero];
+            break;
+        case ACEDrawingModeScale:
+            [self.image drawInRect:self.bounds];
+            break;
+    }
     [self.currentTool draw];
 #endif
+}
+
+- (void)commitAndDiscardToolStack {
+    [self updateCacheImage:YES];
+    self.prev_image = self.image;
+    [self.pathArray removeAllObjects];
 }
 
 - (void)updateCacheImage:(BOOL)redraw
@@ -115,7 +130,14 @@
         self.image = nil;
         
         // load previous image (if returning to screen)
-        [[self.prev_image copy] drawInRect:self.bounds];
+        switch (self.drawMode) {
+            case ACEDrawingModeOriginalSize:
+                [[self.prev_image copy] drawAtPoint:CGPointZero];
+                break;
+            case ACEDrawingModeScale:
+                [[self.prev_image copy] drawInRect:self.bounds];
+                break;
+        }
         
         // I need to redraw all the lines
         for (id<ACEDrawingTool> tool in self.pathArray) {
