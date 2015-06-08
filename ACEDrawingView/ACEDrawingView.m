@@ -82,13 +82,21 @@
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
-    
+
     // set the transparent background
     self.backgroundColor = [UIColor clearColor];
     
     self.originalFrameYPos = self.frame.origin.y;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (UIImage *)prev_image {
+    return self.backgroundImage;
+}
+
+- (void)setPrev_image:(UIImage *)prev_image {
+    [self setBackgroundImage:prev_image];
 }
 
 

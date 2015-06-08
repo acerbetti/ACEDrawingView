@@ -53,6 +53,7 @@ typedef enum {
 
 // get the current drawing
 @property (nonatomic, strong, readonly) UIImage *image;
+@property (nonatomic, strong) UIImage *prev_image DEPRECATED_MSG_ATTRIBUTE("Use 'backgroundImage' instead.");
 @property (nonatomic, strong) UIImage *backgroundImage;
 @property (nonatomic, readonly) NSUInteger undoSteps;
 
