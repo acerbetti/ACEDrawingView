@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 
 // get the current drawing
 @property (nonatomic, strong, readonly) UIImage *image;
-@property (nonatomic, strong) UIImage *prev_image;
+@property (nonatomic, strong) UIImage *backgroundImage;
 @property (nonatomic, readonly) NSUInteger undoSteps;
 
 // load external image
@@ -82,6 +82,12 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
  */
 - (void)commitAndDiscardToolStack;
 
+@end
+
+#pragma mark - 
+
+@interface ACEDrawingView (Deprecated)
+@property (nonatomic, strong) UIImage *prev_image DEPRECATED_MSG_ATTRIBUTE("Use 'backgroundImage' instead.");
 @end
 
 #pragma mark -
