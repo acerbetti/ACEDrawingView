@@ -183,6 +183,14 @@
     self.currentTool = nil;
 }
 
+- (void)setCustomDrawTool:(id<ACEDrawingTool>)customDrawTool
+{
+    _customDrawTool = customDrawTool;
+    
+    if (customDrawTool != nil) {
+        self.drawTool = ACEDrawingToolTypeCustom;
+    }
+}
 
 - (id<ACEDrawingTool>)toolWithCurrentSettings
 {
@@ -238,6 +246,11 @@
         case ACEDrawingToolTypeEraser:
         {
             return ACE_AUTORELEASE([ACEDrawingEraserTool new]);
+        }
+            
+        case ACEDrawingToolTypeCustom:
+        {
+            return self.customDrawTool;
         }
     }
 }
@@ -611,6 +624,7 @@
     self.currentTool = nil;
     self.image = nil;
     self.backgroundImage = nil;
+    self.customDrawTool = nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];

@@ -28,6 +28,7 @@
 #define ACEDrawingViewVersion   1.0.0
 
 typedef enum {
+    ACEDrawingToolTypeCustom,
     ACEDrawingToolTypePen,
     ACEDrawingToolTypeLine,
     ACEDrawingToolTypeRectagleStroke,
@@ -49,6 +50,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @interface ACEDrawingView : UIView<UITextViewDelegate>
 
 @property (nonatomic, assign) ACEDrawingToolType drawTool;
+@property (nonatomic, strong) id<ACEDrawingTool> customDrawTool;
 @property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
 
 // public properties
