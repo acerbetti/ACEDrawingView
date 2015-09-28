@@ -25,10 +25,9 @@
 
 #import <UIKit/UIKit.h>
 
-#define ACEDrawingViewVersion   1.0.0
+#define ACEDrawingViewVersion   1.3.7
 
 typedef enum {
-    ACEDrawingToolTypeCustom,
     ACEDrawingToolTypePen,
     ACEDrawingToolTypeLine,
     ACEDrawingToolTypeRectagleStroke,
@@ -37,7 +36,8 @@ typedef enum {
     ACEDrawingToolTypeEllipseFill,
     ACEDrawingToolTypeEraser,
     ACEDrawingToolTypeText,
-    ACEDrawingToolTypeMultilineText
+    ACEDrawingToolTypeMultilineText,
+    ACEDrawingToolTypeCustom,
 } ACEDrawingToolType;
 
 typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
