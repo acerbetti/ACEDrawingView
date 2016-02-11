@@ -15,7 +15,7 @@ How-To
 - From IB create a view and set the class to "ACEDrawingView"
 - Programmatically use the initWithFrame: and add it as subview
 
-### Cocoapods(Recommended)
+### CocoaPods(Recommended)
 
 1. Add `pod 'ACEDrawingView'` to your Podfile.
 2. Run `pod install`
