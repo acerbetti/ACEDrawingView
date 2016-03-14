@@ -1,4 +1,4 @@
-ACEDrawingView
+ACEDrawingView [![Build Status](https://travis-ci.org/acerbetti/ACEDrawingView.svg?branch=master)](https://travis-ci.org/acerbetti/ACEDrawingView)
 ==============
 
 ![](https://github.com/acerbetti/ACEDrawingView/blob/master/Example.png?raw=true)
