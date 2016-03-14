@@ -205,6 +205,11 @@
             return ACE_AUTORELEASE([ACEDrawingLineTool new]);
         }
             
+        case ACEDrawingToolTypeArrow:
+        {
+            return ACE_AUTORELEASE([ACEDrawingArrowTool new]);
+        }
+
         case ACEDrawingToolTypeText:
         {
             return ACE_AUTORELEASE([ACEDrawingTextTool new]);

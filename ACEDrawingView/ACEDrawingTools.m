@@ -372,3 +372,84 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 }
 
 @end
+
+#pragma mark - ACEDrawingArrowTool
+
+@interface ACEDrawingArrowTool ()
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
+@end
+
+@implementation ACEDrawingArrowTool
+
+@synthesize lineColor = _lineColor;
+@synthesize lineAlpha = _lineAlpha;
+@synthesize lineWidth = _lineWidth;
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    self.lastPoint = endPoint;
+}
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGFloat capHeight = self.lineWidth * 4.0f;
+    // set the line properties
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextSetLineCap(context, kCGLineCapSquare);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetAlpha(context, self.lineAlpha);
+    
+    // draw the line
+    CGContextMoveToPoint(context, self.firstPoint.x, self.firstPoint.y);
+    CGContextAddLineToPoint(context, self.lastPoint.x, self.lastPoint.y);
+    
+    // draw arrow cap
+    CGFloat angle = [self angleWithFirstPoint:self.firstPoint secondPoint:self.lastPoint];
+    CGPoint p1 = [self pointWithAngle:angle + 7.0f * M_PI / 8.0f distance:capHeight];
+    CGPoint p2 = [self pointWithAngle:angle - 7.0f * M_PI / 8.0f distance:capHeight];
+    CGPoint endPointOffset = [self pointWithAngle:angle distance:self.lineWidth];
+    
+    p1 = CGPointMake(self.lastPoint.x + p1.x, self.lastPoint.y + p1.y);
+    p2 = CGPointMake(self.lastPoint.x + p2.x, self.lastPoint.y + p2.y);
+    
+    CGContextMoveToPoint(context, p1.x, p1.y);
+    CGContextAddLineToPoint(context, self.lastPoint.x + endPointOffset.x, self.lastPoint.y + endPointOffset.y);
+    CGContextAddLineToPoint(context, p2.x, p2.y);
+    
+    CGContextStrokePath(context);
+}
+
+- (CGFloat)angleWithFirstPoint:(CGPoint)first secondPoint:(CGPoint)second
+{
+    CGFloat dx = second.x - first.x;
+    CGFloat dy = second.y - first.y;
+    CGFloat angle = atan2f(dy, dx);
+    
+    return angle;
+}
+
+- (CGPoint)pointWithAngle:(CGFloat)angle distance:(CGFloat)distance
+{
+    CGFloat x = distance * cosf(angle);
+    CGFloat y = distance * sinf(angle);
+    
+    return CGPointMake(x, y);
+}
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+#if !ACE_HAS_ARC
+    [super dealloc];
+#endif
+}
+
+@end
