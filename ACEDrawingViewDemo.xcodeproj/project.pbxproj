@@ -206,7 +206,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = ACE;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Stefano Acerbetti";
 				TargetAttributes = {
 					8062C81B1C9B81DE00E9EE51 = {
@@ -317,6 +317,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -364,7 +365,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEDrawingViewDemo/ACEDrawingViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "ACEDrawingViewDemo/ACEDrawingViewDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acetools.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -376,7 +377,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEDrawingViewDemo/ACEDrawingViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "ACEDrawingViewDemo/ACEDrawingViewDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.acetools.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -473,6 +474,7 @@
 				8062C8241C9B81DE00E9EE51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
