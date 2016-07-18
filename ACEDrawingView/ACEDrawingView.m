@@ -368,7 +368,11 @@
     
     int calculatedFontSize = self.lineWidth * 3; //3 is an approximate size factor
     
-    [self.textView setFont:[UIFont systemFontOfSize:calculatedFontSize]];
+    if(self.fontName != nil) {
+        [self.textView setFont:[UIFont fontWithName:self.fontName size:calculatedFontSize]];
+    } else {
+        [self.textView setFont:[UIFont systemFontOfSize:calculatedFontSize]];
+    }
     self.textView.textColor = self.lineColor;
     self.textView.alpha = self.lineAlpha;
     
