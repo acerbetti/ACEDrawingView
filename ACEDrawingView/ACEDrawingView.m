@@ -36,7 +36,8 @@
 #define PARTIAL_REDRAW          0
 #define IOS8_OR_ABOVE [[[UIDevice currentDevice] systemVersion] integerValue] >= 8.0
 
-@interface ACEDrawingView () {
+@interface ACEDrawingView () <ACEDrawingLabelViewDelegate>
+{
     CGPoint currentPoint;
     CGPoint previousPoint1;
     CGPoint previousPoint2;
@@ -48,6 +49,8 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, assign) CGFloat originalFrameYPos;
+
+@property (nonatomic, strong) ACEDrawingLabelView *draggableTextView;
 @end
 
 #pragma mark -
@@ -219,6 +222,13 @@
         {
             return ACE_AUTORELEASE([ACEDrawingMultilineTextTool new]);
         }
+            
+        case ACEDrawingToolTypeDraggableText:
+        {
+            ACEDrawingDraggableTextTool *tool = ACE_AUTORELEASE([ACEDrawingDraggableTextTool new]);
+            tool.drawingView = self;
+            return tool;
+        }
 
         case ACEDrawingToolTypeRectagleStroke:
         {
@@ -268,6 +278,9 @@
     if (self.textView && !self.textView.hidden) {
         [self commitAndHideTextEntry];
         return;
+        
+    } else if (self.draggableTextView.isEditing && self.drawTool != ACEDrawingToolTypeDraggableText) {
+        [self.draggableTextView hideEditingHandles];
     }
     
     // add the first touch
@@ -281,10 +294,17 @@
     self.currentTool.lineColor = self.lineColor;
     self.currentTool.lineAlpha = self.lineAlpha;
     
+    // Handle special cases for tool types. The else case handles all the non-text drawing tools.
+    // The draggable text tool is purposely left in for better code clarity, even though it does nothing.
     if ([self.currentTool class] == [ACEDrawingTextTool class]) {
         [self initializeTextBox:currentPoint WithMultiline:NO];
+        
     } else if([self.currentTool class] == [ACEDrawingMultilineTextTool class]) {
         [self initializeTextBox:currentPoint WithMultiline:YES];
+        
+    } else if ([self.currentTool class] == [ACEDrawingDraggableTextTool class]) {
+        // do nothing
+        
     } else {
         [self.pathArray addObject:self.currentTool];
         
@@ -316,11 +336,14 @@
         drawBox.size.height += self.lineWidth * 4.0;
         
         [self setNeedsDisplayInRect:drawBox];
-    }
-    else if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
+        
+    } else if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
         [self resizeTextViewFrame: currentPoint];
-    }
-    else {
+        
+    } else if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+        return;
+    
+    } else {
         [self.currentTool moveFromPoint:previousPoint1 toPoint:currentPoint];
         [self setNeedsDisplay];
     }
@@ -334,8 +357,19 @@
     
     if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
         [self startTextEntry];
-    }
-    else {
+        
+    } else if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+        if (self.draggableTextView.isEditing) {
+            [self.draggableTextView hideEditingHandles];
+        } else {
+            CGPoint point = [[touches anyObject] locationInView:self];
+            [self.currentTool setInitialPoint:point];
+            self.draggableTextView = ((ACEDrawingDraggableTextTool *)self.currentTool).labelView;
+            
+            [self.pathArray addObject:self.currentTool];
+            [self finishDrawing];
+        }
+    } else {
         [self finishDrawing];
     }
 }
@@ -388,21 +422,23 @@
     self.textView.hidden = NO;
 }
 
-- (void) startTextEntry {
+- (void)startTextEntry
+{
     if (!self.textView.hidden) {
         [self.textView becomeFirstResponder];
     }
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if(([self.currentTool class] == [ACEDrawingTextTool  class]) && [text isEqualToString:@"\n"]) {
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (([self.currentTool class] == [ACEDrawingTextTool  class]) && [text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
     }
     return YES;
 }
 
--(void)textViewDidChange:(UITextView *)textView {
+- (void)textViewDidChange:(UITextView *)textView {
     CGRect frame = self.textView.frame;
     if (self.textView.contentSize.height > frame.size.height) {
         frame.size.height = self.textView.contentSize.height;
@@ -411,12 +447,13 @@
     self.textView.frame = frame;
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView{
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
     [self commitAndHideTextEntry];
 }
 
--(void)resizeTextViewFrame: (CGPoint)adjustedSize {
-    
+- (void)resizeTextViewFrame:(CGPoint)adjustedSize
+{
     int minimumAllowedHeight = self.textView.font.pointSize * 2;
     int minimumAllowedWidth = self.textView.font.pointSize * 0.5;
     
@@ -438,8 +475,8 @@
     self.textView.frame = frame;
 }
 
-- (CGRect)adjustFrameToFitWithinDrawingBounds: (CGRect)frame {
-    
+- (CGRect)adjustFrameToFitWithinDrawingBounds:(CGRect)frame
+{
     //check that the frame does not go beyond bounds of parent view
     if ((frame.origin.x + frame.size.width) > self.frame.size.width) {
         frame.size.width = self.frame.size.width - frame.origin.x;
@@ -450,7 +487,8 @@
     return frame;
 }
 
-- (void)commitAndHideTextEntry {
+- (void)commitAndHideTextEntry
+{
     [self.textView resignFirstResponder];
     
     if ([self.textView.text length]) {
@@ -468,7 +506,6 @@
         [self setNeedsDisplay];
         
         [self finishDrawing];
-        
     }
     
     self.currentTool = nil;
@@ -484,8 +521,8 @@
 
     if (IOS8_OR_ABOVE) {
         [self adjustFramePosition:notification];
-    }
-    else {
+        
+    } else {
         if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             [self landscapeChanges:notification];
         } else {
@@ -494,7 +531,8 @@
     }
 }
 
-- (void)landscapeChanges:(NSNotification *)notification {
+- (void)landscapeChanges:(NSNotification *)notification
+{
     CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:self];
     CGFloat textViewOriginY = textViewBottomPoint.y;
     CGFloat textViewBottomY = textViewOriginY + self.textView.frame.size.height;
@@ -509,7 +547,8 @@
 
     }
 }
-- (void)adjustFramePosition:(NSNotification *)notification {
+- (void)adjustFramePosition:(NSNotification *)notification
+{
     CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:nil];
     textViewBottomPoint.y += self.textView.frame.size.height;
 
@@ -522,11 +561,10 @@
     if (offset < 0) {
         CGFloat newYPos = self.frame.origin.y + offset;
         self.frame = CGRectMake(self.frame.origin.x,newYPos, self.frame.size.width, self.frame.size.height);
-
     }
 }
 
--(void)keyboardDidHide:(NSNotification *)notification
+- (void)keyboardDidHide:(NSNotification *)notification
 {
     self.frame = CGRectMake(self.frame.origin.x,self.originalFrameYPos,self.frame.size.width,self.frame.size.height);
 }
@@ -601,10 +639,28 @@
     if ([self canUndo]) {
         [self resetTool];
         id<ACEDrawingTool>tool = [self.pathArray lastObject];
+        if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+            if ([(ACEDrawingDraggableTextTool *)tool canUndo]) {
+                [(ACEDrawingDraggableTextTool *)tool undo];
+                if (![self.bufferArray containsObject:tool]) {
+                    [self.bufferArray addObject:tool];
+                }
+                if ([self.delegate respondsToSelector:@selector(drawingView:didUndoDrawUsingTool:)]) {
+                    [self.delegate drawingView:self didUndoDrawUsingTool:self.currentTool];
+                }
+                return;
+            } else {
+                [(ACEDrawingDraggableTextTool *)tool undraw];
+            }
+        }
         [self.bufferArray addObject:tool];
         [self.pathArray removeLastObject];
         [self updateCacheImage:YES];
         [self setNeedsDisplay];
+        
+        if ([self.delegate respondsToSelector:@selector(drawingView:didUndoDrawUsingTool:)]) {
+            [self.delegate drawingView:self didUndoDrawUsingTool:self.currentTool];
+        }
     }
 }
 
@@ -618,13 +674,39 @@
     if ([self canRedo]) {
         [self resetTool];
         id<ACEDrawingTool>tool = [self.bufferArray lastObject];
+        if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+            // check if label has any redo options for angle, placement, or size.
+            // if not we will fall through as the label has been removed from the superview
+            if ([(ACEDrawingDraggableTextTool *)tool canRedo]) {
+                BOOL lastRedo = [(ACEDrawingDraggableTextTool *)tool redo];
+                
+                // make sure the tool is added back to the drawingView's undo stack after we've performed a redo
+                if (![self.pathArray containsObject:tool]) {
+                    [self.pathArray addObject:tool];
+                }
+                
+                // if there are no more redo options for this tool, we need to remove the tool from the drawingView's redo stack
+                if (lastRedo) {
+                    [self.bufferArray removeLastObject];
+                }
+                if ([self.delegate respondsToSelector:@selector(drawingView:didRedoDrawUsingTool:)]) {
+                    [self.delegate drawingView:self didRedoDrawUsingTool:self.currentTool];
+                }
+                
+                // no need to continue, since we don't want to continue to add/remove the tool from the drawingView's redo stack when performing the tools redo events
+                return;
+            }
+        }
         [self.pathArray addObject:tool];
         [self.bufferArray removeLastObject];
         [self updateCacheImage:YES];
         [self setNeedsDisplay];
+        
+        if ([self.delegate respondsToSelector:@selector(drawingView:didRedoDrawUsingTool:)]) {
+            [self.delegate drawingView:self didRedoDrawUsingTool:self.currentTool];
+        }
     }
 }
-
 
 - (void)dealloc
 {
@@ -639,10 +721,65 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
     
 #if !ACE_HAS_ARC
-    
     [super dealloc];
 #endif
 }
 
+#pragma mark - ACEDrawingLabelViewDelegate
+
+- (void)labelViewDidClose:(ACEDrawingLabelView *)label
+{
+    ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
+    
+    [self.pathArray removeObject:tool];
+    [self.bufferArray addObject:tool];
+    
+    // call the delegate
+    if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawUsingTool:)]) {
+        [self.delegate drawingView:self didEndDrawUsingTool:self.currentTool];
+    }
+}
+
+- (void)labelViewDidBeginEditing:(ACEDrawingLabelView *)label
+{
+    ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
+    
+    [tool capturePosition];
+}
+
+- (void)labelViewDidEndEditing:(ACEDrawingLabelView *)label
+{
+    ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
+    
+    // after interacting with the label, we move it to the top of the stack
+    [self.pathArray removeObject:tool];
+    [self.pathArray addObject:tool];
+}
+
+- (void)labelViewDidShowEditingHandles:(ACEDrawingLabelView *)label
+{
+    self.draggableTextView = label;
+}
+
+- (void)labelViewDidHideEditingHandles:(ACEDrawingLabelView *)label
+{
+    ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
+    
+    if (![tool.labelView.textValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length) {
+        [self.pathArray removeObject:tool];
+    }
+}
+
+- (ACEDrawingDraggableTextTool *)draggableTextToolForLabel:(ACEDrawingLabelView *)label
+{
+    for (id<ACEDrawingTool> tool in self.pathArray) {
+        if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+            ACEDrawingDraggableTextTool *textTool = tool;
+            if (textTool.labelView == label) { return textTool; }
+        }
+    }
+    
+    return nil;
+}
 
 @end

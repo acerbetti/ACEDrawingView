@@ -24,6 +24,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ACEDrawingLabelView.h"
 
 #define ACEDrawingViewVersion   1.3.7
 
@@ -38,6 +39,7 @@ typedef enum {
     ACEDrawingToolTypeEraser,
     ACEDrawingToolTypeText,
     ACEDrawingToolTypeMultilineText,
+    ACEDrawingToolTypeDraggableText,
     ACEDrawingToolTypeCustom,
 } ACEDrawingToolType;
 
@@ -60,6 +62,10 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @property (nonatomic, assign) CGFloat lineAlpha;
 @property (nonatomic, strong) NSString *fontName;
 @property (nonatomic, assign) ACEDrawingMode drawMode;
+
+@property (nonatomic, strong) UIFont *draggableTextFont;
+@property (nonatomic, strong) UIImage *draggableTextCloseImage;
+@property (nonatomic, strong) UIImage *draggableTextRotateImage;
 
 // get the current drawing
 @property (nonatomic, strong, readonly) UIImage *image;
@@ -101,5 +107,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @optional
 - (void)drawingView:(ACEDrawingView *)view willBeginDrawUsingTool:(id<ACEDrawingTool>)tool;
 - (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view didRedoDrawUsingTool:(id<ACEDrawingTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view didUndoDrawUsingTool:(id<ACEDrawingTool>)tool;
 
 @end
