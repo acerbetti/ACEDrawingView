@@ -78,13 +78,6 @@
 
 #pragma mark -
 
-@interface ACEDrawingTextTool : NSObject<ACEDrawingTool>
-@property (strong, nonatomic) NSAttributedString* attributedText;
-@end
-
-@interface ACEDrawingMultilineTextTool : ACEDrawingTextTool
-@end
-
 @interface ACEDrawingDraggableTextTool : NSObject<ACEDrawingTool>
 
 @property (nonatomic, weak) ACEDrawingView *drawingView;

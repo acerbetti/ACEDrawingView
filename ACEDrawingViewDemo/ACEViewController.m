@@ -150,14 +150,6 @@
                 case 7:
                     self.drawingView.drawTool = ACEDrawingToolTypeEraser;
                     break;
-                    
-                case 8:
-                    self.drawingView.drawTool = ACEDrawingToolTypeText;
-                    break;
-                    
-                case 9:
-                    self.drawingView.drawTool = ACEDrawingToolTypeMultilineText;
-                    break;
             }
             
             // if eraser, disable color and alpha selection

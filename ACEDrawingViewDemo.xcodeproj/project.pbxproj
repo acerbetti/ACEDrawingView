@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4301170E1D5E3C8D0062AF98 /* ACEDrawingLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4301170D1D5E3C8D0062AF98 /* ACEDrawingLabelView.m */; };
+		436D45D81D64E96B0048E391 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436D45D71D64E96B0048E391 /* QuartzCore.framework */; };
 		6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D796B7A19184BBA0045456F /* CoreText.framework */; };
 		7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FA169A072800904C6B /* UIKit.framework */; };
 		7B5AD3FD169A072800904C6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FC169A072800904C6B /* Foundation.framework */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		4301170C1D5E3C8D0062AF98 /* ACEDrawingLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingLabelView.h; sourceTree = "<group>"; };
 		4301170D1D5E3C8D0062AF98 /* ACEDrawingLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingLabelView.m; sourceTree = "<group>"; };
+		436D45D71D64E96B0048E391 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6D796B7A19184BBA0045456F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		7B5AD3F6169A072800904C6B /* ACEDrawingViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACEDrawingViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B5AD3FA169A072800904C6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -75,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436D45D81D64E96B0048E391 /* QuartzCore.framework in Frameworks */,
 				6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */,
 				7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */,
 				7B5AD3FD169A072800904C6B /* Foundation.framework in Frameworks */,
@@ -114,6 +117,7 @@
 		7B5AD3F9169A072800904C6B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				436D45D71D64E96B0048E391 /* QuartzCore.framework */,
 				6D796B7A19184BBA0045456F /* CoreText.framework */,
 				7B5AD3FA169A072800904C6B /* UIKit.framework */,
 				7B5AD3FC169A072800904C6B /* Foundation.framework */,

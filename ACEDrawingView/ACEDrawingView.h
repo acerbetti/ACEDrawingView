@@ -37,8 +37,6 @@ typedef enum {
     ACEDrawingToolTypeEllipseStroke,
     ACEDrawingToolTypeEllipseFill,
     ACEDrawingToolTypeEraser,
-    ACEDrawingToolTypeText,
-    ACEDrawingToolTypeMultilineText,
     ACEDrawingToolTypeDraggableText,
     ACEDrawingToolTypeCustom,
 } ACEDrawingToolType;
@@ -50,7 +48,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 
 @protocol ACEDrawingViewDelegate, ACEDrawingTool;
 
-@interface ACEDrawingView : UIView<UITextViewDelegate>
+@interface ACEDrawingView : UIView<ACEDrawingLabelViewDelegate>
 
 @property (nonatomic, assign) ACEDrawingToolType drawTool;
 @property (nonatomic, strong) id<ACEDrawingTool> customDrawTool;
@@ -60,7 +58,6 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
-@property (nonatomic, strong) NSString *fontName;
 @property (nonatomic, assign) ACEDrawingMode drawMode;
 
 @property (nonatomic, strong) UIFont *draggableTextFont;

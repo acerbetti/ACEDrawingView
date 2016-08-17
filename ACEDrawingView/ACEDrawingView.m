@@ -36,7 +36,7 @@
 #define PARTIAL_REDRAW          0
 #define IOS8_OR_ABOVE [[[UIDevice currentDevice] systemVersion] integerValue] >= 8.0
 
-@interface ACEDrawingView () <ACEDrawingLabelViewDelegate>
+@interface ACEDrawingView ()
 {
     CGPoint currentPoint;
     CGPoint previousPoint1;
@@ -47,8 +47,6 @@
 @property (nonatomic, strong) NSMutableArray *bufferArray;
 @property (nonatomic, strong) id<ACEDrawingTool> currentTool;
 @property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, assign) CGFloat originalFrameYPos;
 
 @property (nonatomic, strong) ACEDrawingLabelView *draggableTextView;
 @end
@@ -90,10 +88,6 @@
     
     // set the transparent background
     self.backgroundColor = [UIColor clearColor];
-    
-    self.originalFrameYPos = self.frame.origin.y;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (UIImage *)prev_image {
@@ -212,16 +206,6 @@
         {
             return ACE_AUTORELEASE([ACEDrawingArrowTool new]);
         }
-
-        case ACEDrawingToolTypeText:
-        {
-            return ACE_AUTORELEASE([ACEDrawingTextTool new]);
-        }
-
-        case ACEDrawingToolTypeMultilineText:
-        {
-            return ACE_AUTORELEASE([ACEDrawingMultilineTextTool new]);
-        }
             
         case ACEDrawingToolTypeDraggableText:
         {
@@ -275,11 +259,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (self.textView && !self.textView.hidden) {
-        [self commitAndHideTextEntry];
-        return;
-        
-    } else if (self.draggableTextView.isEditing && self.drawTool != ACEDrawingToolTypeDraggableText) {
+    if (self.draggableTextView.isEditing && self.drawTool != ACEDrawingToolTypeDraggableText) {
         [self.draggableTextView hideEditingHandles];
     }
     
@@ -296,13 +276,7 @@
     
     // Handle special cases for tool types. The else case handles all the non-text drawing tools.
     // The draggable text tool is purposely left in for better code clarity, even though it does nothing.
-    if ([self.currentTool class] == [ACEDrawingTextTool class]) {
-        [self initializeTextBox:currentPoint WithMultiline:NO];
-        
-    } else if([self.currentTool class] == [ACEDrawingMultilineTextTool class]) {
-        [self initializeTextBox:currentPoint WithMultiline:YES];
-        
-    } else if ([self.currentTool class] == [ACEDrawingDraggableTextTool class]) {
+    if ([self.currentTool class] == [ACEDrawingDraggableTextTool class]) {
         // do nothing
         
     } else {
@@ -337,9 +311,6 @@
         
         [self setNeedsDisplayInRect:drawBox];
         
-    } else if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
-        [self resizeTextViewFrame: currentPoint];
-        
     } else if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
         return;
     
@@ -355,10 +326,7 @@
     // make sure a point is recorded
     [self touchesMoved:touches withEvent:event];
     
-    if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
-        [self startTextEntry];
-        
-    } else if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+    if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
         if (self.draggableTextView.isEditing) {
             [self.draggableTextView hideEditingHandles];
         } else {
@@ -379,196 +347,6 @@
     // make sure a point is recorded
     [self touchesEnded:touches withEvent:event];
 }
-
-#pragma mark - Text Entry
-
-- (void)initializeTextBox:(CGPoint)startingPoint WithMultiline:(BOOL)multiline {
-    if (!self.textView) {
-        self.textView = [[UITextView alloc] init];
-        self.textView.delegate = self;
-        if(!multiline) {
-            self.textView.returnKeyType = UIReturnKeyDone;
-        }
-        self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.textView.backgroundColor = [UIColor clearColor];
-        self.textView.layer.borderWidth = 1.0f;
-        self.textView.layer.borderColor = [[UIColor grayColor] CGColor];
-        self.textView.layer.cornerRadius = 8;
-        [self.textView setContentInset: UIEdgeInsetsZero];
-        
-        
-        [self addSubview:self.textView];
-    }
-    
-    int calculatedFontSize = self.lineWidth * 3; //3 is an approximate size factor
-    
-    if(self.fontName != nil) {
-        [self.textView setFont:[UIFont fontWithName:self.fontName size:calculatedFontSize]];
-    } else {
-        [self.textView setFont:[UIFont systemFontOfSize:calculatedFontSize]];
-    }
-    self.textView.textColor = self.lineColor;
-    self.textView.alpha = self.lineAlpha;
-    
-    int defaultWidth = 200;
-    int defaultHeight = calculatedFontSize * 2;
-    int initialYPosition = startingPoint.y - (defaultHeight/2);
-    
-    CGRect frame = CGRectMake(startingPoint.x, initialYPosition, defaultWidth, defaultHeight);
-    frame = [self adjustFrameToFitWithinDrawingBounds:frame];
-    
-    self.textView.frame = frame;
-    self.textView.text = @"";
-    self.textView.hidden = NO;
-}
-
-- (void)startTextEntry
-{
-    if (!self.textView.hidden) {
-        [self.textView becomeFirstResponder];
-    }
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if (([self.currentTool class] == [ACEDrawingTextTool  class]) && [text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    return YES;
-}
-
-- (void)textViewDidChange:(UITextView *)textView {
-    CGRect frame = self.textView.frame;
-    if (self.textView.contentSize.height > frame.size.height) {
-        frame.size.height = self.textView.contentSize.height;
-    }
-    
-    self.textView.frame = frame;
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    [self commitAndHideTextEntry];
-}
-
-- (void)resizeTextViewFrame:(CGPoint)adjustedSize
-{
-    int minimumAllowedHeight = self.textView.font.pointSize * 2;
-    int minimumAllowedWidth = self.textView.font.pointSize * 0.5;
-    
-    CGRect frame = self.textView.frame;
-    
-    //adjust height
-    int adjustedHeight = adjustedSize.y - self.textView.frame.origin.y;
-    if (adjustedHeight > minimumAllowedHeight) {
-        frame.size.height = adjustedHeight;
-    }
-    
-    //adjust width
-    int adjustedWidth = adjustedSize.x - self.textView.frame.origin.x;
-    if (adjustedWidth > minimumAllowedWidth) {
-        frame.size.width = adjustedWidth;
-    }
-    frame = [self adjustFrameToFitWithinDrawingBounds:frame];
-    
-    self.textView.frame = frame;
-}
-
-- (CGRect)adjustFrameToFitWithinDrawingBounds:(CGRect)frame
-{
-    //check that the frame does not go beyond bounds of parent view
-    if ((frame.origin.x + frame.size.width) > self.frame.size.width) {
-        frame.size.width = self.frame.size.width - frame.origin.x;
-    }
-    if ((frame.origin.y + frame.size.height) > self.frame.size.height) {
-        frame.size.height = self.frame.size.height - frame.origin.y;
-    }
-    return frame;
-}
-
-- (void)commitAndHideTextEntry
-{
-    [self.textView resignFirstResponder];
-    
-    if ([self.textView.text length]) {
-        UIEdgeInsets textInset = self.textView.textContainerInset;
-        CGFloat additionalXPadding = 5;
-        CGPoint start = CGPointMake(self.textView.frame.origin.x + textInset.left + additionalXPadding, self.textView.frame.origin.y + textInset.top);
-        CGPoint end = CGPointMake(self.textView.frame.origin.x + self.textView.frame.size.width - additionalXPadding, self.textView.frame.origin.y + self.textView.frame.size.height);
-        
-        ((ACEDrawingTextTool*)self.currentTool).attributedText = [self.textView.attributedText copy];
-        
-        [self.pathArray addObject:self.currentTool];
-        
-        [self.currentTool setInitialPoint:start]; //change this for precision accuracy of text location
-        [self.currentTool moveFromPoint:start toPoint:end];
-        [self setNeedsDisplay];
-        
-        [self finishDrawing];
-    }
-    
-    self.currentTool = nil;
-    self.textView.hidden = YES;
-    self.textView = nil;
-}
-
-#pragma mark - Keyboard Events
-
-- (void)keyboardDidShow:(NSNotification *)notification
-{
-    self.originalFrameYPos = self.frame.origin.y;
-
-    if (IOS8_OR_ABOVE) {
-        [self adjustFramePosition:notification];
-        
-    } else {
-        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            [self landscapeChanges:notification];
-        } else {
-            [self adjustFramePosition:notification];
-        }
-    }
-}
-
-- (void)landscapeChanges:(NSNotification *)notification
-{
-    CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:self];
-    CGFloat textViewOriginY = textViewBottomPoint.y;
-    CGFloat textViewBottomY = textViewOriginY + self.textView.frame.size.height;
-
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
-    CGFloat offset = (self.frame.size.height - keyboardSize.width) - textViewBottomY;
-
-    if (offset < 0) {
-        CGFloat newYPos = self.frame.origin.y + offset;
-        self.frame = CGRectMake(self.frame.origin.x,newYPos, self.frame.size.width, self.frame.size.height);
-
-    }
-}
-- (void)adjustFramePosition:(NSNotification *)notification
-{
-    CGPoint textViewBottomPoint = [self convertPoint:self.textView.frame.origin toView:nil];
-    textViewBottomPoint.y += self.textView.frame.size.height;
-
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
-    CGFloat offset = (screenRect.size.height - keyboardSize.height) - textViewBottomPoint.y;
-
-    if (offset < 0) {
-        CGFloat newYPos = self.frame.origin.y + offset;
-        self.frame = CGRectMake(self.frame.origin.x,newYPos, self.frame.size.width, self.frame.size.height);
-    }
-}
-
-- (void)keyboardDidHide:(NSNotification *)notification
-{
-    self.frame = CGRectMake(self.frame.origin.x,self.originalFrameYPos,self.frame.size.width,self.frame.size.height);
-}
-
 
 #pragma mark - Load Image
 
@@ -602,10 +380,6 @@
 
 - (void)resetTool
 {
-    if ([self.currentTool isKindOfClass:[ACEDrawingTextTool class]]) {
-        self.textView.text = @"";
-        [self commitAndHideTextEntry];
-    }
     self.currentTool = nil;
 }
 
@@ -716,9 +490,6 @@
     self.image = nil;
     self.backgroundImage = nil;
     self.customDrawTool = nil;
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
     
 #if !ACE_HAS_ARC
     [super dealloc];
