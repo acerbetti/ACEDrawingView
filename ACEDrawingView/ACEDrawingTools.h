@@ -25,6 +25,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class ACEDrawingView;
+@class ACEDrawingLabelView;
+
 #if __has_feature(objc_arc)
 #define ACE_HAS_ARC 1
 #define ACE_RETAIN(exp) (exp)
@@ -80,6 +83,22 @@
 @end
 
 @interface ACEDrawingMultilineTextTool : ACEDrawingTextTool
+@end
+
+@interface ACEDrawingDraggableTextTool : NSObject<ACEDrawingTool>
+
+@property (nonatomic, weak) ACEDrawingView *drawingView;
+@property (nonatomic, readonly) ACEDrawingLabelView *labelView;
+
+- (void)capturePosition;
+- (void)undraw;
+
+- (BOOL)canRedo;
+- (BOOL)redo;
+
+- (BOOL)canUndo;
+- (void)undo;
+
 @end
 
 #pragma mark -

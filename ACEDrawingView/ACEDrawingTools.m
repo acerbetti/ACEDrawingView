@@ -24,6 +24,7 @@
  */
 
 #import "ACEDrawingTools.h"
+#import "ACEDrawingView.h"
 #if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 #import <CoreText/CoreText.h>
 #else
@@ -260,6 +261,128 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 #pragma mark - ACEDrawingMultilineTextTool
 
 @implementation ACEDrawingMultilineTextTool
+@end
+
+#pragma mark - ACEDrawingDraggableTextTool
+
+@interface ACEDrawingDraggableTextTool ()
+@property (nonatomic, strong) NSMutableArray *redoPositions;
+@property (nonatomic, strong) NSMutableArray *undoPositions;
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingDraggableTextTool
+
+@synthesize lineColor   = _lineColor;
+@synthesize lineAlpha   = _lineAlpha;     // Not used for this tool
+@synthesize lineWidth   = _lineWidth;     // Not used for this tool
+@synthesize drawingView = _drawingView;
+@synthesize labelView   = _labelView;
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    CGRect frame = CGRectMake(firstPoint.x, firstPoint.y, 50, 100);
+    
+    _labelView = [[ACEDrawingLabelView alloc] initWithFrame:frame];
+    _labelView.delegate     = self.drawingView;
+    _labelView.fontSize     = self.drawingView.draggableTextFont.pointSize;
+    _labelView.fontName     = self.drawingView.draggableTextFont.fontName;
+    _labelView.textColor    = self.lineColor;
+    _labelView.closeImage   = self.drawingView.draggableTextCloseImage;
+    _labelView.rotateImage  = self.drawingView.draggableTextRotateImage;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    // Not used for this tool
+}
+
+- (void)draw
+{
+    if (!self.labelView.superview) {
+        [self.drawingView addSubview:self.labelView];
+    }
+}
+
+- (NSMutableArray *)redoPositions
+{
+    if (!_redoPositions) {
+        _redoPositions = [NSMutableArray new];
+    }
+    return _redoPositions;
+}
+
+- (NSMutableArray *)undoPositions
+{
+    if (!_undoPositions) {
+        _undoPositions = [NSMutableArray new];
+    }
+    return _undoPositions;
+}
+
+- (void)applyTransform:(ACEDrawingLabelViewTransform *)t
+{
+    self.labelView.center = t.center;
+    self.labelView.transform = t.transform;
+    self.labelView.bounds = t.bounds;
+    [self.labelView resizeInRect:t.bounds];
+}
+
+- (void)capturePosition
+{
+    [self.undoPositions addObject:[ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                                                 atCenter:self.labelView.center
+                                                               withBounds:self.labelView.bounds]];
+    // clear redoPositions
+    self.redoPositions = nil;
+}
+
+- (void)undraw
+{
+    [self.labelView removeFromSuperview];
+}
+
+- (BOOL)canRedo
+{
+    return self.redoPositions.count > 0 && self.labelView.superview;
+}
+
+- (BOOL)redo
+{
+    // add transform to undoPositions
+    [self.undoPositions addObject:[ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                                                 atCenter:self.labelView.center
+                                                               withBounds:self.labelView.bounds]];
+    // apply transform
+    ACEDrawingLabelViewTransform *t = [self.redoPositions lastObject];
+    [self applyTransform:t];
+    
+    // remove transform from redoPositions
+    [self.redoPositions removeLastObject];
+    
+    return ![self canRedo];
+}
+
+- (BOOL)canUndo
+{
+    return self.undoPositions.count > 0;
+}
+
+- (void)undo
+{
+    // add transform to redoPositions
+    [self.redoPositions addObject:[ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                                                 atCenter:self.labelView.center
+                                                               withBounds:self.labelView.bounds]];
+    // apply transform
+    ACEDrawingLabelViewTransform *t = [self.undoPositions lastObject];
+    [self applyTransform:t];
+    
+    // remove transform from undoPositions
+    [self.undoPositions removeLastObject];
+}
+
 @end
 
 #pragma mark - ACEDrawingRectangleTool
