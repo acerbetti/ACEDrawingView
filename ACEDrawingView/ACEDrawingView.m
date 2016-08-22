@@ -25,6 +25,7 @@
 
 #import "ACEDrawingView.h"
 #import "ACEDrawingTools.h"
+#import "ACEDrawingToolState.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -44,7 +45,10 @@
 }
 
 @property (nonatomic, strong) NSMutableArray *pathArray;
-@property (nonatomic, strong) NSMutableArray *bufferArray;
+
+@property (nonatomic, strong) NSMutableArray *redoStates;
+@property (nonatomic, strong) NSMutableArray *undoStates;
+
 @property (nonatomic, strong) id<ACEDrawingTool> currentTool;
 @property (nonatomic, strong) UIImage *image;
 
@@ -77,7 +81,9 @@
 {
     // init the private arrays
     self.pathArray = [NSMutableArray array];
-    self.bufferArray = [NSMutableArray array];
+    
+    self.redoStates = [NSMutableArray array];
+    self.undoStates = [NSMutableArray array];
     
     // set the default values for the public properties
     self.lineColor = kDefaultLineColor;
@@ -169,7 +175,7 @@
     [self updateCacheImage:NO];
     
     // clear the redo queue
-    [self.bufferArray removeAllObjects];
+    [self.redoStates removeAllObjects];
     
     // call the delegate
     if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawUsingTool:)]) {
@@ -281,6 +287,7 @@
         
     } else {
         [self.pathArray addObject:self.currentTool];
+        [self.undoStates addObject:[self.currentTool captureToolState]];
         
         [self.currentTool setInitialPoint:currentPoint];
     }
@@ -335,6 +342,7 @@
             self.draggableTextView = ((ACEDrawingDraggableTextTool *)self.currentTool).labelView;
             
             [self.pathArray addObject:self.currentTool];
+            
             [self finishDrawing];
         }
     } else {
@@ -358,7 +366,8 @@
     self.backgroundImage = [image copy];
     
     // when loading an external image, I'm cleaning all the paths and the undo buffer
-    [self.bufferArray removeAllObjects];
+    [self.redoStates removeAllObjects];
+    [self.undoStates removeAllObjects];
     [self.pathArray removeAllObjects];
     [self updateCacheImage:YES];
     [self setNeedsDisplay];
@@ -388,7 +397,8 @@
 - (void)clear
 {
     [self resetTool];
-    [self.bufferArray removeAllObjects];
+    [self.redoStates removeAllObjects];
+    [self.undoStates removeAllObjects];
     [self.pathArray removeAllObjects];
     self.backgroundImage = nil;
     [self updateCacheImage:YES];
@@ -398,94 +408,102 @@
 
 #pragma mark - Undo / Redo
 
-- (NSUInteger)undoSteps
-{
-    return self.bufferArray.count;
-}
-
 - (BOOL)canUndo
 {
-    return self.pathArray.count > 0;
+    return self.undoStates.count > 0;
 }
 
 - (void)undoLatestStep
 {
     if ([self canUndo]) {
-        [self resetTool];
-        id<ACEDrawingTool>tool = [self.pathArray lastObject];
-        if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
-            if ([(ACEDrawingDraggableTextTool *)tool canUndo]) {
-                [(ACEDrawingDraggableTextTool *)tool undo];
-                if (![self.bufferArray containsObject:tool]) {
-                    [self.bufferArray addObject:tool];
-                }
-                if ([self.delegate respondsToSelector:@selector(drawingView:didUndoDrawUsingTool:)]) {
-                    [self.delegate drawingView:self didUndoDrawUsingTool:self.currentTool];
-                }
-                return;
-            } else {
-                [(ACEDrawingDraggableTextTool *)tool undraw];
+        ACEDrawingToolState *undoState = [self.undoStates lastObject];
+        
+        // add to redo states
+        [self.redoStates addObject:undoState];
+        [self.redoStates addObject:[undoState.tool captureToolState]];
+        
+        // undo for tools last state
+        if ([self lastStateForTool:undoState.tool inStateArray:self.undoStates]) {
+            if ([undoState.tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+                [(ACEDrawingDraggableTextTool *)undoState.tool undraw];
             }
+            
+            [self.pathArray enumerateObjectsUsingBlock:^(id<ACEDrawingTool> tool, NSUInteger idx, BOOL *stop) {
+                if (tool == undoState.tool) {
+                    [self.pathArray removeObjectAtIndex:idx];
+                }
+            }];
+            
+            [self.undoStates removeLastObject];
+            
+        // undo for a tools sub states
+        } else {
+            [self.undoStates removeLastObject];
+            [undoState.tool applyToolState:undoState];
         }
-        [self.bufferArray addObject:tool];
-        [self.pathArray removeLastObject];
+        
+        // redraw
         [self updateCacheImage:YES];
         [self setNeedsDisplay];
         
+        // call the delegate
         if ([self.delegate respondsToSelector:@selector(drawingView:didUndoDrawUsingTool:)]) {
-            [self.delegate drawingView:self didUndoDrawUsingTool:self.currentTool];
+            [self.delegate drawingView:self didUndoDrawUsingTool:undoState.tool];
         }
     }
 }
 
 - (BOOL)canRedo
 {
-    return self.bufferArray.count > 0;
+    return self.redoStates.count > 0;
 }
 
 - (void)redoLatestStep
 {
     if ([self canRedo]) {
-        [self resetTool];
-        id<ACEDrawingTool>tool = [self.bufferArray lastObject];
-        if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
-            // check if label has any redo options for angle, placement, or size.
-            // if not we will fall through as the label has been removed from the superview
-            if ([(ACEDrawingDraggableTextTool *)tool canRedo]) {
-                BOOL lastRedo = [(ACEDrawingDraggableTextTool *)tool redo];
-                
-                // make sure the tool is added back to the drawingView's undo stack after we've performed a redo
-                if (![self.pathArray containsObject:tool]) {
-                    [self.pathArray addObject:tool];
-                }
-                
-                // if there are no more redo options for this tool, we need to remove the tool from the drawingView's redo stack
-                if (lastRedo) {
-                    [self.bufferArray removeLastObject];
-                }
-                if ([self.delegate respondsToSelector:@selector(drawingView:didRedoDrawUsingTool:)]) {
-                    [self.delegate drawingView:self didRedoDrawUsingTool:self.currentTool];
-                }
-                
-                // no need to continue, since we don't want to continue to add/remove the tool from the drawingView's redo stack when performing the tools redo events
-                return;
-            }
+        ACEDrawingToolState *redoState = [self.redoStates lastObject];
+        
+        if ([self lastStateForTool:redoState.tool inStateArray:self.redoStates]) {
+            [self.pathArray addObject:redoState.tool];
         }
-        [self.pathArray addObject:tool];
-        [self.bufferArray removeLastObject];
+        
+        [self.redoStates removeLastObject];
+        if ([redoState.tool respondsToSelector:@selector(applyToolState:)]) {
+            [redoState.tool applyToolState:redoState];
+        }
+        
+        // update undo states
+        [self.undoStates addObject:[self.redoStates lastObject]];
+        [self.redoStates removeLastObject];
+        
+        // redraw
         [self updateCacheImage:YES];
         [self setNeedsDisplay];
         
+        // call the delegate
         if ([self.delegate respondsToSelector:@selector(drawingView:didRedoDrawUsingTool:)]) {
-            [self.delegate drawingView:self didRedoDrawUsingTool:self.currentTool];
+            [self.delegate drawingView:self didRedoDrawUsingTool:redoState.tool];
         }
     }
+}
+
+- (BOOL)lastStateForTool:(id<ACEDrawingTool>)tool inStateArray:(NSArray *)stateArray
+{
+    NSInteger numberOfStates = 0;
+    for (ACEDrawingToolState *state in stateArray) {
+        if (state.tool == tool) { numberOfStates++; };
+    }
+    
+    NSAssert(numberOfStates != 0, @"There much be atleast one state with a matching tool");
+    
+    return (stateArray == self.undoStates) ? numberOfStates == 1 : numberOfStates == 2;
 }
 
 - (void)dealloc
 {
     self.pathArray = nil;
-    self.bufferArray = nil;
+    self.redoStates = nil;
+    self.undoStates = nil;
     self.currentTool = nil;
     self.image = nil;
     self.backgroundImage = nil;
@@ -502,8 +520,8 @@
 {
     ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
     
+    // TODO: handle close for adding redo state on close
     [self.pathArray removeObject:tool];
-    [self.bufferArray addObject:tool];
     
     // call the delegate
     if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawUsingTool:)]) {
@@ -515,16 +533,13 @@
 {
     ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
     
-    [tool capturePosition];
+    [self.undoStates addObject:[tool captureToolState]];
 }
 
+// TODO: remove if not needed
 - (void)labelViewDidEndEditing:(ACEDrawingLabelView *)label
 {
     ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
-    
-    // after interacting with the label, we move it to the top of the stack
-    [self.pathArray removeObject:tool];
-    [self.pathArray addObject:tool];
 }
 
 - (void)labelViewDidShowEditingHandles:(ACEDrawingLabelView *)label
@@ -538,6 +553,23 @@
     
     if (![tool.labelView.textValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length) {
         [self.pathArray removeObject:tool];
+    }
+    
+    // if there are no undo states for the current tool, then we need to capture the first state
+    NSInteger numberOfStates = 0;
+    for (ACEDrawingToolState *state in self.undoStates) {
+        if (state.tool == tool) {
+            numberOfStates++;
+        }
+    }
+    
+    if (numberOfStates == 0 && tool) {
+        [self.undoStates addObject:[tool captureToolState]];
+        
+        // call the delegate
+        if ([self.delegate respondsToSelector:@selector(drawingView:didEndDrawUsingTool:)]) {
+            [self.delegate drawingView:self didEndDrawUsingTool:tool];
+        }
     }
 }
 

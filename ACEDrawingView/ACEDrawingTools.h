@@ -24,9 +24,11 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ACEDrawingToolState.h"
 
 @class ACEDrawingView;
 @class ACEDrawingLabelView;
+@class ACEDrawingToolState;
 
 #if __has_feature(objc_arc)
 #define ACE_HAS_ARC 1
@@ -51,6 +53,14 @@
 - (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
 
 - (void)draw;
+
+- (ACEDrawingToolState *)captureToolState;
+
+@optional
+
+- (void)applyToolState:(ACEDrawingToolState *)state;
+
+- (id)capturePositionObject;
 
 @end
 

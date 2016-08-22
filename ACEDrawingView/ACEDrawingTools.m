@@ -25,6 +25,7 @@
 
 #import "ACEDrawingTools.h"
 #import "ACEDrawingView.h"
+#import "ACEDrawingToolState.h"
 #if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 #import <CoreText/CoreText.h>
 #else
@@ -91,6 +92,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextStrokePath(context);
 }
 
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
+}
+
 - (void)dealloc
 {
     CGPathRelease(path);
@@ -118,6 +124,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextSetBlendMode(context, kCGBlendModeClear);
     CGContextStrokePath(context);
     CGContextRestoreGState(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 @end
@@ -162,6 +173,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextMoveToPoint(context, self.firstPoint.x, self.firstPoint.y);
     CGContextAddLineToPoint(context, self.lastPoint.x, self.lastPoint.y);
     CGContextStrokePath(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 - (void)dealloc
@@ -216,6 +232,33 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     }
 }
 
+- (void)applyToolState:(ACEDrawingToolState *)state
+{
+    // TODO: add assert for optional protocol methods
+    
+    if (state.hasPositionObject) {
+        [self applyTransform:state.positionObject];
+    }
+    
+    [self draw];
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    // TODO: add assert for optional protocol methods
+    
+    return [ACEDrawingToolState stateForTool:self capturePosition:YES];
+}
+
+- (id)capturePositionObject
+{
+    // TODO: add assert for optional protocol methods
+    
+    return [ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                          atCenter:self.labelView.center
+                                        withBounds:self.labelView.bounds];
+}
+
 - (NSMutableArray *)redoPositions
 {
     if (!_redoPositions) {
@@ -234,10 +277,12 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (void)applyTransform:(ACEDrawingLabelViewTransform *)t
 {
-    self.labelView.center = t.center;
-    self.labelView.transform = t.transform;
-    self.labelView.bounds = t.bounds;
-    [self.labelView resizeInRect:t.bounds];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.labelView.center = t.center;
+        self.labelView.transform = t.transform;
+        self.labelView.bounds = t.bounds;
+        [self.labelView resizeInRect:t.bounds];
+    }];
 }
 
 - (void)capturePosition
@@ -341,6 +386,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     }
 }
 
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
+}
+
 - (void)dealloc
 {
     self.lineColor = nil;
@@ -395,6 +445,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         CGContextSetLineWidth(context, self.lineWidth);
         CGContextStrokeEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
     }
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 - (void)dealloc
@@ -459,6 +514,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextAddLineToPoint(context, p2.x, p2.y);
     
     CGContextStrokePath(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 - (CGFloat)angleWithFirstPoint:(CGPoint)first secondPoint:(CGPoint)second
