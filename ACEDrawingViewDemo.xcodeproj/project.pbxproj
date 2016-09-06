@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50F58C571D7F0FCF0050A4A0 /* ACEDrawingViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */; };
+		50F58C591D7F0FE60050A4A0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50F58C581D7F0FE60050A4A0 /* Info.plist */; };
 		6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D796B7A19184BBA0045456F /* CoreText.framework */; };
 		7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FA169A072800904C6B /* UIKit.framework */; };
 		7B5AD3FD169A072800904C6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FC169A072800904C6B /* Foundation.framework */; };
@@ -21,13 +23,10 @@
 		7B5AD417169A072800904C6B /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD415169A072800904C6B /* ACEViewController.xib */; };
 		7B5AD427169A077900904C6B /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AD426169A077900904C6B /* ACEDrawingView.m */; };
 		7B78A68716A4B6780086F7B9 /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B78A68616A4B6770086F7B9 /* ACEDrawingTools.m */; };
-		8062C8271C9B82F200E9EE51 /* ACEDrawingViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8062C8261C9B82F200E9EE51 /* ACEDrawingViewTest.m */; };
-		8062C82D1C9C801800E9EE51 /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8062C82A1C9C801800E9EE51 /* ACEDrawingTools.m */; };
-		8062C82E1C9C801800E9EE51 /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8062C82C1C9C801800E9EE51 /* ACEDrawingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8062C8211C9B81DE00E9EE51 /* PBXContainerItemProxy */ = {
+		50F58C511D7F0F4B0050A4A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7B5AD3ED169A072800904C6B /* Project object */;
 			proxyType = 1;
@@ -37,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50F58C4C1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACEDrawingViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingViewTest.m; sourceTree = "<group>"; };
+		50F58C581D7F0FE60050A4A0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D796B7A19184BBA0045456F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		7B5AD3F6169A072800904C6B /* ACEDrawingViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACEDrawingViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B5AD3FA169A072800904C6B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -58,16 +60,16 @@
 		7B5AD426169A077900904C6B /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
 		7B78A68516A4B6770086F7B9 /* ACEDrawingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingTools.h; sourceTree = "<group>"; };
 		7B78A68616A4B6770086F7B9 /* ACEDrawingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingTools.m; sourceTree = "<group>"; };
-		8062C81C1C9B81DE00E9EE51 /* ACEDrawingViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACEDrawingViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8062C8201C9B81DE00E9EE51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8062C8261C9B82F200E9EE51 /* ACEDrawingViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingViewTest.m; sourceTree = "<group>"; };
-		8062C8291C9C801800E9EE51 /* ACEDrawingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingTools.h; sourceTree = "<group>"; };
-		8062C82A1C9C801800E9EE51 /* ACEDrawingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingTools.m; sourceTree = "<group>"; };
-		8062C82B1C9C801800E9EE51 /* ACEDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingView.h; sourceTree = "<group>"; };
-		8062C82C1C9C801800E9EE51 /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		50F58C491D7F0F4B0050A4A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B5AD3F3169A072800904C6B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -79,21 +81,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8062C8191C9B81DE00E9EE51 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		50F58C4D1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */,
+				50F58C581D7F0FE60050A4A0 /* Info.plist */,
+			);
+			path = ACEDrawingViewDemoTests;
+			sourceTree = "<group>";
+		};
 		7B5AD3EB169A072800904C6B = {
 			isa = PBXGroup;
 			children = (
 				7B5AD400169A072800904C6B /* ACEDrawingViewDemo */,
-				8062C81D1C9B81DE00E9EE51 /* ACEDrawingViewDemoTests */,
+				50F58C4D1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests */,
 				7B5AD3F9169A072800904C6B /* Frameworks */,
 				7B5AD3F7169A072800904C6B /* Products */,
 			);
@@ -103,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				7B5AD3F6169A072800904C6B /* ACEDrawingViewDemo.app */,
-				8062C81C1C9B81DE00E9EE51 /* ACEDrawingViewDemoTests.xctest */,
+				50F58C4C1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,30 +162,27 @@
 			path = ACEDrawingView;
 			sourceTree = SOURCE_ROOT;
 		};
-		8062C81D1C9B81DE00E9EE51 /* ACEDrawingViewDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				8062C8281C9C801800E9EE51 /* ACEDrawingView */,
-				8062C8201C9B81DE00E9EE51 /* Info.plist */,
-				8062C8261C9B82F200E9EE51 /* ACEDrawingViewTest.m */,
-			);
-			path = ACEDrawingViewDemoTests;
-			sourceTree = "<group>";
-		};
-		8062C8281C9C801800E9EE51 /* ACEDrawingView */ = {
-			isa = PBXGroup;
-			children = (
-				8062C8291C9C801800E9EE51 /* ACEDrawingTools.h */,
-				8062C82A1C9C801800E9EE51 /* ACEDrawingTools.m */,
-				8062C82B1C9C801800E9EE51 /* ACEDrawingView.h */,
-				8062C82C1C9C801800E9EE51 /* ACEDrawingView.m */,
-			);
-			path = ACEDrawingView;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		50F58C4B1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50F58C531D7F0F4B0050A4A0 /* Build configuration list for PBXNativeTarget "ACEDrawingViewDemoTests" */;
+			buildPhases = (
+				50F58C481D7F0F4B0050A4A0 /* Sources */,
+				50F58C491D7F0F4B0050A4A0 /* Frameworks */,
+				50F58C4A1D7F0F4B0050A4A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50F58C521D7F0F4B0050A4A0 /* PBXTargetDependency */,
+			);
+			name = ACEDrawingViewDemoTests;
+			productName = ACEDrawingViewDemoTests;
+			productReference = 50F58C4C1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7B5AD3F5169A072800904C6B /* ACEDrawingViewDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B5AD41D169A072800904C6B /* Build configuration list for PBXNativeTarget "ACEDrawingViewDemo" */;
@@ -199,24 +200,6 @@
 			productReference = 7B5AD3F6169A072800904C6B /* ACEDrawingViewDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8062C81B1C9B81DE00E9EE51 /* ACEDrawingViewDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8062C8251C9B81DE00E9EE51 /* Build configuration list for PBXNativeTarget "ACEDrawingViewDemoTests" */;
-			buildPhases = (
-				8062C8181C9B81DE00E9EE51 /* Sources */,
-				8062C8191C9B81DE00E9EE51 /* Frameworks */,
-				8062C81A1C9B81DE00E9EE51 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8062C8221C9B81DE00E9EE51 /* PBXTargetDependency */,
-			);
-			name = ACEDrawingViewDemoTests;
-			productName = ACEDrawingViewDemoTests;
-			productReference = 8062C81C1C9B81DE00E9EE51 /* ACEDrawingViewDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -227,8 +210,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Stefano Acerbetti";
 				TargetAttributes = {
-					8062C81B1C9B81DE00E9EE51 = {
-						CreatedOnToolsVersion = 7.2.1;
+					50F58C4B1D7F0F4B0050A4A0 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 7B5AD3F5169A072800904C6B;
 					};
 				};
 			};
@@ -245,12 +229,20 @@
 			projectRoot = "";
 			targets = (
 				7B5AD3F5169A072800904C6B /* ACEDrawingViewDemo */,
-				8062C81B1C9B81DE00E9EE51 /* ACEDrawingViewDemoTests */,
+				50F58C4B1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		50F58C4A1D7F0F4B0050A4A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50F58C591D7F0FE60050A4A0 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B5AD3F4169A072800904C6B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,16 +255,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8062C81A1C9B81DE00E9EE51 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		50F58C481D7F0F4B0050A4A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50F58C571D7F0FCF0050A4A0 /* ACEDrawingViewTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B5AD3F2169A072800904C6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,23 +278,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8062C8181C9B81DE00E9EE51 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8062C82E1C9C801800E9EE51 /* ACEDrawingView.m in Sources */,
-				8062C82D1C9C801800E9EE51 /* ACEDrawingTools.m in Sources */,
-				8062C8271C9B82F200E9EE51 /* ACEDrawingViewTest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8062C8221C9B81DE00E9EE51 /* PBXTargetDependency */ = {
+		50F58C521D7F0F4B0050A4A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7B5AD3F5169A072800904C6B /* ACEDrawingViewDemo */;
-			targetProxy = 8062C8211C9B81DE00E9EE51 /* PBXContainerItemProxy */;
+			targetProxy = 50F58C511D7F0F4B0050A4A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -325,6 +308,72 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		50F58C541D7F0F4B0050A4A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = ACEDrawingViewDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acetools.ACEDrawingViewDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ACEDrawingViewDemo.app/ACEDrawingViewDemo";
+			};
+			name = Debug;
+		};
+		50F58C551D7F0F4B0050A4A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = ACEDrawingViewDemoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acetools.ACEDrawingViewDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ACEDrawingViewDemo.app/ACEDrawingViewDemo";
+			};
+			name = Release;
+		};
 		7B5AD41B169A072800904C6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -402,68 +451,17 @@
 			};
 			name = Release;
 		};
-		8062C8231C9B81DE00E9EE51 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = ACEDrawingViewDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.acetool.ACEDrawingViewDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		8062C8241C9B81DE00E9EE51 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = ACEDrawingViewDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.acetool.ACEDrawingViewDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		50F58C531D7F0F4B0050A4A0 /* Build configuration list for PBXNativeTarget "ACEDrawingViewDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50F58C541D7F0F4B0050A4A0 /* Debug */,
+				50F58C551D7F0F4B0050A4A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		7B5AD3F0169A072800904C6B /* Build configuration list for PBXProject "ACEDrawingViewDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -478,15 +476,6 @@
 			buildConfigurations = (
 				7B5AD41E169A072800904C6B /* Debug */,
 				7B5AD41F169A072800904C6B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8062C8251C9B81DE00E9EE51 /* Build configuration list for PBXNativeTarget "ACEDrawingViewDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8062C8231C9B81DE00E9EE51 /* Debug */,
-				8062C8241C9B81DE00E9EE51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
