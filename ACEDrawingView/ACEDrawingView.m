@@ -281,6 +281,10 @@
     self.currentTool.lineColor = self.lineColor;
     self.currentTool.lineAlpha = self.lineAlpha;
     
+    if (self.edgeSnapThreshold > 0 && [self.currentTool isKindOfClass:[ACEDrawingRectangleTool class]]) {
+        [self snapCurrentPointToEdges];
+    }
+    
     if ([self.currentTool class] == [ACEDrawingTextTool class]) {
         [self initializeTextBox:currentPoint WithMultiline:NO];
     } else if([self.currentTool class] == [ACEDrawingMultilineTextTool class]) {
@@ -305,6 +309,10 @@
     previousPoint2 = previousPoint1;
     previousPoint1 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
+    
+    if (self.edgeSnapThreshold > 0 && [self.currentTool isKindOfClass:[ACEDrawingRectangleTool class]]) {
+        [self snapCurrentPointToEdges];
+    }
     
     if ([self.currentTool isKindOfClass:[ACEDrawingPenTool class]]) {
         CGRect bounds = [(ACEDrawingPenTool*)self.currentTool addPathPreviousPreviousPoint:previousPoint2 withPreviousPoint:previousPoint1 withCurrentPoint:currentPoint];
