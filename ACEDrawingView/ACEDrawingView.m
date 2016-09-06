@@ -354,6 +354,17 @@
     [self touchesEnded:touches withEvent:event];
 }
 
+- (void) snapCurrentPointToEdges
+{
+    int xMax = self.frame.size.width;
+    int yMax = self.frame.size.height;
+    
+    if(currentPoint.x < self.edgeSnapThreshold) currentPoint.x = 0;
+    else if(currentPoint.x > xMax - self.edgeSnapThreshold) currentPoint.x = xMax;
+    if(currentPoint.y < self.edgeSnapThreshold) currentPoint.y = 0;
+    else if(currentPoint.y > yMax - self.edgeSnapThreshold) currentPoint.y = yMax;
+}
+
 #pragma mark - Text Entry
 
 - (void)initializeTextBox:(CGPoint)startingPoint WithMultiline:(BOOL)multiline {
