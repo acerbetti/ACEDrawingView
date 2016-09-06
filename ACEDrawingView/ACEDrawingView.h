@@ -25,7 +25,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define ACEDrawingViewVersion   1.3.7
+#define ACEDrawingViewVersion   1.3.8
 
 typedef enum {
     ACEDrawingToolTypePen,

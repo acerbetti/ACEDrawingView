@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		50F58C571D7F0FCF0050A4A0 /* ACEDrawingViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */; };
-		50F58C591D7F0FE60050A4A0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50F58C581D7F0FE60050A4A0 /* Info.plist */; };
 		6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D796B7A19184BBA0045456F /* CoreText.framework */; };
 		7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FA169A072800904C6B /* UIKit.framework */; };
 		7B5AD3FD169A072800904C6B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FC169A072800904C6B /* Foundation.framework */; };
@@ -239,7 +238,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50F58C591D7F0FE60050A4A0 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +319,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -353,7 +350,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -383,7 +379,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -413,7 +408,6 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -461,6 +455,7 @@
 				50F58C551D7F0F4B0050A4A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B5AD3F0169A072800904C6B /* Build configuration list for PBXProject "ACEDrawingViewDemo" */ = {
 			isa = XCConfigurationList;
