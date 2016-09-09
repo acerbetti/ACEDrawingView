@@ -94,6 +94,7 @@
 @property (nonatomic, readonly) ACEDrawingLabelView *labelView;
 
 - (void)capturePosition;
+- (void)hideHandle;
 - (void)undraw;
 
 - (BOOL)canRedo;

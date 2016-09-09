@@ -405,6 +405,15 @@
     [self setNeedsDisplay];
 }
 
+- (void)prepareForSnapshot
+{
+    for (id<ACEDrawingTool> tool in self.pathArray) {
+        // check for text tool and hide handles
+        if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+            [(ACEDrawingDraggableTextTool *)tool hideHandle];
+        }
+    }
+}
 
 #pragma mark - Undo / Redo
 

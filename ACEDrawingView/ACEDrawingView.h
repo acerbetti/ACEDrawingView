@@ -76,6 +76,9 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 // erase all
 - (void)clear;
 
+// cleanup in preparation for taking a snapshot
+- (void)prepareForSnapshot;
+
 // undo / redo
 - (BOOL)canUndo;
 - (void)undoLatestStep;

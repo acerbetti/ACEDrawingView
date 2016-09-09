@@ -259,6 +259,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
                                         withBounds:self.labelView.bounds];
 }
 
+- (void)hideHandle
+{
+    [self.labelView hideEditingHandles];
+}
+
 - (NSMutableArray *)redoPositions
 {
     if (!_redoPositions) {
