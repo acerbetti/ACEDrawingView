@@ -448,7 +448,9 @@
         // undo for a tools sub states
         } else {
             [self.undoStates removeLastObject];
-            [undoState.tool applyToolState:undoState];
+            if ([undoState.tool respondsToSelector:@selector(applyToolState:)]) {
+                [undoState.tool applyToolState:undoState];
+            }
         }
         
         // redraw
@@ -543,12 +545,6 @@
     ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
     
     [self.undoStates addObject:[tool captureToolState]];
-}
-
-// TODO: remove if not needed
-- (void)labelViewDidEndEditing:(ACEDrawingLabelView *)label
-{
-    ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
 }
 
 - (void)labelViewDidShowEditingHandles:(ACEDrawingLabelView *)label

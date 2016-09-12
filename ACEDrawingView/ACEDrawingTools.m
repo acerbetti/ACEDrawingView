@@ -233,9 +233,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 }
 
 - (void)applyToolState:(ACEDrawingToolState *)state
-{
-    // TODO: add assert for optional protocol methods
-    
+{    
     if (state.hasPositionObject) {
         [self applyTransform:state.positionObject];
     }
@@ -245,15 +243,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (ACEDrawingToolState *)captureToolState
 {
-    // TODO: add assert for optional protocol methods
-    
     return [ACEDrawingToolState stateForTool:self capturePosition:YES];
 }
 
 - (id)capturePositionObject
 {
-    // TODO: add assert for optional protocol methods
-    
     return [ACEDrawingLabelViewTransform transform:self.labelView.transform
                                           atCenter:self.labelView.center
                                         withBounds:self.labelView.bounds];
