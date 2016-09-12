@@ -26,7 +26,7 @@
 #import <UIKit/UIKit.h>
 #import "ACEDrawingLabelView.h"
 
-#define ACEDrawingViewVersion   1.3.7
+#define ACEDrawingViewVersion   1.3.8
 
 typedef enum {
     ACEDrawingToolTypePen,
@@ -58,6 +58,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
+@property (nonatomic, assign) CGFloat edgeSnapThreshold;
 @property (nonatomic, assign) ACEDrawingMode drawMode;
 
 @property (nonatomic, strong) UIFont *draggableTextFont;

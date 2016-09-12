@@ -26,14 +26,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8062C81B1C9B81DE00E9EE51"
+               BlueprintIdentifier = "50F58C4B1D7F0F4B0050A4A0"
                BuildableName = "ACEDrawingViewDemoTests.xctest"
                BlueprintName = "ACEDrawingViewDemoTests"
                ReferencedContainer = "container:ACEDrawingViewDemo.xcodeproj">
