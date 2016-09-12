@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @property (nonatomic, assign) CGFloat edgeSnapThreshold;
 @property (nonatomic, assign) ACEDrawingMode drawMode;
 
-@property (nonatomic, strong) UIFont *draggableTextFont;
+@property (nonatomic, strong) NSString *draggableTextFontName;
 @property (nonatomic, strong) UIImage *draggableTextCloseImage;
 @property (nonatomic, strong) UIImage *draggableTextRotateImage;
 

@@ -34,7 +34,8 @@
     self.previewImageView.layer.borderColor = [[UIColor blackColor] CGColor];
     self.previewImageView.layer.borderWidth = 2.0f;
     
-    self.drawingView.draggableTextFont = [UIFont systemFontOfSize:18.0];
+    // set draggable text properties
+    self.drawingView.draggableTextFontName = @"MarkerFelt-Thin";
 }
 
 - (void)didReceiveMemoryWarning

@@ -213,8 +213,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     
     _labelView = [[ACEDrawingLabelView alloc] initWithFrame:frame];
     _labelView.delegate     = self.drawingView;
-    _labelView.fontSize     = self.drawingView.draggableTextFont.pointSize;
-    _labelView.fontName     = self.drawingView.draggableTextFont.fontName;
+    _labelView.fontSize     = 18.0;
+    _labelView.fontName     = self.drawingView.draggableTextFontName ?: [UIFont systemFontOfSize:_labelView.fontSize].fontName;
     _labelView.textColor    = self.lineColor;
     _labelView.closeImage   = self.drawingView.draggableTextCloseImage;
     _labelView.rotateImage  = self.drawingView.draggableTextRotateImage;
