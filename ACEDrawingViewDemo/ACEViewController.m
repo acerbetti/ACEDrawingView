@@ -33,6 +33,8 @@
     // init the preview image
     self.previewImageView.layer.borderColor = [[UIColor blackColor] CGColor];
     self.previewImageView.layer.borderWidth = 2.0f;
+    
+    self.drawingView.draggableTextFont = [UIFont systemFontOfSize:18.0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,6 +152,10 @@
                 case 7:
                     self.drawingView.drawTool = ACEDrawingToolTypeEraser;
                     break;
+                    
+                case 8:
+                    self.drawingView.drawTool = ACEDrawingToolTypeDraggableText;
+                    break;
             }
             
             // if eraser, disable color and alpha selection
@@ -181,7 +187,7 @@
                                                     otherButtonTitles:@"Pen", @"Line", @"Arrow",
                                   @"Rect (Stroke)", @"Rect (Fill)",
                                   @"Ellipse (Stroke)", @"Ellipse (Fill)",
-                                  @"Eraser", @"Text", @"Text (Multiline)",
+                                  @"Eraser", @"Draggable Text",
                                   nil];
     
     [actionSheet setTag:kActionSheetTool];
@@ -194,7 +200,6 @@
     self.lineWidthSlider.hidden = !self.lineWidthSlider.hidden;
     self.lineAlphaSlider.hidden = YES;
 }
-
 
 - (IBAction)widthChange:(UISlider *)sender
 {

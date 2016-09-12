@@ -473,6 +473,7 @@ static ACEDrawingLabelView *lastTouchedView;
         [self showEditingHandles];
     }
     [textField adjustsWidthToFillItsContents];
+    
     return YES;
 }
 
