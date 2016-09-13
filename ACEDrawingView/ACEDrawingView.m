@@ -572,7 +572,7 @@
 {
     ACEDrawingDraggableTextTool *tool = [self draggableTextToolForLabel:label];
     
-    [self.undoStates addObject:[tool captureToolState]];
+    if (tool) { [self.undoStates addObject:[tool captureToolState]]; }
 }
 
 - (void)labelViewDidShowEditingHandles:(ACEDrawingLabelView *)label
