@@ -227,7 +227,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 - (void)draw
 {
-    if (self.labelView != nil && !self.labelView.superview == nil) {
+    if (self.labelView != nil && self.labelView.superview == nil) {
         [self.drawingView addSubview:self.labelView];
     }
 }

@@ -51,7 +51,7 @@
 
 - (BOOL)hasPositionObject
 {
-    return self.positionObject;
+    return self.positionObject != nil;
 }
 
 @end
