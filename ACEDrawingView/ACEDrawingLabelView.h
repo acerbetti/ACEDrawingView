@@ -160,6 +160,13 @@
 - (void)labelViewDidClose:(ACEDrawingLabelView *)label;
 
 /**
+ *  Occurs before border and control buttons will show.
+ *
+ *  @param label    A label object informing the delegate about showing.
+ */
+- (void)labelViewWillShowEditingHandles:(ACEDrawingLabelView *)label;
+
+/**
  *  Occurs when border and control buttons was shown.
  *
  *  @param label    A label object informing the delegate about showing.

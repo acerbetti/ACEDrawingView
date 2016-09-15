@@ -435,8 +435,13 @@
 
 - (void)prepareForSnapshot
 {
+    // make sure text label border and handles are hidden for snapshot
+    [self hideTextToolHandles];
+}
+
+- (void)hideTextToolHandles
+{
     for (id<ACEDrawingTool> tool in self.pathArray) {
-        // check for text tool and hide handles
         if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
             [(ACEDrawingDraggableTextTool *)tool hideHandle];
         }
@@ -575,9 +580,15 @@
     if (tool) { [self.undoStates addObject:[tool captureToolState]]; }
 }
 
+- (void)labelViewWillShowEditingHandles:(ACEDrawingLabelView *)label
+{
+    // make sure all text tool handles are hidden before we show the next one
+    [self hideTextToolHandles];
+}
+
 - (void)labelViewDidShowEditingHandles:(ACEDrawingLabelView *)label
 {
-    self.draggableTextView = label;
+    self.draggableTextView = label;    
 }
 
 - (void)labelViewDidHideEditingHandles:(ACEDrawingLabelView *)label

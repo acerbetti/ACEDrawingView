@@ -55,8 +55,6 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
     return CGSizeMake(sqrt(t.a * t.a + t.c * t.c), sqrt(t.b * t.b + t.d * t.d)) ;
 }
 
-static ACEDrawingLabelView *lastTouchedView;
-
 @interface ACEDrawingLabelView () <UIGestureRecognizerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign) CGFloat globalInset;
@@ -180,12 +178,6 @@ static ACEDrawingLabelView *lastTouchedView;
     return self;
 }
 
-- (void)dealloc
-{
-    // since lastTouchedView is declared as a global static variable, we need to manually free
-    lastTouchedView = nil;
-}
-
 - (void)layoutSubviews
 {
     if (self.labelTextField) {
@@ -290,8 +282,6 @@ static ACEDrawingLabelView *lastTouchedView;
 
 - (void)hideEditingHandles
 {
-    lastTouchedView = nil;
-    
     self.showEditingHandles = NO;
     
     if (self.isEnableClose)       self.closeButton.hidden = YES;
@@ -308,12 +298,12 @@ static ACEDrawingLabelView *lastTouchedView;
 
 - (void)showEditingHandles
 {
-    [lastTouchedView hideEditingHandles];
+    if ([self.delegate respondsToSelector:@selector(labelViewWillShowEditingHandles:)]) {
+        [self.delegate labelViewWillShowEditingHandles:self];
+    }
     
     self.showEditingHandles = YES;
-    
-    lastTouchedView = self;
-    
+        
     if (self.isEnableClose)       self.closeButton.hidden = NO;
     if (self.isEnableRotate)      self.rotateButton.hidden = NO;
     
