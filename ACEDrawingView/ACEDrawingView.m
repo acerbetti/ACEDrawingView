@@ -425,6 +425,13 @@
 - (void)clear
 {
     [self resetTool];
+    
+    for (id<ACEDrawingTool> tool in self.pathArray) {
+        if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
+            [(ACEDrawingDraggableTextTool *)tool undraw];
+        }
+    }
+    
     [self.redoStates removeAllObjects];
     [self.undoStates removeAllObjects];
     [self.pathArray removeAllObjects];
