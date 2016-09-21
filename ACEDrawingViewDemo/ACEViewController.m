@@ -33,6 +33,9 @@
     // init the preview image
     self.previewImageView.layer.borderColor = [[UIColor blackColor] CGColor];
     self.previewImageView.layer.borderWidth = 2.0f;
+    
+    // set draggable text properties
+    self.drawingView.draggableTextFontName = @"MarkerFelt-Thin";
 }
 
 - (void)didReceiveMemoryWarning
@@ -152,11 +155,7 @@
                     break;
                     
                 case 8:
-                    self.drawingView.drawTool = ACEDrawingToolTypeText;
-                    break;
-                    
-                case 9:
-                    self.drawingView.drawTool = ACEDrawingToolTypeMultilineText;
+                    self.drawingView.drawTool = ACEDrawingToolTypeDraggableText;
                     break;
             }
             
@@ -189,7 +188,7 @@
                                                     otherButtonTitles:@"Pen", @"Line", @"Arrow",
                                   @"Rect (Stroke)", @"Rect (Fill)",
                                   @"Ellipse (Stroke)", @"Ellipse (Fill)",
-                                  @"Eraser", @"Text", @"Text (Multiline)",
+                                  @"Eraser", @"Draggable Text",
                                   nil];
     
     [actionSheet setTag:kActionSheetTool];
@@ -202,7 +201,6 @@
     self.lineWidthSlider.hidden = !self.lineWidthSlider.hidden;
     self.lineAlphaSlider.hidden = YES;
 }
-
 
 - (IBAction)widthChange:(UISlider *)sender
 {

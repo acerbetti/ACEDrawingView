@@ -24,8 +24,9 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ACEDrawingLabelView.h"
 
-#define ACEDrawingViewVersion   1.3.8
+#define ACEDrawingViewVersion   2.0.0
 
 typedef enum {
     ACEDrawingToolTypePen,
@@ -36,8 +37,7 @@ typedef enum {
     ACEDrawingToolTypeEllipseStroke,
     ACEDrawingToolTypeEllipseFill,
     ACEDrawingToolTypeEraser,
-    ACEDrawingToolTypeText,
-    ACEDrawingToolTypeMultilineText,
+    ACEDrawingToolTypeDraggableText,
     ACEDrawingToolTypeCustom,
 } ACEDrawingToolType;
 
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 
 @protocol ACEDrawingViewDelegate, ACEDrawingTool;
 
-@interface ACEDrawingView : UIView<UITextViewDelegate>
+@interface ACEDrawingView : UIView<ACEDrawingLabelViewDelegate>
 
 @property (nonatomic, assign) ACEDrawingToolType drawTool;
 @property (nonatomic, strong) id<ACEDrawingTool> customDrawTool;
@@ -58,9 +58,12 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) CGFloat lineAlpha;
-@property (nonatomic, strong) NSString *fontName;
 @property (nonatomic, assign) CGFloat edgeSnapThreshold;
 @property (nonatomic, assign) ACEDrawingMode drawMode;
+
+@property (nonatomic, strong) NSString *draggableTextFontName;
+@property (nonatomic, strong) UIImage *draggableTextCloseImage;
+@property (nonatomic, strong) UIImage *draggableTextRotateImage;
 
 // get the current drawing
 @property (nonatomic, strong, readonly) UIImage *image;
@@ -73,6 +76,9 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 
 // erase all
 - (void)clear;
+
+// cleanup in preparation for taking a snapshot
+- (void)prepareForSnapshot;
 
 // undo / redo
 - (BOOL)canUndo;
@@ -102,5 +108,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @optional
 - (void)drawingView:(ACEDrawingView *)view willBeginDrawUsingTool:(id<ACEDrawingTool>)tool;
 - (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view didRedoDrawUsingTool:(id<ACEDrawingTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view didUndoDrawUsingTool:(id<ACEDrawingTool>)tool;
 
 @end

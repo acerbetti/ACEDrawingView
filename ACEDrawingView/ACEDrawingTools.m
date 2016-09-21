@@ -24,6 +24,8 @@
  */
 
 #import "ACEDrawingTools.h"
+#import "ACEDrawingView.h"
+#import "ACEDrawingToolState.h"
 #if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 #import <CoreText/CoreText.h>
 #else
@@ -90,6 +92,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextStrokePath(context);
 }
 
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
+}
+
 - (void)dealloc
 {
     CGPathRelease(path);
@@ -117,6 +124,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextSetBlendMode(context, kCGBlendModeClear);
     CGContextStrokePath(context);
     CGContextRestoreGState(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 @end
@@ -163,6 +175,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextStrokePath(context);
 }
 
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
+}
+
 - (void)dealloc
 {
     self.lineColor = nil;
@@ -173,93 +190,154 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 
 @end
 
-#pragma mark - ACEDrawingTextTool
+#pragma mark - ACEDrawingDraggableTextTool
 
-@interface ACEDrawingTextTool ()
-@property (nonatomic, assign) CGPoint firstPoint;
-@property (nonatomic, assign) CGPoint lastPoint;
+@interface ACEDrawingDraggableTextTool ()
+@property (nonatomic, strong) NSMutableArray *redoPositions;
+@property (nonatomic, strong) NSMutableArray *undoPositions;
 @end
 
 #pragma mark -
 
-@implementation ACEDrawingTextTool
+@implementation ACEDrawingDraggableTextTool
 
-@synthesize lineColor = _lineColor;
-@synthesize lineAlpha = _lineAlpha;
-@synthesize lineWidth = _lineWidth;
-@synthesize attributedText = _attributedText;
+@synthesize lineColor   = _lineColor;
+@synthesize lineAlpha   = _lineAlpha;     // Not used for this tool
+@synthesize lineWidth   = _lineWidth;     // Not used for this tool
+@synthesize drawingView = _drawingView;
+@synthesize labelView   = _labelView;
 
 - (void)setInitialPoint:(CGPoint)firstPoint
 {
-    self.firstPoint = firstPoint;
+    CGRect frame = CGRectMake(firstPoint.x, firstPoint.y, 50, 100);
+    
+    _labelView = [[ACEDrawingLabelView alloc] initWithFrame:frame];
+    _labelView.delegate     = self.drawingView;
+    _labelView.fontSize     = 18.0;
+    _labelView.fontName     = self.drawingView.draggableTextFontName ?: [UIFont systemFontOfSize:_labelView.fontSize].fontName;
+    _labelView.textColor    = self.lineColor;
+    _labelView.closeImage   = self.drawingView.draggableTextCloseImage;
+    _labelView.rotateImage  = self.drawingView.draggableTextRotateImage;
 }
 
 - (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
-    self.lastPoint = endPoint;
+    // Not used for this tool
 }
 
 - (void)draw
 {
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSaveGState(context);
-    CGContextSetAlpha(context, self.lineAlpha);
-    
-    // draw the text
-    CGRect viewBounds = CGRectMake(MIN(self.firstPoint.x, self.lastPoint.x),
-                                   MIN(self.firstPoint.y, self.lastPoint.y),
-                                   fabs(self.firstPoint.x - self.lastPoint.x),
-                                   fabs(self.firstPoint.y - self.lastPoint.y)
-                                   );
-    
-    // Flip the context coordinates, in iOS only.
-    CGContextTranslateCTM(context, 0, viewBounds.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    // Set the text matrix.
-    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    
-    // Create a path which bounds the area where you will be drawing text.
-    // The path need not be rectangular.
-    CGMutablePathRef path = CGPathCreateMutable();
-    
-    // In this simple example, initialize a rectangular path.
-    CGRect bounds = CGRectMake(viewBounds.origin.x, -viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
-    CGPathAddRect(path, NULL, bounds );
-    
-    // Create the framesetter with the attributed string.
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedText);
-    
-    // Create a frame.
-    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
-    
-    // Draw the specified frame in the given context.
-    CTFrameDraw(frame, context);
-    
-    // Release the objects we used.
-    CFRelease(frame);
-    CFRelease(framesetter);
-    CFRelease(path);
-    CGContextRestoreGState(context);
+    if (self.labelView != nil && self.labelView.superview == nil) {
+        [self.drawingView addSubview:self.labelView];
+    }
 }
 
-- (void)dealloc
+- (void)applyToolState:(ACEDrawingToolState *)state
+{    
+    if (state.hasPositionObject) {
+        [self applyTransform:state.positionObject];
+    }
+    
+    [self draw];
+}
+
+- (ACEDrawingToolState *)captureToolState
 {
-    self.lineColor = nil;
-    self.attributedText = nil;
-#if !ACE_HAS_ARC
-    [super dealloc];
-#endif
+    return [ACEDrawingToolState stateForTool:self capturePosition:YES];
 }
 
-@end
+- (id)capturePositionObject
+{
+    return [ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                          atCenter:self.labelView.center
+                                        withBounds:self.labelView.bounds];
+}
 
+- (void)hideHandle
+{
+    [self.labelView hideEditingHandles];
+}
 
-#pragma mark - ACEDrawingMultilineTextTool
+- (NSMutableArray *)redoPositions
+{
+    if (!_redoPositions) {
+        _redoPositions = [NSMutableArray new];
+    }
+    return _redoPositions;
+}
 
-@implementation ACEDrawingMultilineTextTool
+- (NSMutableArray *)undoPositions
+{
+    if (!_undoPositions) {
+        _undoPositions = [NSMutableArray new];
+    }
+    return _undoPositions;
+}
+
+- (void)applyTransform:(ACEDrawingLabelViewTransform *)t
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.labelView.center = t.center;
+        self.labelView.transform = t.transform;
+        self.labelView.bounds = t.bounds;
+        [self.labelView resizeInRect:t.bounds];
+    }];
+}
+
+- (void)capturePosition
+{
+    [self.undoPositions addObject:[ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                                                 atCenter:self.labelView.center
+                                                               withBounds:self.labelView.bounds]];
+    // clear redoPositions
+    self.redoPositions = nil;
+}
+
+- (void)undraw
+{
+    [self.labelView removeFromSuperview];
+}
+
+- (BOOL)canRedo
+{
+    return self.redoPositions.count > 0 && self.labelView.superview;
+}
+
+- (BOOL)redo
+{
+    // add transform to undoPositions
+    [self.undoPositions addObject:[ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                                                 atCenter:self.labelView.center
+                                                               withBounds:self.labelView.bounds]];
+    // apply transform
+    ACEDrawingLabelViewTransform *t = [self.redoPositions lastObject];
+    [self applyTransform:t];
+    
+    // remove transform from redoPositions
+    [self.redoPositions removeLastObject];
+    
+    return ![self canRedo];
+}
+
+- (BOOL)canUndo
+{
+    return self.undoPositions.count > 0;
+}
+
+- (void)undo
+{
+    // add transform to redoPositions
+    [self.redoPositions addObject:[ACEDrawingLabelViewTransform transform:self.labelView.transform
+                                                                 atCenter:self.labelView.center
+                                                               withBounds:self.labelView.bounds]];
+    // apply transform
+    ACEDrawingLabelViewTransform *t = [self.undoPositions lastObject];
+    [self applyTransform:t];
+    
+    // remove transform from undoPositions
+    [self.undoPositions removeLastObject];
+}
+
 @end
 
 #pragma mark - ACEDrawingRectangleTool
@@ -305,6 +383,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         CGContextSetLineWidth(context, self.lineWidth);
         CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);
     }
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 - (void)dealloc
@@ -361,6 +444,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
         CGContextSetLineWidth(context, self.lineWidth);
         CGContextStrokeEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
     }
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 - (void)dealloc
@@ -425,6 +513,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGContextAddLineToPoint(context, p2.x, p2.y);
     
     CGContextStrokePath(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 - (CGFloat)angleWithFirstPoint:(CGPoint)first secondPoint:(CGPoint)second

@@ -24,6 +24,11 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ACEDrawingToolState.h"
+
+@class ACEDrawingView;
+@class ACEDrawingLabelView;
+@class ACEDrawingToolState;
 
 #if __has_feature(objc_arc)
 #define ACE_HAS_ARC 1
@@ -48,6 +53,14 @@
 - (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
 
 - (void)draw;
+
+- (ACEDrawingToolState *)captureToolState;
+
+@optional
+
+- (void)applyToolState:(ACEDrawingToolState *)state;
+
+- (id)capturePositionObject;
 
 @end
 
@@ -75,11 +88,21 @@
 
 #pragma mark -
 
-@interface ACEDrawingTextTool : NSObject<ACEDrawingTool>
-@property (strong, nonatomic) NSAttributedString* attributedText;
-@end
+@interface ACEDrawingDraggableTextTool : NSObject<ACEDrawingTool>
 
-@interface ACEDrawingMultilineTextTool : ACEDrawingTextTool
+@property (nonatomic, weak) ACEDrawingView *drawingView;
+@property (nonatomic, readonly) ACEDrawingLabelView *labelView;
+
+- (void)capturePosition;
+- (void)hideHandle;
+- (void)undraw;
+
+- (BOOL)canRedo;
+- (BOOL)redo;
+
+- (BOOL)canUndo;
+- (void)undo;
+
 @end
 
 #pragma mark -
