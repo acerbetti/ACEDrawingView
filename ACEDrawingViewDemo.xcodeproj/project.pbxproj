@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		43654EB21D87368400647215 /* ACEDrawingLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43654EAF1D87368400647215 /* ACEDrawingLabelView.m */; };
-		43654EB31D87368400647215 /* ACEDrawingToolState.m in Sources */ = {isa = PBXBuildFile; fileRef = 43654EB11D87368400647215 /* ACEDrawingToolState.m */; };
-		43654EB51D8736B700647215 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43654EB41D8736B700647215 /* QuartzCore.framework */; };
 		50F58C571D7F0FCF0050A4A0 /* ACEDrawingViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */; };
 		6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D796B7A19184BBA0045456F /* CoreText.framework */; };
 		7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FA169A072800904C6B /* UIKit.framework */; };
@@ -23,8 +20,6 @@
 		7B5AD411169A072800904C6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD410169A072800904C6B /* Default-568h@2x.png */; };
 		7B5AD414169A072800904C6B /* ACEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AD413169A072800904C6B /* ACEViewController.m */; };
 		7B5AD417169A072800904C6B /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD415169A072800904C6B /* ACEViewController.xib */; };
-		7B5AD427169A077900904C6B /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AD426169A077900904C6B /* ACEDrawingView.m */; };
-		7B78A68716A4B6780086F7B9 /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B78A68616A4B6770086F7B9 /* ACEDrawingTools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,11 +33,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		43654EAE1D87368400647215 /* ACEDrawingLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingLabelView.h; sourceTree = "<group>"; };
-		43654EAF1D87368400647215 /* ACEDrawingLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingLabelView.m; sourceTree = "<group>"; };
-		43654EB01D87368400647215 /* ACEDrawingToolState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingToolState.h; sourceTree = "<group>"; };
-		43654EB11D87368400647215 /* ACEDrawingToolState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingToolState.m; sourceTree = "<group>"; };
-		43654EB41D8736B700647215 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		50F58C4C1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACEDrawingViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingViewTest.m; sourceTree = "<group>"; };
 		50F58C581D7F0FE60050A4A0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,10 +53,6 @@
 		7B5AD412169A072800904C6B /* ACEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewController.h; sourceTree = "<group>"; };
 		7B5AD413169A072800904C6B /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
 		7B5AD416169A072800904C6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
-		7B5AD425169A077900904C6B /* ACEDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingView.h; sourceTree = "<group>"; };
-		7B5AD426169A077900904C6B /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
-		7B78A68516A4B6770086F7B9 /* ACEDrawingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingTools.h; sourceTree = "<group>"; };
-		7B78A68616A4B6770086F7B9 /* ACEDrawingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingTools.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43654EB51D8736B700647215 /* QuartzCore.framework in Frameworks */,
 				6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */,
 				7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */,
 				7B5AD3FD169A072800904C6B /* Foundation.framework in Frameworks */,
@@ -126,7 +111,6 @@
 				7B5AD3FE169A072800904C6B /* CoreGraphics.framework */,
 				6D796B7A19184BBA0045456F /* CoreText.framework */,
 				7B5AD3FC169A072800904C6B /* Foundation.framework */,
-				43654EB41D8736B700647215 /* QuartzCore.framework */,
 				7B5AD3FA169A072800904C6B /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -135,7 +119,6 @@
 		7B5AD400169A072800904C6B /* ACEDrawingViewDemo */ = {
 			isa = PBXGroup;
 			children = (
-				7B5AD424169A077900904C6B /* ACEDrawingView */,
 				7B5AD409169A072800904C6B /* ACEAppDelegate.h */,
 				7B5AD40A169A072800904C6B /* ACEAppDelegate.m */,
 				7B5AD412169A072800904C6B /* ACEViewController.h */,
@@ -159,21 +142,6 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
-		};
-		7B5AD424169A077900904C6B /* ACEDrawingView */ = {
-			isa = PBXGroup;
-			children = (
-				43654EAE1D87368400647215 /* ACEDrawingLabelView.h */,
-				43654EAF1D87368400647215 /* ACEDrawingLabelView.m */,
-				7B78A68516A4B6770086F7B9 /* ACEDrawingTools.h */,
-				7B78A68616A4B6770086F7B9 /* ACEDrawingTools.m */,
-				43654EB01D87368400647215 /* ACEDrawingToolState.h */,
-				43654EB11D87368400647215 /* ACEDrawingToolState.m */,
-				7B5AD425169A077900904C6B /* ACEDrawingView.h */,
-				7B5AD426169A077900904C6B /* ACEDrawingView.m */,
-			);
-			path = ACEDrawingView;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -285,10 +253,6 @@
 				7B5AD407169A072800904C6B /* main.m in Sources */,
 				7B5AD40B169A072800904C6B /* ACEAppDelegate.m in Sources */,
 				7B5AD414169A072800904C6B /* ACEViewController.m in Sources */,
-				7B5AD427169A077900904C6B /* ACEDrawingView.m in Sources */,
-				43654EB31D87368400647215 /* ACEDrawingToolState.m in Sources */,
-				43654EB21D87368400647215 /* ACEDrawingLabelView.m in Sources */,
-				7B78A68716A4B6780086F7B9 /* ACEDrawingTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
