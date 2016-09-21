@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140DDF81FBD5EBE8EF7826AC /* libPods-ACEDrawingViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EFFBBC0CDE03617564D8F48 /* libPods-ACEDrawingViewDemo.a */; };
 		50F58C571D7F0FCF0050A4A0 /* ACEDrawingViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */; };
 		6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D796B7A19184BBA0045456F /* CoreText.framework */; };
 		7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5AD3FA169A072800904C6B /* UIKit.framework */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0EFFBBC0CDE03617564D8F48 /* libPods-ACEDrawingViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACEDrawingViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F58C4C1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACEDrawingViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F58C561D7F0FCF0050A4A0 /* ACEDrawingViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingViewTest.m; sourceTree = "<group>"; };
 		50F58C581D7F0FE60050A4A0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +55,8 @@
 		7B5AD412169A072800904C6B /* ACEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewController.h; sourceTree = "<group>"; };
 		7B5AD413169A072800904C6B /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
 		7B5AD416169A072800904C6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
+		BD8605C60ECCA761EB40D225 /* Pods-ACEDrawingViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		D6801415A1667A65D59C4F83 /* Pods-ACEDrawingViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 				7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */,
 				7B5AD3FD169A072800904C6B /* Foundation.framework in Frameworks */,
 				7B5AD3FF169A072800904C6B /* CoreGraphics.framework in Frameworks */,
+				140DDF81FBD5EBE8EF7826AC /* libPods-ACEDrawingViewDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +98,7 @@
 				50F58C4D1D7F0F4B0050A4A0 /* ACEDrawingViewDemoTests */,
 				7B5AD3F9169A072800904C6B /* Frameworks */,
 				7B5AD3F7169A072800904C6B /* Products */,
+				FCE43B2D75DE827F653C0EBF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +118,7 @@
 				6D796B7A19184BBA0045456F /* CoreText.framework */,
 				7B5AD3FC169A072800904C6B /* Foundation.framework */,
 				7B5AD3FA169A072800904C6B /* UIKit.framework */,
+				0EFFBBC0CDE03617564D8F48 /* libPods-ACEDrawingViewDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,6 +150,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FCE43B2D75DE827F653C0EBF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D6801415A1667A65D59C4F83 /* Pods-ACEDrawingViewDemo.debug.xcconfig */,
+				BD8605C60ECCA761EB40D225 /* Pods-ACEDrawingViewDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -168,9 +184,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B5AD41D169A072800904C6B /* Build configuration list for PBXNativeTarget "ACEDrawingViewDemo" */;
 			buildPhases = (
+				6BE190482E7BBCC2A1DF55E1 /* [CP] Check Pods Manifest.lock */,
 				7B5AD3F2169A072800904C6B /* Sources */,
 				7B5AD3F3169A072800904C6B /* Frameworks */,
 				7B5AD3F4169A072800904C6B /* Resources */,
+				4FF34F5FCD619E869138B248 /* [CP] Embed Pods Frameworks */,
+				05FB36D6C70BB70BA059291B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,6 +255,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		05FB36D6C70BB70BA059291B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FF34F5FCD619E869138B248 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6BE190482E7BBCC2A1DF55E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		50F58C481D7F0F4B0050A4A0 /* Sources */ = {
@@ -403,6 +470,7 @@
 		};
 		7B5AD41E169A072800904C6B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6801415A1667A65D59C4F83 /* Pods-ACEDrawingViewDemo.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEDrawingViewDemo/ACEDrawingViewDemo-Prefix.pch";
@@ -415,6 +483,7 @@
 		};
 		7B5AD41F169A072800904C6B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD8605C60ECCA761EB40D225 /* Pods-ACEDrawingViewDemo.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACEDrawingViewDemo/ACEDrawingViewDemo-Prefix.pch";
