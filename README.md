@@ -40,7 +40,7 @@ This component can be used in projects using ARC or not
 Change Log
 ------------------
 09/21/2016 - v2.0
-- Added advanced draggable tool
+- Added advanced draggable text tool
 - Removed legacy text tools
 
 05/20/2014 - v1.3
