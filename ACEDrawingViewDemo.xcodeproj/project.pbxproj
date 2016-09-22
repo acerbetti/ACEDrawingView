@@ -21,6 +21,7 @@
 		7B5AD411169A072800904C6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD410169A072800904C6B /* Default-568h@2x.png */; };
 		7B5AD414169A072800904C6B /* ACEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AD413169A072800904C6B /* ACEViewController.m */; };
 		7B5AD417169A072800904C6B /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD415169A072800904C6B /* ACEViewController.xib */; };
+		ACD910F032529D9C9D46F47B /* libPods-ACEDrawingViewDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2A0B73BAA3A774018E887A1 /* libPods-ACEDrawingViewDemoTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +56,10 @@
 		7B5AD412169A072800904C6B /* ACEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewController.h; sourceTree = "<group>"; };
 		7B5AD413169A072800904C6B /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
 		7B5AD416169A072800904C6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
+		9AE399C4ADCDCD6FFAA0D20A /* Pods-ACEDrawingViewDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemoTests/Pods-ACEDrawingViewDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		BD8605C60ECCA761EB40D225 /* Pods-ACEDrawingViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo.release.xcconfig"; sourceTree = "<group>"; };
+		C2A0B73BAA3A774018E887A1 /* libPods-ACEDrawingViewDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACEDrawingViewDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C373C8F916E80938612C180D /* Pods-ACEDrawingViewDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemoTests/Pods-ACEDrawingViewDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D6801415A1667A65D59C4F83 /* Pods-ACEDrawingViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACD910F032529D9C9D46F47B /* libPods-ACEDrawingViewDemoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +124,7 @@
 				7B5AD3FC169A072800904C6B /* Foundation.framework */,
 				7B5AD3FA169A072800904C6B /* UIKit.framework */,
 				0EFFBBC0CDE03617564D8F48 /* libPods-ACEDrawingViewDemo.a */,
+				C2A0B73BAA3A774018E887A1 /* libPods-ACEDrawingViewDemoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -155,6 +161,8 @@
 			children = (
 				D6801415A1667A65D59C4F83 /* Pods-ACEDrawingViewDemo.debug.xcconfig */,
 				BD8605C60ECCA761EB40D225 /* Pods-ACEDrawingViewDemo.release.xcconfig */,
+				C373C8F916E80938612C180D /* Pods-ACEDrawingViewDemoTests.debug.xcconfig */,
+				9AE399C4ADCDCD6FFAA0D20A /* Pods-ACEDrawingViewDemoTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -166,9 +174,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50F58C531D7F0F4B0050A4A0 /* Build configuration list for PBXNativeTarget "ACEDrawingViewDemoTests" */;
 			buildPhases = (
+				24F0FD2681B1DCBBD675123B /* [CP] Check Pods Manifest.lock */,
 				50F58C481D7F0F4B0050A4A0 /* Sources */,
 				50F58C491D7F0F4B0050A4A0 /* Frameworks */,
 				50F58C4A1D7F0F4B0050A4A0 /* Resources */,
+				7BA3C9598943E5B7B6946C4A /* [CP] Embed Pods Frameworks */,
+				08FD046ACC6ADADD08027B1D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -272,6 +283,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		08FD046ACC6ADADD08027B1D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEDrawingViewDemoTests/Pods-ACEDrawingViewDemoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		24F0FD2681B1DCBBD675123B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		4FF34F5FCD619E869138B248 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,6 +341,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7BA3C9598943E5B7B6946C4A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEDrawingViewDemoTests/Pods-ACEDrawingViewDemoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -355,6 +411,7 @@
 /* Begin XCBuildConfiguration section */
 		50F58C541D7F0F4B0050A4A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C373C8F916E80938612C180D /* Pods-ACEDrawingViewDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -386,6 +443,7 @@
 		};
 		50F58C551D7F0F4B0050A4A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AE399C4ADCDCD6FFAA0D20A /* Pods-ACEDrawingViewDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
