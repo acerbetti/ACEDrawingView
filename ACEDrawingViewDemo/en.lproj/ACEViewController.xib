@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACEViewController">
             <connections>
                 <outlet property="alphaButton" destination="64" id="78"/>
+                <outlet property="baseImageView" destination="MSe-Bn-pP1" id="ES3-lu-PJv"/>
                 <outlet property="colorButton" destination="72" id="76"/>
                 <outlet property="drawingView" destination="39" id="59"/>
                 <outlet property="lineAlphaSlider" destination="65" id="67"/>
@@ -51,10 +52,14 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="MSe-Bn-pP1">
+                    <rect key="frame" x="0.0" y="44" width="320" height="480"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="39" customClass="ACEDrawingView">
                     <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="20" id="51">
                     <rect key="frame" x="18" y="486" width="284" height="29"/>
@@ -70,7 +75,7 @@
                         <action selector="alphaChange:" destination="-1" eventType="valueChanged" id="68"/>
                     </connections>
                 </slider>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" id="62">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" id="62">
                     <rect key="frame" x="150" y="64" width="151" height="224"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -88,6 +93,11 @@
                                 <action selector="toolChange:" destination="-1" id="75"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Image" id="ldQ-Nx-6Gn">
+                            <connections>
+                                <action selector="imageChange:" destination="-1" id="Fmv-2G-nwo"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="43"/>
                         <barButtonItem title="Width" id="9Nh-bk-b8e">
                             <connections>
@@ -103,8 +113,6 @@
                 </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
 </document>
