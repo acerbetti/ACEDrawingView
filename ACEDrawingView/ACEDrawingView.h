@@ -26,7 +26,7 @@
 #import <UIKit/UIKit.h>
 #import "ACEDrawingLabelView.h"
 
-#define ACEDrawingViewVersion   2.0.0
+#define ACEDrawingViewVersion   2.0.1
 
 typedef enum {
     ACEDrawingToolTypePen,
