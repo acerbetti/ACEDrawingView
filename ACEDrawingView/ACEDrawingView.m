@@ -174,20 +174,6 @@
     UIGraphicsEndImageContext();
 }
 
-- (UIImage *)drawings
-{
-    if (self.pathArray.count == 0)
-        return nil;
-    
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0);
-    for (id<ACEDrawingTool> tool in self.pathArray) {
-        [tool draw];
-    }
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 - (void)finishDrawing
 {
     // update the image

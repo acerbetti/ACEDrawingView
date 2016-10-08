@@ -21,7 +21,6 @@
 		7B5AD411169A072800904C6B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD410169A072800904C6B /* Default-568h@2x.png */; };
 		7B5AD414169A072800904C6B /* ACEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AD413169A072800904C6B /* ACEViewController.m */; };
 		7B5AD417169A072800904C6B /* ACEViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B5AD415169A072800904C6B /* ACEViewController.xib */; };
-		A98CF4F51DA89A640084F35E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98CF4F41DA89A640084F35E /* AVFoundation.framework */; };
 		ACD910F032529D9C9D46F47B /* libPods-ACEDrawingViewDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2A0B73BAA3A774018E887A1 /* libPods-ACEDrawingViewDemoTests.a */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +57,6 @@
 		7B5AD413169A072800904C6B /* ACEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewController.m; sourceTree = "<group>"; };
 		7B5AD416169A072800904C6B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACEViewController.xib; sourceTree = "<group>"; };
 		9AE399C4ADCDCD6FFAA0D20A /* Pods-ACEDrawingViewDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemoTests/Pods-ACEDrawingViewDemoTests.release.xcconfig"; sourceTree = "<group>"; };
-		A98CF4F41DA89A640084F35E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BD8605C60ECCA761EB40D225 /* Pods-ACEDrawingViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemo/Pods-ACEDrawingViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C2A0B73BAA3A774018E887A1 /* libPods-ACEDrawingViewDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACEDrawingViewDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C373C8F916E80938612C180D /* Pods-ACEDrawingViewDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEDrawingViewDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEDrawingViewDemoTests/Pods-ACEDrawingViewDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A98CF4F51DA89A640084F35E /* AVFoundation.framework in Frameworks */,
 				6D796B7B19184BBA0045456F /* CoreText.framework in Frameworks */,
 				7B5AD3FB169A072800904C6B /* UIKit.framework in Frameworks */,
 				7B5AD3FD169A072800904C6B /* Foundation.framework in Frameworks */,
@@ -122,7 +119,6 @@
 		7B5AD3F9169A072800904C6B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A98CF4F41DA89A640084F35E /* AVFoundation.framework */,
 				7B5AD3FE169A072800904C6B /* CoreGraphics.framework */,
 				6D796B7A19184BBA0045456F /* CoreText.framework */,
 				7B5AD3FC169A072800904C6B /* Foundation.framework */,
