@@ -16,6 +16,7 @@
 @property (nonatomic, unsafe_unretained) IBOutlet UISlider *lineWidthSlider;
 @property (nonatomic, unsafe_unretained) IBOutlet UISlider *lineAlphaSlider;
 @property (nonatomic, unsafe_unretained) IBOutlet UIImageView *previewImageView;
+@property (nonatomic, unsafe_unretained) IBOutlet UIImageView *baseImageView;
 
 @property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *undoButton;
 @property (nonatomic, unsafe_unretained) IBOutlet UIBarButtonItem *redoButton;
@@ -36,5 +37,6 @@
 - (IBAction)widthChange:(UISlider *)sender;
 - (IBAction)toggleAlphaSlider:(id)sender;
 - (IBAction)alphaChange:(UISlider *)sender;
+- (IBAction)imageChange:(id)sender;
 
 @end
