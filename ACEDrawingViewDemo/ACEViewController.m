@@ -56,26 +56,9 @@
 - (IBAction)takeScreenshot:(id)sender
 {
     // show the preview image
-    
     UIImage *baseImage = [self.baseImageView image];
-    if (baseImage)
-    {
-        UIImage *drawings = [self.drawingView drawings];
-        
-        // scale drawings to size of base image
-        drawings = (baseImage.size.width > baseImage.size.height) ? [self scaleImage:drawings proportionallyToWidth:baseImage.size.width] : [self scaleImage:drawings proportionallyToHeight:baseImage.size.height];
-        
-        // blend drawings with image
-        baseImage = [self blendImage:baseImage topImage:drawings];
-        
-        self.previewImageView.image = baseImage;
-        self.previewImageView.hidden = NO;
-    }
-    else
-    {
-        self.previewImageView.image = self.drawingView.image;
-        self.previewImageView.hidden = NO;
-    }
+    self.previewImageView.image =  baseImage ? [self.drawingView applyDrawToImage:baseImage] : self.drawingView.image;
+    self.previewImageView.hidden = NO;
     
     // close it after 3 seconds
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -261,42 +244,6 @@
     [self.drawingView setFrame:AVMakeRectWithAspectRatioInsideRect(image.size, self.baseImageView.frame)];
     
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark Image Utilities
-
-- (UIImage*)scaleImage:(UIImage *)sourceImage proportionallyToWidth:(CGFloat)width
-{
-    UIImage *newImage = nil;
-    CGFloat height = sourceImage.size.height * (width / sourceImage.size.width);
-    UIGraphicsBeginImageContext(CGSizeMake(width, height));
-    [sourceImage drawInRect:CGRectMake(0, 0, width, height)];
-    newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
-- (UIImage*)scaleImage:(UIImage *)sourceImage proportionallyToHeight:(CGFloat)height
-{
-    UIImage *newImage = nil;
-    CGFloat width = sourceImage.size.width * (height / sourceImage.size.height);
-    UIGraphicsBeginImageContext(CGSizeMake(width, height));
-    [sourceImage drawInRect:CGRectMake(0, 0, width, height)];
-    newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
-// if blending results in memory issues, please scale down the size of images before blending
-- (UIImage *)blendImage:(UIImage *)imageBottom topImage:(UIImage *)imageTop
-{
-    UIImage *image;
-    UIGraphicsBeginImageContext(imageBottom.size);
-    [imageBottom drawAtPoint:CGPointZero];
-    [imageTop drawAtPoint:CGPointZero];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
 }
 
 @end

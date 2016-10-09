@@ -87,7 +87,7 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 - (BOOL)canRedo;
 - (void)redoLatestStep;
 
-- (UIImage *)drawings;
+- (UIImage *)applyDrawToImage:(UIImage *)baseImage;
 
 /**
  @discussion Discards the tool stack and renders them to prev_image, making the current state the 'start' state.
