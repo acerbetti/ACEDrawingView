@@ -8,13 +8,13 @@
 
 #import "ACEViewController.h"
 #import "ACEDrawingView.h"
-
+#import <AVFoundation/AVUtilities.h>
 #import <QuartzCore/QuartzCore.h>
 
 #define kActionSheetColor       100
 #define kActionSheetTool        101
 
-@interface ACEViewController ()<UIActionSheetDelegate, ACEDrawingViewDelegate>
+@interface ACEViewController ()<UIActionSheetDelegate, ACEDrawingViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -56,7 +56,8 @@
 - (IBAction)takeScreenshot:(id)sender
 {
     // show the preview image
-    self.previewImageView.image = self.drawingView.image;
+    UIImage *baseImage = [self.baseImageView image];
+    self.previewImageView.image =  baseImage ? [self.drawingView applyDrawToImage:baseImage] : self.drawingView.image;
     self.previewImageView.hidden = NO;
     
     // close it after 3 seconds
@@ -79,6 +80,12 @@
 
 - (IBAction)clear:(id)sender
 {
+    if ([self.baseImageView image])
+    {
+        [self.baseImageView setImage:nil];
+        [self.drawingView setFrame:self.baseImageView.frame];
+    }
+    
     [self.drawingView clear];
     [self updateButtonStatus];
 }
@@ -217,6 +224,26 @@
 - (IBAction)alphaChange:(UISlider *)sender
 {
     self.drawingView.lineAlpha = sender.value;
+}
+
+- (IBAction)imageChange:(id)sender
+{
+    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
+{
+    [self.drawingView clear];
+    [self updateButtonStatus];
+    
+    UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.baseImageView setImage:image];
+    [self.drawingView setFrame:AVMakeRectWithAspectRatioInsideRect(image.size, self.baseImageView.frame)];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
