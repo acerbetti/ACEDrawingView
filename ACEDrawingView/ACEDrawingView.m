@@ -50,7 +50,7 @@
 @property (nonatomic, strong) NSMutableArray *undoStates;
 
 @property (nonatomic, strong) id<ACEDrawingTool> currentTool;
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) UIImage *cacheImage;
 
 @property (nonatomic, strong) ACEDrawingLabelView *draggableTextView;
 @end
@@ -147,7 +147,7 @@
     
     if (redraw) {
         // erase the previous image
-        self.image = nil;
+        self.cacheImage = nil;
         
         // load previous image (if returning to screen)
         
@@ -172,7 +172,7 @@
     }
     
     // store the image
-    self.image = UIGraphicsGetImageFromCurrentImageContext();
+    self.cacheImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
 
@@ -395,7 +395,7 @@
 
 - (void)loadImage:(UIImage *)image
 {
-    self.image = image;
+    self.cacheImage = image;
     
     //save the loaded image to persist after an undo step
     self.backgroundImage = [image copy];
@@ -428,6 +428,16 @@
 }
 
 #pragma mark - Actions
+
+- (UIImage *)image
+{
+    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.0);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 - (void)clear
 {
@@ -563,7 +573,7 @@
     self.redoStates = nil;
     self.undoStates = nil;
     self.currentTool = nil;
-    self.image = nil;
+    self.cacheImage = nil;
     self.backgroundImage = nil;
     self.customDrawTool = nil;
     
