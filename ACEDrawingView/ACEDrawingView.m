@@ -122,11 +122,11 @@
 #else
     switch (self.drawMode) {
         case ACEDrawingModeOriginalSize:
-            [self.image drawAtPoint:CGPointZero];
+            [self.cacheImage drawAtPoint:CGPointZero];
             break;
             
         case ACEDrawingModeScale:
-            [self.image drawInRect:self.bounds];
+            [self.cacheImage drawInRect:self.bounds];
             break;
     }
     [self.currentTool draw];
@@ -136,7 +136,7 @@
 - (void)commitAndDiscardToolStack
 {
     [self updateCacheImage:YES];
-    self.backgroundImage = self.image;
+    self.backgroundImage = self.cacheImage;
     [self.pathArray removeAllObjects];
 }
 
@@ -167,7 +167,7 @@
         
     } else {
         // set the draw point
-        [self.image drawAtPoint:CGPointZero];
+        [self.cacheImage drawAtPoint:CGPointZero];
         [self.currentTool draw];
     }
     
