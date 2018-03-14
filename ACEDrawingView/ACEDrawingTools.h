@@ -1,7 +1,7 @@
 /*
  * ACEDrawingView: https://github.com/acerbetti/ACEDrawingView
  *
- * Copyright (c) 2013 Stefano Acerbetti
+ * Copyright (c) 2018 Stefano Acerbetti
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,24 +23,65 @@
  *
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 #import "ACEDrawingToolState.h"
 
 @class ACEDrawingView;
 @class ACEDrawingLabelView;
-@class ACEDrawingToolState;
 
 
-@protocol ACEDrawingTool <NSObject>
+@protocol ACEDrawingViewTool<NSObject, NSCoding>
+
++ (nonnull NSString *)identifier;
+
+- (void)setInitialPoint:(CGPoint)firstPoint;
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
+- (void)draw;
+
+@end
+
+#pragma mark -
+
+@protocol ACEDrawingViewDrawableTool<ACEDrawingViewTool>
+
+- (void)setColor:(nonnull UIColor *)color;
+
+- (void)setAlpha:(CGFloat)alpha;
+
+- (void)setLineWidth:(CGFloat)lineWidth;
+
+@end
+
+#pragma mark -
+
+@protocol ACEDrawingViewDraggableTool<ACEDrawingViewTool>
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@protocol ACEDrawingTool <ACEDrawingViewTool>
 
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineAlpha;
 @property (nonatomic, assign) CGFloat lineWidth;
-
-- (void)setInitialPoint:(CGPoint)firstPoint;
-- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
-
-- (void)draw;
 
 - (ACEDrawingToolState *)captureToolState;
 

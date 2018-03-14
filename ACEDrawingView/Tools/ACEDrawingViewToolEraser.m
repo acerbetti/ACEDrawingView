@@ -1,7 +1,7 @@
 /*
  * ACEDrawingView: https://github.com/acerbetti/ACEDrawingView
  *
- * Copyright (c) 2016 Matthew Jackson
+ * Copyright (c) 2018 Stefano Acerbetti
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,36 +23,28 @@
  *
  */
 
-#import "ACEDrawingToolState.h"
-#import "ACEDrawingTools.h"
+#import "ACEDrawingViewToolEraser.h"
 
-@interface ACEDrawingToolState ()
-@property (nonatomic, strong) id<ACEDrawingTool> tool;
-@property (nonatomic, strong) id positionObject;
-@end
+NSString * const kACEDrawingViewEraser = @"kACEDrawingViewEraser";
 
-@implementation ACEDrawingToolState
+@implementation ACEDrawingViewToolEraser
 
-+ (instancetype)stateForTool:(id<ACEDrawingTool>)tool
++ (NSString *)identifier
 {
-    return [ACEDrawingToolState stateForTool:tool capturePosition:NO];
+    return kACEDrawingViewEraser;
 }
 
-+ (instancetype)stateForTool:(id<ACEDrawingTool>)tool capturePosition:(BOOL)capture
+- (void)draw
 {
-    ACEDrawingToolState *state = [ACEDrawingToolState new];
-    state.tool = tool;
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
     
-    if (capture && [tool respondsToSelector:@selector(capturePositionObject)]) {
-        state.positionObject = [tool capturePositionObject];
-    }
-    
-    return state;
-}
-
-- (BOOL)hasPositionObject
-{
-    return self.positionObject != nil;
+    CGContextAddPath(context, self.path);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetBlendMode(context, kCGBlendModeClear);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
 }
 
 @end

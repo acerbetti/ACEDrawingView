@@ -7,27 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02ECEA286BE0A139D2BA159D36FED36A /* sticker_resize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41132C64B2CA773B5D768297D11082B3 /* sticker_resize@2x.png */; };
-		24655E49A1ACB33BAEE196B667CB28A8 /* ACEDrawingView.h in Headers */ = {isa = PBXBuildFile; fileRef = D1D3551D04F61AE3088F6F704A47C8A6 /* ACEDrawingView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2F79D306523ABEEAD9CBDF75469239B8 /* ACEDrawingLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = DDE0797B42B01433A06108E6148144AB /* ACEDrawingLabelView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		35C26EB32DE49F22DD56403197D78EFE /* ACEDrawingView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7858731F55A057E4F5C0517D1F850574 /* ACEDrawingView-dummy.m */; };
-		3BBD79FB43921A6F251C521BBF8C1FC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
-		3DDA018647C3921695E2AF586CA14F17 /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCD5709185CBD2408A2EFBAA9810DF /* ACEDrawingTools.m */; };
-		59BE94DD155FABCA2045EB6C5978673A /* sticker_resize@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F54EE6FBC6DE817F4164ABCAB6C22E0C /* sticker_resize@3x.png */; };
+		29C6C8D074F27FDA30CAABE6852421E1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2770B482BFE91273C8560623F1422C /* QuartzCore.framework */; };
+		3328CD1D3CE5895A7B373AAABFF323F9 /* ACEDrawingView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A069F92F6C734E072105982387C06406 /* ACEDrawingView-dummy.m */; };
+		33E07AB381370DC5369127D95D7E8257 /* ACEDrawingViewToolLine.h in Headers */ = {isa = PBXBuildFile; fileRef = B10CCB97D239C41B0F9436A8EC0E3818 /* ACEDrawingViewToolLine.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		348F0CFC7C07111BA1A440F786FD0BC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
+		363E7D6B0E0415C8218968C894A05B00 /* sticker_resize@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE8476D2F50E1906E2DC92F704CBA2E /* sticker_resize@3x.png */; };
+		410658D3ABA5E8BA23767D2EB910BA40 /* sticker_resize.png in Resources */ = {isa = PBXBuildFile; fileRef = 47E6B383ADE44804585CFD2E0333624B /* sticker_resize.png */; };
+		44A6D15DB6C77E4CC15348383A11341F /* ACEDrawingViewToolPen.m in Sources */ = {isa = PBXBuildFile; fileRef = C092043780096C1E368939CF3996DB13 /* ACEDrawingViewToolPen.m */; };
+		4F4969B3C85173D920BF3157057E52E9 /* ACEDrawingViewToolEraser.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F3C0F3B4A1F7DD4B085ADB59681718E /* ACEDrawingViewToolEraser.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6C9926C0215EA22BAF60A2A1BF87A18A /* ACEDrawingToolState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B760B054A170BBFE696A242FC3257BC /* ACEDrawingToolState.m */; };
 		6FC409146DA5AD5AB63984B81515F00F /* Pods-ACEDrawingViewDemoTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FFC9A3E9F3AE3C40217D6AE831454656 /* Pods-ACEDrawingViewDemoTests-dummy.m */; };
-		716F79773C1FE369A4085CEB2FD83741 /* ACEDrawingLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C3402B9DF2CA0A8C6A45CB3AE96F40 /* ACEDrawingLabelView.m */; };
+		71670C5D00DFCDDDEB31DD97A6977AE3 /* ACEDrawingTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CED5EEE541106BFE66EB652438FE39D /* ACEDrawingTools.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		73965ED8320B06E952DD75CB410F1CAD /* sticker_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 36FE6E9DD20850652E66403E202037B0 /* sticker_close.png */; };
+		76C73D328C3C100773C56BA627BBF566 /* ACEDrawingLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3903A9146F743CD09CDDD9204EE44796 /* ACEDrawingLabelView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		786169BF8FB8F503AD3D8B2B6262216D /* ACEDrawingToolState.h in Headers */ = {isa = PBXBuildFile; fileRef = 988405B1E79F43EE4FBA09970743B5F3 /* ACEDrawingToolState.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9338EE3970389A26D3097C82CAE84697 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
 		94C8B6D81ABEEC0A55FC44B103DED794 /* Pods-ACEDrawingViewDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C43383922FE4E9BE9A89F61DF65AD2D1 /* Pods-ACEDrawingViewDemo-dummy.m */; };
-		9A0406A864979B78556F4E087D0A4501 /* sticker_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B35ACD41E2AFC1B37D9A8757F6FDF31 /* sticker_close@3x.png */; };
-		A3BD1027A7B8D301406A214C19E1BD51 /* ACEDrawingToolState.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8BAFFD1DC798E16BBD15AE70197D60 /* ACEDrawingToolState.m */; };
-		A553ADF82ECB5E5C7B56AA89181FE372 /* sticker_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CAC42F367803B3E783ED83D60316D51B /* sticker_close@2x.png */; };
-		ABAEB2EF675B607801E8C6386651BC5F /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6444C489009FB0415E9CA005C4B6D9F3 /* ACEDrawingView.m */; };
-		AC2BC48F7CD2A9505A7C76FDF99CBCEA /* ACEDrawingToolState.h in Headers */ = {isa = PBXBuildFile; fileRef = 711D00CAF4F40C76989FD64248EA31FA /* ACEDrawingToolState.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B1D6E3BA4C2A0F9E5C46CC2F602A8B35 /* ACEDrawingTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 96ED9BDA710DAA1F32D094D8BB72E441 /* ACEDrawingTools.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B2A7DCEBED353BAC1CB23DE040FBE505 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2770B482BFE91273C8560623F1422C /* QuartzCore.framework */; };
-		E7941B7D9D50DA464A395B397942082F /* sticker_resize.png in Resources */ = {isa = PBXBuildFile; fileRef = E29F37035745BCB86BD099F40DC94497 /* sticker_resize.png */; };
-		E93E3953326F0FC82165C543637E804E /* sticker_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAA688380FCC54FF9AE46E59953FF0B /* sticker_close.png */; };
+		98643DE17FECB9274ABF1F1C1BC9405D /* sticker_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4D451FADBBC113C5F1E9B6E9D1027D /* sticker_close@3x.png */; };
+		A6E45CA1699F03A3FDE8CE81ABA1582E /* ACEDrawingViewToolPen.h in Headers */ = {isa = PBXBuildFile; fileRef = 33F0B75E41F962B463301E17670A60A7 /* ACEDrawingViewToolPen.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AF055F162C591C78DA73C03342D5386F /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DF4D08CC23F401A3FC8D3DF43EDE51 /* ACEDrawingTools.m */; };
+		B4BDDBBF22D48507482C28B0BF258B5E /* ACEDrawingViewToolEraser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3A7E578DF1E0350A0C85136A4FD15C /* ACEDrawingViewToolEraser.m */; };
+		B809E8708B690E95DE529FD47458C414 /* sticker_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61FE4DF4349265F487601B7609CD0EAE /* sticker_close@2x.png */; };
+		BEBCFCC104442C770F0F61302539C326 /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 600365FC98D5C9566CE413F099C2471F /* ACEDrawingView.m */; };
+		D50036AFF9C4AFE03758EC2401785D43 /* ACEDrawingViewToolLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 718C86B821C568F66A4DD96C19798787 /* ACEDrawingViewToolLine.m */; };
+		F02743AB551230D527C234E2087BB286 /* ACEDrawingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AA6E562877B78E6C2E9FBCFBC5B11C1 /* ACEDrawingView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		F3CDA03BC1A4931E95273D32E77A0071 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */; };
+		F6EDD4B112B3AED6465761AC9AC67D26 /* ACEDrawingLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C58879511DE3CC69720EAC7FB5B4586 /* ACEDrawingLabelView.m */; };
+		FBF5CE06B97BF58DC02F4BFCF37629A4 /* sticker_resize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2176BA9FD644366424CF9C84DAA7ED9 /* sticker_resize@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,68 +41,76 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6090063EF7B7DC85270A78955968E186;
+			remoteGlobalIDString = 379FE6CE7DD5715D071EE497181B04D2;
 			remoteInfo = ACEDrawingView;
 		};
-		E93383B44202F7C4B6A0C92E4893E3CF /* PBXContainerItemProxy */ = {
+		8691776FDAB48A72D709B68EAF63CE02 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 790E356BE3826A734CB7E012C5B22979;
+			remoteGlobalIDString = 3AF27921F1ADC05E05F101C96FC2F8D0;
 			remoteInfo = "ACEDrawingView-ACEDraggableText";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08DF4D08CC23F401A3FC8D3DF43EDE51 /* ACEDrawingTools.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingTools.m; path = ACEDrawingView/ACEDrawingTools.m; sourceTree = "<group>"; };
+		0A4D451FADBBC113C5F1E9B6E9D1027D /* sticker_close@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_close@3x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_close@3x.png"; sourceTree = "<group>"; };
 		166A733110FEEDA8D4D667563F359837 /* Pods-ACEDrawingViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ACEDrawingViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		1DAA688380FCC54FF9AE46E59953FF0B /* sticker_close.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = sticker_close.png; path = ACEDrawingView/ACEDraggableText/sticker_close.png; sourceTree = "<group>"; };
-		1F906232A9408EF9A8E765B9DAE3B61D /* ACEDrawingView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ACEDrawingView-prefix.pch"; sourceTree = "<group>"; };
+		1AA6E562877B78E6C2E9FBCFBC5B11C1 /* ACEDrawingView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingView.h; path = ACEDrawingView/ACEDrawingView.h; sourceTree = "<group>"; };
+		1B760B054A170BBFE696A242FC3257BC /* ACEDrawingToolState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingToolState.m; path = ACEDrawingView/ACEDrawingToolState.m; sourceTree = "<group>"; };
 		2AFB83531F2DA650E8FDD042D66F12DD /* Pods-ACEDrawingViewDemoTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ACEDrawingViewDemoTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2F3C0F3B4A1F7DD4B085ADB59681718E /* ACEDrawingViewToolEraser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ACEDrawingViewToolEraser.h; sourceTree = "<group>"; };
+		33F0B75E41F962B463301E17670A60A7 /* ACEDrawingViewToolPen.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ACEDrawingViewToolPen.h; sourceTree = "<group>"; };
+		36FE6E9DD20850652E66403E202037B0 /* sticker_close.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = sticker_close.png; path = ACEDrawingView/ACEDraggableText/sticker_close.png; sourceTree = "<group>"; };
+		3903A9146F743CD09CDDD9204EE44796 /* ACEDrawingLabelView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingLabelView.h; path = ACEDrawingView/ACEDrawingLabelView.h; sourceTree = "<group>"; };
 		3C33529F69D203D08453D1C1061994D7 /* Pods-ACEDrawingViewDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ACEDrawingViewDemo-acknowledgements.plist"; sourceTree = "<group>"; };
-		41132C64B2CA773B5D768297D11082B3 /* sticker_resize@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_resize@2x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_resize@2x.png"; sourceTree = "<group>"; };
+		47E6B383ADE44804585CFD2E0333624B /* sticker_resize.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = sticker_resize.png; path = ACEDrawingView/ACEDraggableText/sticker_resize.png; sourceTree = "<group>"; };
+		4D037CBEF44934F6200848836816F554 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		54F9A0E952988935C32EDDB1429D7133 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		584890F30C25E704D2D1F4D0CF42C2A1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		5B35ACD41E2AFC1B37D9A8757F6FDF31 /* sticker_close@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_close@3x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_close@3x.png"; sourceTree = "<group>"; };
 		5F7D329BD3E41490D419B042BDB179DD /* Pods-ACEDrawingViewDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ACEDrawingViewDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
-		6444C489009FB0415E9CA005C4B6D9F3 /* ACEDrawingView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingView.m; path = ACEDrawingView/ACEDrawingView.m; sourceTree = "<group>"; };
-		711D00CAF4F40C76989FD64248EA31FA /* ACEDrawingToolState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingToolState.h; path = ACEDrawingView/ACEDrawingToolState.h; sourceTree = "<group>"; };
-		7858731F55A057E4F5C0517D1F850574 /* ACEDrawingView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ACEDrawingView-dummy.m"; sourceTree = "<group>"; };
+		600365FC98D5C9566CE413F099C2471F /* ACEDrawingView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingView.m; path = ACEDrawingView/ACEDrawingView.m; sourceTree = "<group>"; };
+		60714794A524B34C0AFAEE3900C876CF /* ResourceBundle-ACEDraggableText-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ACEDraggableText-Info.plist"; sourceTree = "<group>"; };
+		61FE4DF4349265F487601B7609CD0EAE /* sticker_close@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_close@2x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_close@2x.png"; sourceTree = "<group>"; };
+		6C58879511DE3CC69720EAC7FB5B4586 /* ACEDrawingLabelView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingLabelView.m; path = ACEDrawingView/ACEDrawingLabelView.m; sourceTree = "<group>"; };
+		718C86B821C568F66A4DD96C19798787 /* ACEDrawingViewToolLine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingViewToolLine.m; sourceTree = "<group>"; };
 		790A09744AAC559F29B5A0F7733763F7 /* libPods-ACEDrawingViewDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ACEDrawingViewDemoTests.a"; path = "libPods-ACEDrawingViewDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E6B2EBEF717F6900CB6C876A1E2928D /* Pods-ACEDrawingViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ACEDrawingViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		84F84D953FC1B2609ED099963EA983AB /* Pods-ACEDrawingViewDemoTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ACEDrawingViewDemoTests-resources.sh"; sourceTree = "<group>"; };
-		86DBBCD6507B965035F0AA716C400140 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
 		8DE611C3184357ED498DEBF85FCB596D /* ACEDraggableText.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ACEDraggableText.bundle; path = "ACEDrawingView-ACEDraggableText.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		96ED9BDA710DAA1F32D094D8BB72E441 /* ACEDrawingTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingTools.h; path = ACEDrawingView/ACEDrawingTools.h; sourceTree = "<group>"; };
-		9A8BAFFD1DC798E16BBD15AE70197D60 /* ACEDrawingToolState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingToolState.m; path = ACEDrawingView/ACEDrawingToolState.m; sourceTree = "<group>"; };
-		9ADCD5709185CBD2408A2EFBAA9810DF /* ACEDrawingTools.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingTools.m; path = ACEDrawingView/ACEDrawingTools.m; sourceTree = "<group>"; };
-		A8C3402B9DF2CA0A8C6A45CB3AE96F40 /* ACEDrawingLabelView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ACEDrawingLabelView.m; path = ACEDrawingView/ACEDrawingLabelView.m; sourceTree = "<group>"; };
+		988405B1E79F43EE4FBA09970743B5F3 /* ACEDrawingToolState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingToolState.h; path = ACEDrawingView/ACEDrawingToolState.h; sourceTree = "<group>"; };
+		99BB06E20BA441321B6870245AECFDA0 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		9CED5EEE541106BFE66EB652438FE39D /* ACEDrawingTools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingTools.h; path = ACEDrawingView/ACEDrawingTools.h; sourceTree = "<group>"; };
+		9F3A7E578DF1E0350A0C85136A4FD15C /* ACEDrawingViewToolEraser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingViewToolEraser.m; sourceTree = "<group>"; };
+		A069F92F6C734E072105982387C06406 /* ACEDrawingView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ACEDrawingView-dummy.m"; sourceTree = "<group>"; };
 		AEB88002D3D9AAF87B76B0F2C51AD6CB /* Pods-ACEDrawingViewDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ACEDrawingViewDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		B10CCB97D239C41B0F9436A8EC0E3818 /* ACEDrawingViewToolLine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ACEDrawingViewToolLine.h; sourceTree = "<group>"; };
+		B2176BA9FD644366424CF9C84DAA7ED9 /* sticker_resize@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_resize@2x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_resize@2x.png"; sourceTree = "<group>"; };
+		B2B07D584298975FF8046D423341870A /* ACEDrawingView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = ACEDrawingView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B522C51113CA75A0DCDC3898D4658FBD /* libPods-ACEDrawingViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ACEDrawingViewDemo.a"; path = "libPods-ACEDrawingViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B696CE587DED364768A194FEE733BD63 /* ACEDrawingView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ACEDrawingView-prefix.pch"; sourceTree = "<group>"; };
 		BCDC205533B36933C58465A348809568 /* Pods-ACEDrawingViewDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ACEDrawingViewDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C092043780096C1E368939CF3996DB13 /* ACEDrawingViewToolPen.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingViewToolPen.m; sourceTree = "<group>"; };
 		C43383922FE4E9BE9A89F61DF65AD2D1 /* Pods-ACEDrawingViewDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ACEDrawingViewDemo-dummy.m"; sourceTree = "<group>"; };
-		C7555B11F387C9254C5C691DAC0CA214 /* ACEDrawingView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ACEDrawingView.xcconfig; sourceTree = "<group>"; };
 		C95154BC47A1F9C547C00D6DABD7075E /* Pods-ACEDrawingViewDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ACEDrawingViewDemo-frameworks.sh"; sourceTree = "<group>"; };
-		CAC42F367803B3E783ED83D60316D51B /* sticker_close@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_close@2x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_close@2x.png"; sourceTree = "<group>"; };
-		CCFCD63C5BF3B4F09CC87E3094A4BF4C /* ResourceBundle-ACEDraggableText-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ACEDraggableText-Info.plist"; sourceTree = "<group>"; };
-		D1D3551D04F61AE3088F6F704A47C8A6 /* ACEDrawingView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingView.h; path = ACEDrawingView/ACEDrawingView.h; sourceTree = "<group>"; };
+		CDE8476D2F50E1906E2DC92F704CBA2E /* sticker_resize@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_resize@3x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_resize@3x.png"; sourceTree = "<group>"; };
 		D3679E819BD0457F784AD340A52602C3 /* Pods-ACEDrawingViewDemoTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ACEDrawingViewDemoTests-frameworks.sh"; sourceTree = "<group>"; };
-		DDE0797B42B01433A06108E6148144AB /* ACEDrawingLabelView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ACEDrawingLabelView.h; path = ACEDrawingView/ACEDrawingLabelView.h; sourceTree = "<group>"; };
-		E29F37035745BCB86BD099F40DC94497 /* sticker_resize.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = sticker_resize.png; path = ACEDrawingView/ACEDraggableText/sticker_resize.png; sourceTree = "<group>"; };
 		E73C3C2850866862F799044B10087D0F /* Pods-ACEDrawingViewDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ACEDrawingViewDemo-resources.sh"; sourceTree = "<group>"; };
-		F0F055277CF2C492DB28B69BC51F23A0 /* ACEDrawingView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = ACEDrawingView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		F54EE6FBC6DE817F4164ABCAB6C22E0C /* sticker_resize@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "sticker_resize@3x.png"; path = "ACEDrawingView/ACEDraggableText/sticker_resize@3x.png"; sourceTree = "<group>"; };
 		F71000C80DE2BCCA9E7C07103E263316 /* libACEDrawingView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libACEDrawingView.a; path = libACEDrawingView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADAA90664CF32E4E538CE49437F1D43 /* Pods-ACEDrawingViewDemoTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ACEDrawingViewDemoTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		FC2770B482BFE91273C8560623F1422C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		FD871439F36C938EFAF479BF5E654B70 /* ACEDrawingView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ACEDrawingView.xcconfig; sourceTree = "<group>"; };
 		FFC9A3E9F3AE3C40217D6AE831454656 /* Pods-ACEDrawingViewDemoTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ACEDrawingViewDemoTests-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5B81A8826CEB0173F7F7FAEDB1B0D7E4 /* Frameworks */ = {
+		210745F1D5988FAC374396204722CDD6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348F0CFC7C07111BA1A440F786FD0BC0 /* Foundation.framework in Frameworks */,
+				29C6C8D074F27FDA30CAABE6852421E1 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,15 +122,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		96F3EC8A76A520C5B19F51C3CACDA5E0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3BBD79FB43921A6F251C521BBF8C1FC7 /* Foundation.framework in Frameworks */,
-				B2A7DCEBED353BAC1CB23DE040FBE505 /* QuartzCore.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A1ED95E385D47136374925B666D660EC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -125,9 +130,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2B6146B03B23496E42CF87C6F31635E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07141CB9E23EC58F62EECB43665F2AF2 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				787AA46EFA7C3D3EAE895CD9667AB378 /* ACEDrawingView */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		2618587936D165019A25915F05851112 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				2F3C0F3B4A1F7DD4B085ADB59681718E /* ACEDrawingViewToolEraser.h */,
+				9F3A7E578DF1E0350A0C85136A4FD15C /* ACEDrawingViewToolEraser.m */,
+				B10CCB97D239C41B0F9436A8EC0E3818 /* ACEDrawingViewToolLine.h */,
+				718C86B821C568F66A4DD96C19798787 /* ACEDrawingViewToolLine.m */,
+				33F0B75E41F962B463301E17670A60A7 /* ACEDrawingViewToolPen.h */,
+				C092043780096C1E368939CF3996DB13 /* ACEDrawingViewToolPen.m */,
+			);
+			name = Tools;
+			path = ACEDrawingView/Tools;
+			sourceTree = "<group>";
+		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,19 +185,6 @@
 			path = "Target Support Files/Pods-ACEDrawingViewDemoTests";
 			sourceTree = "<group>";
 		};
-		6605FF94D1624B3C03C901B39E4C3BFC /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				1DAA688380FCC54FF9AE46E59953FF0B /* sticker_close.png */,
-				CAC42F367803B3E783ED83D60316D51B /* sticker_close@2x.png */,
-				5B35ACD41E2AFC1B37D9A8757F6FDF31 /* sticker_close@3x.png */,
-				E29F37035745BCB86BD099F40DC94497 /* sticker_resize.png */,
-				41132C64B2CA773B5D768297D11082B3 /* sticker_resize@2x.png */,
-				F54EE6FBC6DE817F4164ABCAB6C22E0C /* sticker_resize@3x.png */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		73242ADCC88E2AB34F9398682287EA10 /* Pods-ACEDrawingViewDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,11 +200,31 @@
 			path = "Target Support Files/Pods-ACEDrawingViewDemo";
 			sourceTree = "<group>";
 		};
+		787AA46EFA7C3D3EAE895CD9667AB378 /* ACEDrawingView */ = {
+			isa = PBXGroup;
+			children = (
+				3903A9146F743CD09CDDD9204EE44796 /* ACEDrawingLabelView.h */,
+				6C58879511DE3CC69720EAC7FB5B4586 /* ACEDrawingLabelView.m */,
+				9CED5EEE541106BFE66EB652438FE39D /* ACEDrawingTools.h */,
+				08DF4D08CC23F401A3FC8D3DF43EDE51 /* ACEDrawingTools.m */,
+				988405B1E79F43EE4FBA09970743B5F3 /* ACEDrawingToolState.h */,
+				1B760B054A170BBFE696A242FC3257BC /* ACEDrawingToolState.m */,
+				1AA6E562877B78E6C2E9FBCFBC5B11C1 /* ACEDrawingView.h */,
+				600365FC98D5C9566CE413F099C2471F /* ACEDrawingView.m */,
+				879DC9C84F219E9845ADFAE16525426A /* Pod */,
+				FBE3A64C1AB79A20F3907E2DCFDB513A /* Resources */,
+				9808604783C59446439D5B0B494FE4B9 /* Support Files */,
+				2618587936D165019A25915F05851112 /* Tools */,
+			);
+			name = ACEDrawingView;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				A5C1B117F1E5902AA245693E7B2D5651 /* Development Pods */,
+				07141CB9E23EC58F62EECB43665F2AF2 /* Development Pods */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				8075E91F60E9D65CD4AE59B7AF1B4446 /* Products */,
 				DFA2A44B4D64E72FA34277C948322A33 /* Targets Support Files */,
@@ -201,6 +242,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		879DC9C84F219E9845ADFAE16525426A /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				B2B07D584298975FF8046D423341870A /* ACEDrawingView.podspec */,
+				99BB06E20BA441321B6870245AECFDA0 /* LICENSE.txt */,
+				4D037CBEF44934F6200848836816F554 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 		978007DCB56F415BE390E0F949D4D4E5 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,43 +261,16 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		A5C1B117F1E5902AA245693E7B2D5651 /* Development Pods */ = {
+		9808604783C59446439D5B0B494FE4B9 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				D81F428656F71F4D8F66EB3906BD4686 /* ACEDrawingView */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		B6DAEB2DAB96FD2C430BEF73A83769E0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				C7555B11F387C9254C5C691DAC0CA214 /* ACEDrawingView.xcconfig */,
-				7858731F55A057E4F5C0517D1F850574 /* ACEDrawingView-dummy.m */,
-				1F906232A9408EF9A8E765B9DAE3B61D /* ACEDrawingView-prefix.pch */,
-				CCFCD63C5BF3B4F09CC87E3094A4BF4C /* ResourceBundle-ACEDraggableText-Info.plist */,
+				FD871439F36C938EFAF479BF5E654B70 /* ACEDrawingView.xcconfig */,
+				A069F92F6C734E072105982387C06406 /* ACEDrawingView-dummy.m */,
+				B696CE587DED364768A194FEE733BD63 /* ACEDrawingView-prefix.pch */,
+				60714794A524B34C0AFAEE3900C876CF /* ResourceBundle-ACEDraggableText-Info.plist */,
 			);
 			name = "Support Files";
 			path = "Pods/Target Support Files/ACEDrawingView";
-			sourceTree = "<group>";
-		};
-		D81F428656F71F4D8F66EB3906BD4686 /* ACEDrawingView */ = {
-			isa = PBXGroup;
-			children = (
-				DDE0797B42B01433A06108E6148144AB /* ACEDrawingLabelView.h */,
-				A8C3402B9DF2CA0A8C6A45CB3AE96F40 /* ACEDrawingLabelView.m */,
-				96ED9BDA710DAA1F32D094D8BB72E441 /* ACEDrawingTools.h */,
-				9ADCD5709185CBD2408A2EFBAA9810DF /* ACEDrawingTools.m */,
-				711D00CAF4F40C76989FD64248EA31FA /* ACEDrawingToolState.h */,
-				9A8BAFFD1DC798E16BBD15AE70197D60 /* ACEDrawingToolState.m */,
-				D1D3551D04F61AE3088F6F704A47C8A6 /* ACEDrawingView.h */,
-				6444C489009FB0415E9CA005C4B6D9F3 /* ACEDrawingView.m */,
-				F10B984AED8B920D311DDDDE209EAA18 /* Pod */,
-				6605FF94D1624B3C03C901B39E4C3BFC /* Resources */,
-				B6DAEB2DAB96FD2C430BEF73A83769E0 /* Support Files */,
-			);
-			name = ACEDrawingView;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		DFA2A44B4D64E72FA34277C948322A33 /* Targets Support Files */ = {
@@ -258,58 +282,64 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		F10B984AED8B920D311DDDDE209EAA18 /* Pod */ = {
+		FBE3A64C1AB79A20F3907E2DCFDB513A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F0F055277CF2C492DB28B69BC51F23A0 /* ACEDrawingView.podspec */,
-				86DBBCD6507B965035F0AA716C400140 /* LICENSE.txt */,
-				584890F30C25E704D2D1F4D0CF42C2A1 /* README.md */,
+				36FE6E9DD20850652E66403E202037B0 /* sticker_close.png */,
+				61FE4DF4349265F487601B7609CD0EAE /* sticker_close@2x.png */,
+				0A4D451FADBBC113C5F1E9B6E9D1027D /* sticker_close@3x.png */,
+				47E6B383ADE44804585CFD2E0333624B /* sticker_resize.png */,
+				B2176BA9FD644366424CF9C84DAA7ED9 /* sticker_resize@2x.png */,
+				CDE8476D2F50E1906E2DC92F704CBA2E /* sticker_resize@3x.png */,
 			);
-			name = Pod;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		A4D9BB24D7FA16F78181BD6DC1FB7320 /* Headers */ = {
+		48AC1A920C27A5A263651AB89201279C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F79D306523ABEEAD9CBDF75469239B8 /* ACEDrawingLabelView.h in Headers */,
-				B1D6E3BA4C2A0F9E5C46CC2F602A8B35 /* ACEDrawingTools.h in Headers */,
-				AC2BC48F7CD2A9505A7C76FDF99CBCEA /* ACEDrawingToolState.h in Headers */,
-				24655E49A1ACB33BAEE196B667CB28A8 /* ACEDrawingView.h in Headers */,
+				76C73D328C3C100773C56BA627BBF566 /* ACEDrawingLabelView.h in Headers */,
+				71670C5D00DFCDDDEB31DD97A6977AE3 /* ACEDrawingTools.h in Headers */,
+				786169BF8FB8F503AD3D8B2B6262216D /* ACEDrawingToolState.h in Headers */,
+				F02743AB551230D527C234E2087BB286 /* ACEDrawingView.h in Headers */,
+				4F4969B3C85173D920BF3157057E52E9 /* ACEDrawingViewToolEraser.h in Headers */,
+				33E07AB381370DC5369127D95D7E8257 /* ACEDrawingViewToolLine.h in Headers */,
+				A6E45CA1699F03A3FDE8CE81ABA1582E /* ACEDrawingViewToolPen.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6090063EF7B7DC85270A78955968E186 /* ACEDrawingView */ = {
+		379FE6CE7DD5715D071EE497181B04D2 /* ACEDrawingView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5C3A2AE7532EE116D020321E8FA17797 /* Build configuration list for PBXNativeTarget "ACEDrawingView" */;
+			buildConfigurationList = 6872FBB4BD7E74CDC7D62F0AD5D8C84F /* Build configuration list for PBXNativeTarget "ACEDrawingView" */;
 			buildPhases = (
-				1A2E0E7B8F6746890C889147091BE002 /* Sources */,
-				96F3EC8A76A520C5B19F51C3CACDA5E0 /* Frameworks */,
-				A4D9BB24D7FA16F78181BD6DC1FB7320 /* Headers */,
+				B19A7D852F68CC6C9B3948B76AC53BDA /* Sources */,
+				210745F1D5988FAC374396204722CDD6 /* Frameworks */,
+				48AC1A920C27A5A263651AB89201279C /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D4DCAC5FD00AF9F05905407772D57378 /* PBXTargetDependency */,
+				868EA7F2F438BCF536FE02F0F569D2CD /* PBXTargetDependency */,
 			);
 			name = ACEDrawingView;
 			productName = ACEDrawingView;
 			productReference = F71000C80DE2BCCA9E7C07103E263316 /* libACEDrawingView.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		790E356BE3826A734CB7E012C5B22979 /* ACEDrawingView-ACEDraggableText */ = {
+		3AF27921F1ADC05E05F101C96FC2F8D0 /* ACEDrawingView-ACEDraggableText */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A1355609CFE5FE2EC1DBD856A9453A7 /* Build configuration list for PBXNativeTarget "ACEDrawingView-ACEDraggableText" */;
+			buildConfigurationList = 104129E579E92CB4DE21D72A55D14A88 /* Build configuration list for PBXNativeTarget "ACEDrawingView-ACEDraggableText" */;
 			buildPhases = (
-				85D923848D46257AA489EAD58D4AF31F /* Sources */,
-				5B81A8826CEB0173F7F7FAEDB1B0D7E4 /* Frameworks */,
-				E9A7F23841CCBBE4824246D089311860 /* Resources */,
+				679E7AC2AF46E835AEBF699BB1C0A509 /* Sources */,
+				E2B6146B03B23496E42CF87C6F31635E /* Frameworks */,
+				2D5B7EF9D3B1E4F6231333D71CEE7807 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -374,8 +404,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6090063EF7B7DC85270A78955968E186 /* ACEDrawingView */,
-				790E356BE3826A734CB7E012C5B22979 /* ACEDrawingView-ACEDraggableText */,
+				379FE6CE7DD5715D071EE497181B04D2 /* ACEDrawingView */,
+				3AF27921F1ADC05E05F101C96FC2F8D0 /* ACEDrawingView-ACEDraggableText */,
 				91E6965D6662151C87CEE9D3660CB260 /* Pods-ACEDrawingViewDemo */,
 				AEF513C116F93761D4E69A113CBDC9D4 /* Pods-ACEDrawingViewDemoTests */,
 			);
@@ -383,34 +413,22 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E9A7F23841CCBBE4824246D089311860 /* Resources */ = {
+		2D5B7EF9D3B1E4F6231333D71CEE7807 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E93E3953326F0FC82165C543637E804E /* sticker_close.png in Resources */,
-				A553ADF82ECB5E5C7B56AA89181FE372 /* sticker_close@2x.png in Resources */,
-				9A0406A864979B78556F4E087D0A4501 /* sticker_close@3x.png in Resources */,
-				E7941B7D9D50DA464A395B397942082F /* sticker_resize.png in Resources */,
-				02ECEA286BE0A139D2BA159D36FED36A /* sticker_resize@2x.png in Resources */,
-				59BE94DD155FABCA2045EB6C5978673A /* sticker_resize@3x.png in Resources */,
+				73965ED8320B06E952DD75CB410F1CAD /* sticker_close.png in Resources */,
+				B809E8708B690E95DE529FD47458C414 /* sticker_close@2x.png in Resources */,
+				98643DE17FECB9274ABF1F1C1BC9405D /* sticker_close@3x.png in Resources */,
+				410658D3ABA5E8BA23767D2EB910BA40 /* sticker_resize.png in Resources */,
+				FBF5CE06B97BF58DC02F4BFCF37629A4 /* sticker_resize@2x.png in Resources */,
+				363E7D6B0E0415C8218968C894A05B00 /* sticker_resize@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1A2E0E7B8F6746890C889147091BE002 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				716F79773C1FE369A4085CEB2FD83741 /* ACEDrawingLabelView.m in Sources */,
-				3DDA018647C3921695E2AF586CA14F17 /* ACEDrawingTools.m in Sources */,
-				A3BD1027A7B8D301406A214C19E1BD51 /* ACEDrawingToolState.m in Sources */,
-				35C26EB32DE49F22DD56403197D78EFE /* ACEDrawingView-dummy.m in Sources */,
-				ABAEB2EF675B607801E8C6386651BC5F /* ACEDrawingView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2B5F4C0F6F0F3D5688D029B3D3F077F6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -419,7 +437,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		85D923848D46257AA489EAD58D4AF31F /* Sources */ = {
+		679E7AC2AF46E835AEBF699BB1C0A509 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -434,64 +452,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B19A7D852F68CC6C9B3948B76AC53BDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6EDD4B112B3AED6465761AC9AC67D26 /* ACEDrawingLabelView.m in Sources */,
+				AF055F162C591C78DA73C03342D5386F /* ACEDrawingTools.m in Sources */,
+				6C9926C0215EA22BAF60A2A1BF87A18A /* ACEDrawingToolState.m in Sources */,
+				3328CD1D3CE5895A7B373AAABFF323F9 /* ACEDrawingView-dummy.m in Sources */,
+				BEBCFCC104442C770F0F61302539C326 /* ACEDrawingView.m in Sources */,
+				B4BDDBBF22D48507482C28B0BF258B5E /* ACEDrawingViewToolEraser.m in Sources */,
+				D50036AFF9C4AFE03758EC2401785D43 /* ACEDrawingViewToolLine.m in Sources */,
+				44A6D15DB6C77E4CC15348383A11341F /* ACEDrawingViewToolPen.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		2707DB6FA1C33D2FAE874536FB4749FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ACEDrawingView;
-			target = 6090063EF7B7DC85270A78955968E186 /* ACEDrawingView */;
+			target = 379FE6CE7DD5715D071EE497181B04D2 /* ACEDrawingView */;
 			targetProxy = 0BE4DB9E6F09E0B6A58CD8E6614A2F45 /* PBXContainerItemProxy */;
 		};
-		D4DCAC5FD00AF9F05905407772D57378 /* PBXTargetDependency */ = {
+		868EA7F2F438BCF536FE02F0F569D2CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ACEDrawingView-ACEDraggableText";
-			target = 790E356BE3826A734CB7E012C5B22979 /* ACEDrawingView-ACEDraggableText */;
-			targetProxy = E93383B44202F7C4B6A0C92E4893E3CF /* PBXContainerItemProxy */;
+			target = 3AF27921F1ADC05E05F101C96FC2F8D0 /* ACEDrawingView-ACEDraggableText */;
+			targetProxy = 8691776FDAB48A72D709B68EAF63CE02 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3E73D76437DE390D7F981D1D8D2E8C29 /* Debug */ = {
+		34AEE8C663B3E99EB7D2DCE9587E1179 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7555B11F387C9254C5C691DAC0CA214 /* ACEDrawingView.xcconfig */;
+			baseConfigurationReference = FD871439F36C938EFAF479BF5E654B70 /* ACEDrawingView.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/ACEDrawingView/ACEDrawingView-prefix.pch";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ACEDrawingView";
+				INFOPLIST_FILE = "Target Support Files/ACEDrawingView/ResourceBundle-ACEDraggableText-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = ACEDraggableText;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		5FC0F1594D614426C8AB3FDD1DCE1E7B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7555B11F387C9254C5C691DAC0CA214 /* ACEDrawingView.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/ACEDrawingView/ACEDrawingView-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -536,22 +542,6 @@
 			};
 			name = Release;
 		};
-		7E103B4AE2C571874BAB9DCFB964A0AB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7555B11F387C9254C5C691DAC0CA214 /* ACEDrawingView.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ACEDrawingView";
-				INFOPLIST_FILE = "Target Support Files/ACEDrawingView/ResourceBundle-ACEDraggableText-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = ACEDraggableText;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		8709DC6F55AD80E145EEBF7C02CC6058 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AEB88002D3D9AAF87B76B0F2C51AD6CB /* Pods-ACEDrawingViewDemoTests.release.xcconfig */;
@@ -572,6 +562,27 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		C29C818B6DA2425EFD6D511684EF1EE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD871439F36C938EFAF479BF5E654B70 /* ACEDrawingView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/ACEDrawingView/ACEDrawingView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		C3E37FB098AE76440E29106ADBF00CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -656,6 +667,22 @@
 			};
 			name = Debug;
 		};
+		D7DED6C96C7A8373D2FF97A8A668F384 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD871439F36C938EFAF479BF5E654B70 /* ACEDrawingView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ACEDrawingView";
+				INFOPLIST_FILE = "Target Support Files/ACEDrawingView/ResourceBundle-ACEDraggableText-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = ACEDraggableText;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
 		DA03565BE765DB55C6448FB363A44481 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -714,25 +741,40 @@
 			};
 			name = Release;
 		};
-		F0D510AAA1758473ABF638A80AF4129E /* Debug */ = {
+		DA58E05CF2C8D0693617AA9C9DC355C9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7555B11F387C9254C5C691DAC0CA214 /* ACEDrawingView.xcconfig */;
+			baseConfigurationReference = FD871439F36C938EFAF479BF5E654B70 /* ACEDrawingView.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ACEDrawingView";
-				INFOPLIST_FILE = "Target Support Files/ACEDrawingView/ResourceBundle-ACEDraggableText-Info.plist";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/ACEDrawingView/ACEDrawingView-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = ACEDraggableText;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		104129E579E92CB4DE21D72A55D14A88 /* Build configuration list for PBXNativeTarget "ACEDrawingView-ACEDraggableText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7DED6C96C7A8373D2FF97A8A668F384 /* Debug */,
+				34AEE8C663B3E99EB7D2DCE9587E1179 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -751,15 +793,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5C3A2AE7532EE116D020321E8FA17797 /* Build configuration list for PBXNativeTarget "ACEDrawingView" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3E73D76437DE390D7F981D1D8D2E8C29 /* Debug */,
-				5FC0F1594D614426C8AB3FDD1DCE1E7B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		65664D36F907AA830FAC7EF91AEDC727 /* Build configuration list for PBXNativeTarget "Pods-ACEDrawingViewDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -769,11 +802,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A1355609CFE5FE2EC1DBD856A9453A7 /* Build configuration list for PBXNativeTarget "ACEDrawingView-ACEDraggableText" */ = {
+		6872FBB4BD7E74CDC7D62F0AD5D8C84F /* Build configuration list for PBXNativeTarget "ACEDrawingView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F0D510AAA1758473ABF638A80AF4129E /* Debug */,
-				7E103B4AE2C571874BAB9DCFB964A0AB /* Release */,
+				C29C818B6DA2425EFD6D511684EF1EE5 /* Debug */,
+				DA58E05CF2C8D0693617AA9C9DC355C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

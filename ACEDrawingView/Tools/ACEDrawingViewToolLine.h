@@ -1,7 +1,7 @@
 /*
  * ACEDrawingView: https://github.com/acerbetti/ACEDrawingView
  *
- * Copyright (c) 2016 Matthew Jackson
+ * Copyright (c) 2018 Stefano Acerbetti
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,36 +23,10 @@
  *
  */
 
-#import "ACEDrawingToolState.h"
 #import "ACEDrawingTools.h"
 
-@interface ACEDrawingToolState ()
-@property (nonatomic, strong) id<ACEDrawingTool> tool;
-@property (nonatomic, strong) id positionObject;
-@end
+extern NSString * _Nonnull const kACEDrawingViewLine;
 
-@implementation ACEDrawingToolState
-
-+ (instancetype)stateForTool:(id<ACEDrawingTool>)tool
-{
-    return [ACEDrawingToolState stateForTool:tool capturePosition:NO];
-}
-
-+ (instancetype)stateForTool:(id<ACEDrawingTool>)tool capturePosition:(BOOL)capture
-{
-    ACEDrawingToolState *state = [ACEDrawingToolState new];
-    state.tool = tool;
-    
-    if (capture && [tool respondsToSelector:@selector(capturePositionObject)]) {
-        state.positionObject = [tool capturePositionObject];
-    }
-    
-    return state;
-}
-
-- (BOOL)hasPositionObject
-{
-    return self.positionObject != nil;
-}
+@interface ACEDrawingViewToolLine : NSObject<ACEDrawingViewDrawableTool>
 
 @end

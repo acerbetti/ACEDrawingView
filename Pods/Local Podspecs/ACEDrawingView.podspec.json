@@ -18,7 +18,7 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "ACEDrawingView/*.{h,m}",
+  "source_files": "ACEDrawingView/**/*.{h,m}",
   "resource_bundles": {
     "ACEDraggableText": [
       "ACEDrawingView/ACEDraggableText/*.png"
