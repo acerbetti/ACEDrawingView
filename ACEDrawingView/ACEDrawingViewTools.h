@@ -23,15 +23,50 @@
  *
  */
 
-#import "ACEDrawingViewTools.h"
+#import <Foundation/Foundation.h>
 
-@interface ACEDrawingViewToolLine : NSObject<ACEDrawingViewDrawableTool>
+// default drawable tools
+extern NSString * _Nonnull const kACEDrawingToolViewArrow;
+extern NSString * _Nonnull const kACEDrawingToolViewEllipse;
+extern NSString * _Nonnull const kACEDrawingToolViewEraser;
+extern NSString * _Nonnull const kACEDrawingToolViewLine;
+extern NSString * _Nonnull const kACEDrawingToolViewPen;
+extern NSString * _Nonnull const kACEDrawingToolViewRectangle;
 
-@property (nonatomic, strong, nonnull) UIColor *color;
-@property (nonatomic, assign) CGFloat alpha;
-@property (nonatomic, assign) CGFloat lineWidth;
+@protocol ACEDrawingViewTool<NSObject, NSCoding>
 
-@property (nonatomic, assign) CGPoint firstPoint;
-@property (nonatomic, assign) CGPoint lastPoint;
++ (nonnull NSString *)identifier;
+
+- (void)setInitialPoint:(CGPoint)firstPoint;
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
+- (void)draw;
+
+@end
+
+#pragma mark -
+
+@protocol ACEDrawingViewDrawableTool<ACEDrawingViewTool>
+
+- (void)setColor:(nonnull UIColor *)color;
+
+- (void)setAlpha:(CGFloat)alpha;
+
+- (void)setLineWidth:(CGFloat)lineWidth;
+
+@end
+
+#pragma mark -
+
+@protocol ACEDrawingViewDraggableTool<ACEDrawingViewTool>
+
+@end
+
+#pragma mark -
+
+@interface ACEDrawingViewTools : NSObject
+
++ (void)registerToolClass:(nonnull Class<ACEDrawingViewTool>)toolClass;
+
++ (nullable id<ACEDrawingViewTool>)toolWithIdentifier:(nonnull NSString *)identifier;
 
 @end

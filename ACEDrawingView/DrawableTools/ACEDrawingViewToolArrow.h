@@ -25,8 +25,6 @@
 
 #import "ACEDrawingViewToolLine.h"
 
-extern NSString * _Nonnull const kACEDrawingToolViewArrow;
-
 @interface ACEDrawingViewToolArrow : ACEDrawingViewToolLine
 
 @end

@@ -25,8 +25,6 @@
 
 #import "ACEDrawingViewToolLine.h"
 
-extern NSString * _Nonnull const kACEDrawingToolViewRectangle;
-
 @interface ACEDrawingViewToolRectangle : ACEDrawingViewToolLine
 
 @property (nonatomic, assign) BOOL fill;

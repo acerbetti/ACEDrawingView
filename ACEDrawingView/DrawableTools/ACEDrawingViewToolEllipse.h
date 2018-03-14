@@ -25,8 +25,6 @@
 
 #import "ACEDrawingViewToolLine.h"
 
-extern NSString * _Nonnull const kACEDrawingToolViewEllipse;
-
 @interface ACEDrawingViewToolEllipse : ACEDrawingViewToolLine
 
 @property (nonatomic, assign) BOOL fill;

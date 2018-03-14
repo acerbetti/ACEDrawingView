@@ -25,39 +25,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "ACEDrawingViewTools.h"
 #import "ACEDrawingToolState.h"
 
 @class ACEDrawingView;
 @class ACEDrawingLabelView;
 
-
-@protocol ACEDrawingViewTool<NSObject, NSCoding>
-
-+ (nonnull NSString *)identifier;
-
-- (void)setInitialPoint:(CGPoint)firstPoint;
-- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
-- (void)draw;
-
-@end
-
-#pragma mark -
-
-@protocol ACEDrawingViewDrawableTool<ACEDrawingViewTool>
-
-- (void)setColor:(nonnull UIColor *)color;
-
-- (void)setAlpha:(CGFloat)alpha;
-
-- (void)setLineWidth:(CGFloat)lineWidth;
-
-@end
-
-#pragma mark -
-
-@protocol ACEDrawingViewDraggableTool<ACEDrawingViewTool>
-
-@end
 
 
 

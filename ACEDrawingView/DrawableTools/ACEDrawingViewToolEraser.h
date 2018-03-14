@@ -25,8 +25,6 @@
 
 #import "ACEDrawingViewToolPen.h"
 
-extern NSString * _Nonnull const kACEDrawingToolViewEraser;
-
 @interface ACEDrawingViewToolEraser : ACEDrawingViewToolPen
 
 @end

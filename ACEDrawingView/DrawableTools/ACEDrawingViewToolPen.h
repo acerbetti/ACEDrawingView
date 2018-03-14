@@ -23,9 +23,7 @@
  *
  */
 
-#import "ACEDrawingTools.h"
-
-extern NSString * _Nonnull const kACEDrawingToolViewPen;
+#import "ACEDrawingViewTools.h"
 
 @interface ACEDrawingViewToolPen : UIBezierPath<ACEDrawingViewDrawableTool>
 
