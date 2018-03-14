@@ -61,13 +61,19 @@ NSString * const kACEDrawingToolViewPen = @"kACEDrawingToolViewPen";
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        
+        self.path = [[aDecoder decodeObjectForKey:NSStringFromSelector(@selector(path))] pointerValue];
+        self.color = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(color))];
+        self.alpha = [aDecoder decodeDoubleForKey:NSStringFromSelector(@selector(alpha))];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
+    [aCoder encodeObject:[NSValue valueWithPointer:self.path] forKey:NSStringFromSelector(@selector(path))];
+    [aCoder encodeObject:self.color forKey:NSStringFromSelector(@selector(color))];
+    [aCoder encodeDouble:self.alpha forKey:NSStringFromSelector(@selector(alpha))];
+    
     [super encodeWithCoder:aCoder];
 }
 
@@ -93,7 +99,7 @@ NSString * const kACEDrawingToolViewPen = @"kACEDrawingToolViewPen";
     CGPathAddQuadCurveToPoint(subpath, NULL, p1Point.x, p1Point.y, mid2.x, mid2.y);
     CGRect bounds = CGPathGetBoundingBox(subpath);
     
-    CGPathAddPath(_path, NULL, subpath);
+    CGPathAddPath(self.path, NULL, subpath);
     CGPathRelease(subpath);
     
     return bounds;
@@ -103,7 +109,7 @@ NSString * const kACEDrawingToolViewPen = @"kACEDrawingToolViewPen";
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextAddPath(context, _path);
+    CGContextAddPath(context, self.path);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetStrokeColorWithColor(context, self.color.CGColor);

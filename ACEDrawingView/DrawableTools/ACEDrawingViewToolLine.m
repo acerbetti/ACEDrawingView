@@ -38,14 +38,24 @@ NSString * const kACEDrawingToolViewLine = @"kACEDrawingToolViewLine";
 {
     self = [super init];
     if (self) {
+        self.firstPoint = [aDecoder decodeCGPointForKey:NSStringFromSelector(@selector(firstPoint))];
+        self.lastPoint = [aDecoder decodeCGPointForKey:NSStringFromSelector(@selector(lastPoint))];
         
+        self.color = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(color))];
+        self.alpha = [aDecoder decodeDoubleForKey:NSStringFromSelector(@selector(alpha))];
+        self.lineWidth = [aDecoder decodeDoubleForKey:NSStringFromSelector(@selector(lineWidth))];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
+    [aCoder encodeCGPoint:self.firstPoint forKey:NSStringFromSelector(@selector(firstPoint))];
+    [aCoder encodeCGPoint:self.lastPoint forKey:NSStringFromSelector(@selector(lastPoint))];
     
+    [aCoder encodeObject:self.color forKey:NSStringFromSelector(@selector(color))];
+    [aCoder encodeDouble:self.alpha forKey:NSStringFromSelector(@selector(alpha))];
+    [aCoder encodeDouble:self.lineWidth forKey:NSStringFromSelector(@selector(lineWidth))];
 }
 
 
