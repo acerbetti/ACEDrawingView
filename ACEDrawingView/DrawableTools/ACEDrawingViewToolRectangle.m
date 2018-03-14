@@ -23,12 +23,39 @@
  *
  */
 
-#import "ACEDrawingTools.h"
+#import "ACEDrawingViewToolRectangle.h"
 
-extern NSString * _Nonnull const kACEDrawingViewPen;
+NSString * const kACEDrawingToolViewRectangle = @"kACEDrawingToolViewRectangle";
 
-@interface ACEDrawingViewToolPen : UIBezierPath<ACEDrawingViewDrawableTool>
+@implementation ACEDrawingViewToolRectangle
 
-@property (nonatomic, assign, nonnull, readonly) CGMutablePathRef path;
++ (NSString *)identifier
+{
+    return kACEDrawingToolViewRectangle;
+}
+
+
+#pragma mark Drawing View Methods
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the properties
+    CGContextSetAlpha(context, self.alpha);
+    
+    // draw the rectangle
+    CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
+    
+    if (self.fill) {
+        CGContextSetFillColorWithColor(context, self.color.CGColor);
+        CGContextFillRect(UIGraphicsGetCurrentContext(), rectToFill);
+        
+    } else {
+        CGContextSetStrokeColorWithColor(context, self.color.CGColor);
+        CGContextSetLineWidth(context, self.lineWidth);
+        CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);
+    }
+}
 
 @end

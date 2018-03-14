@@ -23,77 +23,57 @@
  *
  */
 
-#import "ACEDrawingViewToolPen.h"
+#import "ACEDrawingViewToolLine.h"
 
-#define MID_POINT(p1, p2) CGPointMake((p1.x + p2.x) * 0.5, (p1.y + p2.y) * 0.5)
+NSString * const kACEDrawingToolViewLine = @"kACEDrawingToolViewLine";
 
-NSString * const kACEDrawingViewPen = @"kACEDrawingViewPen";
-
-#pragma mark -
-
-@interface ACEDrawingViewToolPen()
-@property (nonatomic, assign) CGMutablePathRef path;
-@property (nonatomic, strong) UIColor *color;
-@property (nonatomic, assign) CGFloat alpha;
-@end
-
-#pragma mark -
-
-@implementation ACEDrawingViewToolPen
+@implementation ACEDrawingViewToolLine
 
 + (NSString *)identifier
 {
-    return kACEDrawingViewPen;
+    return kACEDrawingToolViewLine;
 }
 
-- (id)init
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
-    if (self != nil) {
-        // create a new path
-        self.path = CGPathCreateMutable();
+    if (self) {
         
-        // use round style
-        self.lineCapStyle = kCGLineCapRound;
     }
     return self;
 }
 
-- (void)setInitialPoint:(CGPoint)firstPoint
+- (void)encodeWithCoder:(NSCoder *)aCoder
 {
     
+}
+
+
+#pragma mark Drawing View Methods
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
 }
 
 - (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
 {
-    
-}
-
-- (CGRect)addPathPreviousPreviousPoint:(CGPoint)p2Point withPreviousPoint:(CGPoint)p1Point withCurrentPoint:(CGPoint)cpoint {
-    
-    CGPoint mid1 = MID_POINT(p1Point, p2Point);
-    CGPoint mid2 = MID_POINT(cpoint, p1Point);
-    CGMutablePathRef subpath = CGPathCreateMutable();
-    CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
-    CGPathAddQuadCurveToPoint(subpath, NULL, p1Point.x, p1Point.y, mid2.x, mid2.y);
-    CGRect bounds = CGPathGetBoundingBox(subpath);
-    
-    CGPathAddPath(_path, NULL, subpath);
-    CGPathRelease(subpath);
-    
-    return bounds;
+    self.lastPoint = endPoint;
 }
 
 - (void)draw
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextAddPath(context, _path);
+    // set the line properties
+    CGContextSetStrokeColorWithColor(context, self.color.CGColor);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, self.lineWidth);
-    CGContextSetStrokeColorWithColor(context, self.color.CGColor);
-    CGContextSetBlendMode(context, kCGBlendModeNormal);
     CGContextSetAlpha(context, self.alpha);
+    
+    // draw the line
+    CGContextMoveToPoint(context, self.firstPoint.x, self.firstPoint.y);
+    CGContextAddLineToPoint(context, self.lastPoint.x, self.lastPoint.y);
     CGContextStrokePath(context);
 }
 

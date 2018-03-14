@@ -25,8 +25,15 @@
 
 #import "ACEDrawingTools.h"
 
-extern NSString * _Nonnull const kACEDrawingViewLine;
+extern NSString * _Nonnull const kACEDrawingToolViewLine;
 
 @interface ACEDrawingViewToolLine : NSObject<ACEDrawingViewDrawableTool>
+
+@property (nonatomic, strong, nonnull) UIColor *color;
+@property (nonatomic, assign) CGFloat alpha;
+@property (nonatomic, assign) CGFloat lineWidth;
+
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
 
 @end

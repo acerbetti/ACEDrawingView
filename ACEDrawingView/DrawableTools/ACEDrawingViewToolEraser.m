@@ -23,10 +23,31 @@
  *
  */
 
-#import "ACEDrawingViewToolPen.h"
+#import "ACEDrawingViewToolEraser.h"
 
-extern NSString * _Nonnull const kACEDrawingViewEraser;
+NSString * const kACEDrawingToolViewEraser = @"kACEDrawingToolViewEraser";
 
-@interface ACEDrawingViewToolEraser : ACEDrawingViewToolPen
+@implementation ACEDrawingViewToolEraser
+
++ (NSString *)identifier
+{
+    return kACEDrawingToolViewEraser;
+}
+
+
+#pragma mark Drawing View Methods
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    
+    CGContextAddPath(context, self.path);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetBlendMode(context, kCGBlendModeClear);
+    CGContextStrokePath(context);
+    CGContextRestoreGState(context);
+}
 
 @end
