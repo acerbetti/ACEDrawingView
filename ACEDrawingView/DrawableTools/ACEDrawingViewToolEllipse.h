@@ -25,8 +25,12 @@
 
 #import "ACEDrawingViewToolLine.h"
 
-@interface ACEDrawingViewToolEllipse : ACEDrawingViewToolLine
+@interface ACEDrawingViewToolEllipseStroke : ACEDrawingViewToolLine
 
-@property (nonatomic, assign) BOOL fill;
+@end
+
+#pragma mark -
+
+@interface ACEDrawingViewToolEllipseFill : ACEDrawingViewToolEllipseStroke
 
 @end

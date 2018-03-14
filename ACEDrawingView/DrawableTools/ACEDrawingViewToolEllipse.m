@@ -25,13 +25,14 @@
 
 #import "ACEDrawingViewToolEllipse.h"
 
-NSString * const kACEDrawingToolViewEllipse = @"kACEDrawingToolViewEllipse";
+NSString * const kACEDrawingToolViewEllipseStroke = @"kACEDrawingToolViewEllipseStroke";
+NSString * const kACEDrawingToolViewEllipseFill   = @"kACEDrawingToolViewEllipseFill";
 
-@implementation ACEDrawingViewToolEllipse
+@implementation ACEDrawingViewToolEllipseStroke
 
 + (NSString *)identifier
 {
-    return kACEDrawingToolViewEllipse;
+    return kACEDrawingToolViewEllipseStroke;
 }
 
 
@@ -46,15 +47,38 @@ NSString * const kACEDrawingToolViewEllipse = @"kACEDrawingToolViewEllipse";
     
     // draw the ellipse
     CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
-    if (self.fill) {
-        CGContextSetFillColorWithColor(context, self.color.CGColor);
-        CGContextFillEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
-        
-    } else {
-        CGContextSetStrokeColorWithColor(context, self.color.CGColor);
-        CGContextSetLineWidth(context, self.lineWidth);
-        CGContextStrokeEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
-    }
+    
+    CGContextSetStrokeColorWithColor(context, self.color.CGColor);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextStrokeEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
+}
+
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingViewToolEllipseFill
+
++ (NSString *)identifier
+{
+    return kACEDrawingToolViewEllipseFill;
+}
+
+
+#pragma mark Drawing View Methods
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the properties
+    CGContextSetAlpha(context, self.alpha);
+    
+    // draw the ellipse
+    CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
+    
+    CGContextSetFillColorWithColor(context, self.color.CGColor);
+    CGContextFillEllipseInRect(UIGraphicsGetCurrentContext(), rectToFill);
 }
 
 @end

@@ -25,13 +25,14 @@
 
 #import "ACEDrawingViewToolRectangle.h"
 
-NSString * const kACEDrawingToolViewRectangle = @"kACEDrawingToolViewRectangle";
+NSString * const kACEDrawingToolViewRectangleStroke = @"kACEDrawingToolViewRectangleStroke";
+NSString * const kACEDrawingToolViewRectangleFill   = @"kACEDrawingToolViewRectangleFill";
 
-@implementation ACEDrawingViewToolRectangle
+@implementation ACEDrawingViewToolRectangleStroke
 
 + (NSString *)identifier
 {
-    return kACEDrawingToolViewRectangle;
+    return kACEDrawingToolViewRectangleStroke;
 }
 
 
@@ -47,15 +48,37 @@ NSString * const kACEDrawingToolViewRectangle = @"kACEDrawingToolViewRectangle";
     // draw the rectangle
     CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
     
-    if (self.fill) {
-        CGContextSetFillColorWithColor(context, self.color.CGColor);
-        CGContextFillRect(UIGraphicsGetCurrentContext(), rectToFill);
-        
-    } else {
-        CGContextSetStrokeColorWithColor(context, self.color.CGColor);
-        CGContextSetLineWidth(context, self.lineWidth);
-        CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);
-    }
+    CGContextSetStrokeColorWithColor(context, self.color.CGColor);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextStrokeRect(UIGraphicsGetCurrentContext(), rectToFill);
+}
+
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingViewToolRectangleFill
+
++ (NSString *)identifier
+{
+    return kACEDrawingToolViewRectangleFill;
+}
+
+
+#pragma mark Drawing View Methods
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the properties
+    CGContextSetAlpha(context, self.alpha);
+    
+    // draw the rectangle
+    CGRect rectToFill = CGRectMake(self.firstPoint.x, self.firstPoint.y, self.lastPoint.x - self.firstPoint.x, self.lastPoint.y - self.firstPoint.y);
+    
+    CGContextSetFillColorWithColor(context, self.color.CGColor);
+    CGContextFillRect(UIGraphicsGetCurrentContext(), rectToFill);
 }
 
 @end

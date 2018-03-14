@@ -25,8 +25,12 @@
 
 #import "ACEDrawingViewToolLine.h"
 
-@interface ACEDrawingViewToolRectangle : ACEDrawingViewToolLine
+@interface ACEDrawingViewToolRectangleStroke : ACEDrawingViewToolLine
 
-@property (nonatomic, assign) BOOL fill;
+@end
+
+#pragma mark -
+
+@interface ACEDrawingViewToolRectangleFill : ACEDrawingViewToolRectangleStroke
 
 @end

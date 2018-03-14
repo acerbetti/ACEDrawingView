@@ -49,7 +49,7 @@
 @property (nonatomic, strong) NSMutableArray *redoStates;
 @property (nonatomic, strong) NSMutableArray *undoStates;
 
-@property (nonatomic, strong) id<ACEDrawingTool> currentTool;
+@property (nonatomic, strong) id<ACEDrawingViewTool> currentTool;
 @property (nonatomic, strong) UIImage *cacheImage;
 
 @property (nonatomic, strong) ACEDrawingLabelView *draggableTextView;
@@ -220,78 +220,9 @@
     self.currentTool = nil;
 }
 
-- (void)setCustomDrawTool:(id<ACEDrawingTool>)customDrawTool
+- (id<ACEDrawingViewTool>)toolWithCurrentSettings
 {
-    _customDrawTool = customDrawTool;
-    
-    if (customDrawTool != nil) {
-        self.drawTool = ACEDrawingToolTypeCustom;
-    }
-}
-
-- (id<ACEDrawingTool>)toolWithCurrentSettings
-{
-    switch (self.drawTool) {
-        case ACEDrawingToolTypePen:
-        {
-            return [ACEDrawingPenTool new];
-        }
-            
-        case ACEDrawingToolTypeLine:
-        {
-            return [ACEDrawingLineTool new];
-        }
-            
-        case ACEDrawingToolTypeArrow:
-        {
-            return [ACEDrawingArrowTool new];
-        }
-            
-        case ACEDrawingToolTypeDraggableText:
-        {
-            ACEDrawingDraggableTextTool *tool = [ACEDrawingDraggableTextTool new];
-            tool.drawingView = self;
-            return tool;
-        }
-
-        case ACEDrawingToolTypeRectagleStroke:
-        {
-            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
-            tool.fill = NO;
-            return tool;
-        }
-            
-        case ACEDrawingToolTypeRectagleFill:
-        {
-            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
-            tool.fill = YES;
-            return tool;
-        }
-            
-        case ACEDrawingToolTypeEllipseStroke:
-        {
-            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
-            tool.fill = NO;
-            return tool;
-        }
-            
-        case ACEDrawingToolTypeEllipseFill:
-        {
-            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
-            tool.fill = YES;
-            return tool;
-        }
-            
-        case ACEDrawingToolTypeEraser:
-        {
-            return [ACEDrawingEraserTool new];
-        }
-            
-        case ACEDrawingToolTypeCustom:
-        {
-            return self.customDrawTool;
-        }
-    }
+    return [ACEDrawingViewTools toolWithIdentifier:self.drawToolIdentifier];
 }
 
 
@@ -299,9 +230,10 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (self.draggableTextView.isEditing && self.drawTool != ACEDrawingToolTypeDraggableText) {
-        [self.draggableTextView hideEditingHandles];
-    }
+    // TODO: support text
+//    if (self.draggableTextView.isEditing && self.drawTool != ACEDrawingToolTypeDraggableText) {
+//        [self.draggableTextView hideEditingHandles];
+//    }
     
     // add the first touch
     UITouch *touch = [touches anyObject];
@@ -310,9 +242,11 @@
     
     // init the bezier path
     self.currentTool = [self toolWithCurrentSettings];
-    self.currentTool.lineWidth = self.lineWidth;
-    self.currentTool.lineColor = self.lineColor;
-    self.currentTool.lineAlpha = self.lineAlpha;
+    if ([self.currentTool conformsToProtocol:@protocol(ACEDrawingViewDrawableTool)]) {
+        [(id<ACEDrawingViewDrawableTool>)self.currentTool setLineWidth:self.lineWidth];
+        [(id<ACEDrawingViewDrawableTool>)self.currentTool setColor:self.lineColor];
+        [(id<ACEDrawingViewDrawableTool>)self.currentTool setAlpha:self.lineAlpha];
+    }
     
     if (self.edgeSnapThreshold > 0 && [self.currentTool isKindOfClass:[ACEDrawingRectangleTool class]]) {
         [self snapCurrentPointToEdges];
@@ -325,7 +259,7 @@
         
     } else {
         [self.pathArray addObject:self.currentTool];
-        [self.undoStates addObject:[self.currentTool captureToolState]];
+//        [self.undoStates addObject:[self.currentTool captureToolState]];
         
         [self.currentTool setInitialPoint:currentPoint];
     }
@@ -602,7 +536,6 @@
     self.currentTool = nil;
     self.cacheImage = nil;
     self.backgroundImage = nil;
-    self.customDrawTool = nil;
 }
 
 #pragma mark - ACEDrawingLabelViewDelegate

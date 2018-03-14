@@ -130,39 +130,39 @@
             self.toolButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
             switch (buttonIndex) {
                 case 0:
-                    self.drawingView.drawTool = ACEDrawingToolTypePen;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewPen;
                     break;
                     
                 case 1:
-                    self.drawingView.drawTool = ACEDrawingToolTypeLine;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewLine;
                     break;
                     
                 case 2:
-                    self.drawingView.drawTool = ACEDrawingToolTypeArrow;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewArrow;
                     break;
                     
                 case 3:
-                    self.drawingView.drawTool = ACEDrawingToolTypeRectagleStroke;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewRectangleStroke;
                     break;
                     
                 case 4:
-                    self.drawingView.drawTool = ACEDrawingToolTypeRectagleFill;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewRectangleFill;
                     break;
                     
                 case 5:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseStroke;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewEllipseStroke;
                     break;
                     
                 case 6:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEllipseFill;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewEllipseFill;
                     break;
                     
                 case 7:
-                    self.drawingView.drawTool = ACEDrawingToolTypeEraser;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolViewEraser;
                     break;
                     
                 case 8:
-                    self.drawingView.drawTool = ACEDrawingToolTypeDraggableText;
+//                    self.drawingView.drawTool = ACEDrawingToolTypeDraggableText;
                     break;
             }
             

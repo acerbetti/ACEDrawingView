@@ -21,11 +21,13 @@
 {
     // add the default tools
     [self registerToolClass:[ACEDrawingViewToolArrow class]];
-    [self registerToolClass:[ACEDrawingViewToolEllipse class]];
+    [self registerToolClass:[ACEDrawingViewToolEllipseFill class]];
+    [self registerToolClass:[ACEDrawingViewToolEllipseStroke class]];
     [self registerToolClass:[ACEDrawingViewToolEraser class]];
     [self registerToolClass:[ACEDrawingViewToolLine class]];
     [self registerToolClass:[ACEDrawingViewToolPen class]];
-    [self registerToolClass:[ACEDrawingViewToolRectangle class]];
+    [self registerToolClass:[ACEDrawingViewToolRectangleFill class]];
+    [self registerToolClass:[ACEDrawingViewToolRectangleStroke class]];
 }
 
 + (NSMutableDictionary *)tools
@@ -51,7 +53,7 @@
     
     Class toolClass = [[self tools] objectForKey:identifier];
     if (toolClass != nil) {
-        return [toolClass init];
+        return [[toolClass alloc] init];
     }
     return nil;
 }

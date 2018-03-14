@@ -27,11 +27,13 @@
 
 // default drawable tools
 extern NSString * _Nonnull const kACEDrawingToolViewArrow;
-extern NSString * _Nonnull const kACEDrawingToolViewEllipse;
+extern NSString * _Nonnull const kACEDrawingToolViewEllipseFill;
+extern NSString * _Nonnull const kACEDrawingToolViewEllipseStroke;
 extern NSString * _Nonnull const kACEDrawingToolViewEraser;
 extern NSString * _Nonnull const kACEDrawingToolViewLine;
 extern NSString * _Nonnull const kACEDrawingToolViewPen;
-extern NSString * _Nonnull const kACEDrawingToolViewRectangle;
+extern NSString * _Nonnull const kACEDrawingToolViewRectangleFill;
+extern NSString * _Nonnull const kACEDrawingToolViewRectangleStroke;
 
 @protocol ACEDrawingViewTool<NSObject, NSCoding>
 

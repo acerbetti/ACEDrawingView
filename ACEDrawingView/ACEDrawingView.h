@@ -24,22 +24,12 @@
  */
 
 #import <UIKit/UIKit.h>
+
+#import "ACEDrawingViewTools.h"
 #import "ACEDrawingLabelView.h"
 
 #define ACEDrawingViewVersion   3.0.0
 
-typedef enum {
-    ACEDrawingToolTypePen,
-    ACEDrawingToolTypeLine,
-    ACEDrawingToolTypeArrow,
-    ACEDrawingToolTypeRectagleStroke,
-    ACEDrawingToolTypeRectagleFill,
-    ACEDrawingToolTypeEllipseStroke,
-    ACEDrawingToolTypeEllipseFill,
-    ACEDrawingToolTypeEraser,
-    ACEDrawingToolTypeDraggableText,
-    ACEDrawingToolTypeCustom,
-} ACEDrawingToolType;
 
 typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
     ACEDrawingModeScale,
@@ -50,8 +40,8 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 
 @interface ACEDrawingView : UIView<ACEDrawingLabelViewDelegate>
 
-@property (nonatomic, assign) ACEDrawingToolType drawTool;
-@property (nonatomic, strong) id<ACEDrawingTool> customDrawTool;
+@property (nonatomic, strong) NSString *drawToolIdentifier;
+
 @property (nonatomic, assign) id<ACEDrawingViewDelegate> delegate;
 
 // public properties
@@ -108,9 +98,9 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 @protocol ACEDrawingViewDelegate <NSObject>
 
 @optional
-- (void)drawingView:(ACEDrawingView *)view willBeginDrawUsingTool:(id<ACEDrawingTool>)tool;
-- (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingTool>)tool;
-- (void)drawingView:(ACEDrawingView *)view didRedoDrawUsingTool:(id<ACEDrawingTool>)tool;
-- (void)drawingView:(ACEDrawingView *)view didUndoDrawUsingTool:(id<ACEDrawingTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view willBeginDrawUsingTool:(id<ACEDrawingViewTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingViewTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view didRedoDrawUsingTool:(id<ACEDrawingViewTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view didUndoDrawUsingTool:(id<ACEDrawingViewTool>)tool;
 
 @end
