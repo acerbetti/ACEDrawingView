@@ -103,11 +103,13 @@
     }
 }
 
-- (UIImage *)prev_image {
+- (UIImage *)prev_image
+{
     return self.backgroundImage;
 }
 
-- (void)setPrev_image:(UIImage *)prev_image {
+- (void)setPrev_image:(UIImage *)prev_image 
+{
     [self setBackgroundImage:prev_image];
 }
 
