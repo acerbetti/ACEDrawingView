@@ -234,57 +234,57 @@
     switch (self.drawTool) {
         case ACEDrawingToolTypePen:
         {
-            return ACE_AUTORELEASE([ACEDrawingPenTool new]);
+            return [ACEDrawingPenTool new];
         }
             
         case ACEDrawingToolTypeLine:
         {
-            return ACE_AUTORELEASE([ACEDrawingLineTool new]);
+            return [ACEDrawingLineTool new];
         }
             
         case ACEDrawingToolTypeArrow:
         {
-            return ACE_AUTORELEASE([ACEDrawingArrowTool new]);
+            return [ACEDrawingArrowTool new];
         }
             
         case ACEDrawingToolTypeDraggableText:
         {
-            ACEDrawingDraggableTextTool *tool = ACE_AUTORELEASE([ACEDrawingDraggableTextTool new]);
+            ACEDrawingDraggableTextTool *tool = [ACEDrawingDraggableTextTool new];
             tool.drawingView = self;
             return tool;
         }
 
         case ACEDrawingToolTypeRectagleStroke:
         {
-            ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);
+            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
             tool.fill = NO;
             return tool;
         }
             
         case ACEDrawingToolTypeRectagleFill:
         {
-            ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);
+            ACEDrawingRectangleTool *tool = [ACEDrawingRectangleTool new];
             tool.fill = YES;
             return tool;
         }
             
         case ACEDrawingToolTypeEllipseStroke:
         {
-            ACEDrawingEllipseTool *tool = ACE_AUTORELEASE([ACEDrawingEllipseTool new]);
+            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
             tool.fill = NO;
             return tool;
         }
             
         case ACEDrawingToolTypeEllipseFill:
         {
-            ACEDrawingEllipseTool *tool = ACE_AUTORELEASE([ACEDrawingEllipseTool new]);
+            ACEDrawingEllipseTool *tool = [ACEDrawingEllipseTool new];
             tool.fill = YES;
             return tool;
         }
             
         case ACEDrawingToolTypeEraser:
         {
-            return ACE_AUTORELEASE([ACEDrawingEraserTool new]);
+            return [ACEDrawingEraserTool new];
         }
             
         case ACEDrawingToolTypeCustom:
@@ -603,10 +603,6 @@
     self.cacheImage = nil;
     self.backgroundImage = nil;
     self.customDrawTool = nil;
-    
-#if !ACE_HAS_ARC
-    [super dealloc];
-#endif
 }
 
 #pragma mark - ACEDrawingLabelViewDelegate

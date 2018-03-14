@@ -26,6 +26,7 @@
 #import "ACEDrawingTools.h"
 #import "ACEDrawingView.h"
 #import "ACEDrawingToolState.h"
+
 #if (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 #import <CoreText/CoreText.h>
 #else
@@ -101,9 +102,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     CGPathRelease(path);
     self.lineColor = nil;
-    #if !ACE_HAS_ARC
-    [super dealloc];
-    #endif
 }
 
 @end
@@ -183,9 +181,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)dealloc
 {
     self.lineColor = nil;
-#if !ACE_HAS_ARC
-    [super dealloc];
-#endif
 }
 
 @end
@@ -393,9 +388,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)dealloc
 {
     self.lineColor = nil;
-#if !ACE_HAS_ARC
-    [super dealloc];
-#endif
 }
 
 @end
@@ -454,9 +446,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)dealloc
 {
     self.lineColor = nil;
-#if !ACE_HAS_ARC
-    [super dealloc];
-#endif
 }
 
 @end
@@ -540,9 +529,6 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)dealloc
 {
     self.lineColor = nil;
-#if !ACE_HAS_ARC
-    [super dealloc];
-#endif
 }
 
 @end
