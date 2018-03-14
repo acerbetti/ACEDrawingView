@@ -86,6 +86,7 @@
     self.undoStates = [NSMutableArray array];
     
     // set the default values for the public properties
+    self.drawToolIdentifier = kACEDrawingToolViewPen;
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
@@ -101,16 +102,6 @@
         self.draggableTextRotateImage = [UIImage imageWithContentsOfFile:[[NSBundle bundleWithURL:bundleURL] pathForResource:@"sticker_resize" ofType:@"png"]];
         self.draggableTextCloseImage  = [UIImage imageWithContentsOfFile:[[NSBundle bundleWithURL:bundleURL] pathForResource:@"sticker_close" ofType:@"png"]];
     }
-}
-
-- (UIImage *)prev_image
-{
-    return self.backgroundImage;
-}
-
-- (void)setPrev_image:(UIImage *)prev_image 
-{
-    [self setBackgroundImage:prev_image];
 }
 
 
@@ -243,9 +234,11 @@
     // init the bezier path
     self.currentTool = [self toolWithCurrentSettings];
     if ([self.currentTool conformsToProtocol:@protocol(ACEDrawingViewDrawableTool)]) {
-        [(id<ACEDrawingViewDrawableTool>)self.currentTool setLineWidth:self.lineWidth];
-        [(id<ACEDrawingViewDrawableTool>)self.currentTool setColor:self.lineColor];
-        [(id<ACEDrawingViewDrawableTool>)self.currentTool setAlpha:self.lineAlpha];
+        id<ACEDrawingViewDrawableTool> drawableTool = (id<ACEDrawingViewDrawableTool>)self.currentTool;
+        
+        [drawableTool setLineWidth:self.lineWidth];
+        [drawableTool setColor:self.lineColor];
+        [drawableTool setAlpha:self.lineAlpha];
     }
     
     if (self.edgeSnapThreshold > 0 && [self.currentTool isKindOfClass:[ACEDrawingRectangleTool class]]) {

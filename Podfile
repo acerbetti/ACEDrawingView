@@ -2,7 +2,7 @@
 platform :ios, '8.0'
 
 target 'ACEDrawingViewDemo' do
-  pod 'ACEDrawingView', :path => './'
+  pod 'ACEDrawingView/DraggableText', :path => './'
 
   target 'ACEDrawingViewDemoTests' do
     inherit! :search_paths

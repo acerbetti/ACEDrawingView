@@ -1,16 +1,18 @@
 PODS:
-  - ACEDrawingView (3.0.0)
+  - ACEDrawingView/DraggableText (3.0.0):
+    - ACEDrawingView/DrawingView
+  - ACEDrawingView/DrawingView (3.0.0)
 
 DEPENDENCIES:
-  - ACEDrawingView (from `./`)
+  - ACEDrawingView/DraggableText (from `./`)
 
 EXTERNAL SOURCES:
   ACEDrawingView:
     :path: ./
 
 SPEC CHECKSUMS:
-  ACEDrawingView: 0265cfdb2421972999ef89bb4117fd6802959dfd
+  ACEDrawingView: e6d7ccc8b354c095632c4671c84dfd40bfa8b32c
 
-PODFILE CHECKSUM: 4a2eb441af8ad7a2a041029eb078a42d93ba69de
+PODFILE CHECKSUM: f615cd270f82822bf044af87ef12470b8275a752
 
 COCOAPODS: 1.4.0

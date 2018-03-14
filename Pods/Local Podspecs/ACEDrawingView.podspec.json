@@ -15,14 +15,30 @@
     "tag": "3.0.0"
   },
   "frameworks": "QuartzCore",
+  "default_subspecs": "DrawingView",
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "ACEDrawingView/**/*.{h,m}",
-  "resource_bundles": {
-    "ACEDraggableText": [
-      "ACEDrawingView/ACEDraggableText/*.png"
-    ]
-  },
-  "requires_arc": true
+  "requires_arc": true,
+  "subspecs": [
+    {
+      "name": "DrawingView",
+      "source_files": "ACEDrawingView/**/*.{h,m}",
+      "private_header_files": "ACEDrawingView/DrawableTools/*.h"
+    },
+    {
+      "name": "DraggableText",
+      "dependencies": {
+        "ACEDrawingView/DrawingView": [
+
+        ]
+      },
+      "source_files": "ACEDraggableText/**/*.{h,m}",
+      "resource_bundles": {
+        "ACEDraggableText": [
+          "ACEDraggableText/**/*.png"
+        ]
+      }
+    }
+  ]
 }

@@ -87,12 +87,6 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 
 @end
 
-#pragma mark - 
-
-@interface ACEDrawingView (Deprecated)
-@property (nonatomic, strong) UIImage *prev_image DEPRECATED_MSG_ATTRIBUTE("Use 'backgroundImage' instead.");
-@end
-
 #pragma mark -
 
 @protocol ACEDrawingViewDelegate <NSObject>
