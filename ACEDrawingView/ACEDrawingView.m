@@ -213,7 +213,27 @@
 
 - (id<ACEDrawingViewTool>)toolWithCurrentSettings
 {
-    return [ACEDrawingViewTools toolWithIdentifier:self.drawToolIdentifier];
+    id<ACEDrawingViewTool> tool = [ACEDrawingViewTools toolWithIdentifier:self.drawToolIdentifier];
+    
+    if ([tool conformsToProtocol:@protocol(ACEDrawingViewDrawableTool)]) {
+        
+        // only drawable tools have these properties
+        id<ACEDrawingViewDrawableTool> drawableTool = (id<ACEDrawingViewDrawableTool>)tool;
+        
+        // set the properties
+        [drawableTool setLineWidth:self.lineWidth];
+        [drawableTool setColor:self.lineColor];
+        [drawableTool setAlpha:self.lineAlpha];
+        
+    } else if ([tool conformsToProtocol:@protocol(ACEDrawingViewDraggableTool)]) {
+        
+        // only draggable tools needs the draw view
+        id<ACEDrawingViewDraggableTool> draggableTool = (id<ACEDrawingViewDraggableTool>)tool;
+        
+        [draggableTool setDrawingView:self];
+    }
+    
+    return tool;
 }
 
 
@@ -231,17 +251,10 @@
     previousPoint1 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
     
-    // init the bezier path
     self.currentTool = [self toolWithCurrentSettings];
-    if ([self.currentTool conformsToProtocol:@protocol(ACEDrawingViewDrawableTool)]) {
-        id<ACEDrawingViewDrawableTool> drawableTool = (id<ACEDrawingViewDrawableTool>)self.currentTool;
-        
-        [drawableTool setLineWidth:self.lineWidth];
-        [drawableTool setColor:self.lineColor];
-        [drawableTool setAlpha:self.lineAlpha];
-    }
+
     
-    if (self.edgeSnapThreshold > 0 && [self.currentTool isKindOfClass:[ACEDrawingRectangleTool class]]) {
+    if (self.edgeSnapThreshold > 0 && [self.currentTool isKindOfClass:[kACEDrawingToolViewRectangleStroke class]]) {
         [self snapCurrentPointToEdges];
     }
     
@@ -265,7 +278,7 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // save all the touches in the path
+    // get the single touch
     UITouch *touch = [touches anyObject];
     
     previousPoint2 = previousPoint1;
@@ -276,25 +289,13 @@
         [self snapCurrentPointToEdges];
     }
     
-    if ([self.currentTool isKindOfClass:[ACEDrawingPenTool class]]) {
-        CGRect bounds = [(ACEDrawingPenTool*)self.currentTool addPathPreviousPreviousPoint:previousPoint2 withPreviousPoint:previousPoint1 withCurrentPoint:currentPoint];
-        
-        CGRect drawBox = bounds;
-        drawBox.origin.x -= self.lineWidth * 2.0;
-        drawBox.origin.y -= self.lineWidth * 2.0;
-        drawBox.size.width += self.lineWidth * 4.0;
-        drawBox.size.height += self.lineWidth * 4.0;
-        
+    CGRect drawBox = [self.currentTool moveInAreaFromPoint:previousPoint2 toPoint:previousPoint1 toPoint:currentPoint];
+    if (!CGRectIsNull(drawBox)) {
         [self setNeedsDisplayInRect:drawBox];
         
-    } else if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
-        return;
-    
     } else {
-        [self.currentTool moveFromPoint:previousPoint1 toPoint:currentPoint];
         [self setNeedsDisplay];
     }
-    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

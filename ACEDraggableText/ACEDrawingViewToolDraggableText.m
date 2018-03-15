@@ -24,8 +24,15 @@
  */
 
 #import "ACEDrawingViewToolDraggableText.h"
+#import "ACEDrawingLabelView.h"
 
 NSString * const kACEDrawingToolDraggableText = @"kACEDrawingToolDraggableText";
+
+@interface ACEDrawingViewToolDraggableText()
+@property (nonatomic, weak) ACEDrawingView *drawingView;
+@end
+
+#pragma mark -
 
 @implementation ACEDrawingViewToolDraggableText
 
@@ -62,10 +69,10 @@ NSString * const kACEDrawingToolDraggableText = @"kACEDrawingToolDraggableText";
     
 }
 
-
-- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+- (CGRect)moveInAreaFromPoint:(CGPoint)startPoint toPoint:(CGPoint)middlePoint toPoint:(CGPoint)endPoint
 {
-    
+    // Not used for this tool
+    return CGRectNull;
 }
 
 - (void)draw

@@ -7,7 +7,10 @@
 //
 
 #import "ACEViewController.h"
+
 #import "ACEDrawingView.h"
+#import "ACEDrawingViewToolDraggableText.h"
+
 #import <AVFoundation/AVUtilities.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -162,7 +165,7 @@
                     break;
                     
                 case 8:
-//                    self.drawingView.drawTool = ACEDrawingToolTypeDraggableText;
+                    self.drawingView.drawToolIdentifier = kACEDrawingToolDraggableText;
                     break;
             }
             

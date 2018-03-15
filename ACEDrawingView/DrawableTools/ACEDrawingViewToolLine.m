@@ -66,9 +66,11 @@ NSString * const kACEDrawingToolViewLine = @"kACEDrawingToolViewLine";
     self.firstPoint = firstPoint;
 }
 
-- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+- (CGRect)moveInAreaFromPoint:(CGPoint)startPoint toPoint:(CGPoint)middlePoint toPoint:(CGPoint)endPoint
 {
     self.lastPoint = endPoint;
+    
+    return CGRectNull;
 }
 
 - (void)draw

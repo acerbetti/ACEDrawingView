@@ -85,24 +85,25 @@ NSString * const kACEDrawingToolViewPen = @"kACEDrawingToolViewPen";
     
 }
 
-- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+- (CGRect)moveInAreaFromPoint:(CGPoint)startPoint toPoint:(CGPoint)middlePoint toPoint:(CGPoint)endPoint
 {
-    
-}
-
-- (CGRect)addPathPreviousPreviousPoint:(CGPoint)p2Point withPreviousPoint:(CGPoint)p1Point withCurrentPoint:(CGPoint)cpoint {
-    
-    CGPoint mid1 = MID_POINT(p1Point, p2Point);
-    CGPoint mid2 = MID_POINT(cpoint, p1Point);
+    CGPoint mid1 = MID_POINT(middlePoint, startPoint);
+    CGPoint mid2 = MID_POINT(endPoint, middlePoint);
     CGMutablePathRef subpath = CGPathCreateMutable();
     CGPathMoveToPoint(subpath, NULL, mid1.x, mid1.y);
-    CGPathAddQuadCurveToPoint(subpath, NULL, p1Point.x, p1Point.y, mid2.x, mid2.y);
-    CGRect bounds = CGPathGetBoundingBox(subpath);
+    CGPathAddQuadCurveToPoint(subpath, NULL, middlePoint.x, middlePoint.y, mid2.x, mid2.y);
+    CGRect drawBox = CGPathGetBoundingBox(subpath);
     
     CGPathAddPath(self.path, NULL, subpath);
     CGPathRelease(subpath);
     
-    return bounds;
+    // final adjustements
+    drawBox.origin.x    -= self.lineWidth * 2.0;
+    drawBox.origin.y    -= self.lineWidth * 2.0;
+    drawBox.size.width  += self.lineWidth * 4.0;
+    drawBox.size.height += self.lineWidth * 4.0;
+    
+    return drawBox;
 }
 
 - (void)draw

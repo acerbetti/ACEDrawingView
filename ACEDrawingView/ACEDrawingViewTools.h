@@ -25,6 +25,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class ACEDrawingView;
+
 // default drawable tools
 extern NSString * _Nonnull const kACEDrawingToolViewArrow;
 extern NSString * _Nonnull const kACEDrawingToolViewEllipseFill;
@@ -40,7 +42,9 @@ extern NSString * _Nonnull const kACEDrawingToolViewRectangleStroke;
 + (nonnull NSString *)identifier;
 
 - (void)setInitialPoint:(CGPoint)firstPoint;
-- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
+
+- (CGRect)moveInAreaFromPoint:(CGPoint)startPoint toPoint:(CGPoint)middlePoint toPoint:(CGPoint)endPoint;
+
 - (void)draw;
 
 @end
@@ -60,6 +64,8 @@ extern NSString * _Nonnull const kACEDrawingToolViewRectangleStroke;
 #pragma mark -
 
 @protocol ACEDrawingViewDraggableTool<ACEDrawingViewTool>
+
+- (void)setDrawingView:(nonnull ACEDrawingView *)drawingView;
 
 @end
 
