@@ -64,7 +64,35 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         self.previewImageView.hidden = YES;
     });
+    
+    // Save Snapshot in DocumentDirectory
+    [self saveDrawingSnapshot];
 }
+
+- (void)saveDrawingSnapshot
+{
+    UIImage *snapShotImage = [self takeSnapshotOfDrawing:self.previewImageView];
+    NSData *data=UIImagePNGRepresentation(snapShotImage);
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString * timestamp = [NSString stringWithFormat:@"%@.png",[NSDate date]];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:timestamp];
+    [data writeToFile:filePath atomically:YES];
+}
+
+- (UIImage *)takeSnapshotOfDrawing:(UIImageView *)imageView
+{
+    UIGraphicsBeginImageContext(CGSizeMake(self.drawingView.frame.size.width, self.drawingView.frame.size.height));
+    [imageView drawViewHierarchyInRect:CGRectMake(0, 0, self.drawingView.frame.size.width, self.drawingView.frame.size.height) afterScreenUpdates:YES];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 
 - (IBAction)undo:(id)sender
 {
