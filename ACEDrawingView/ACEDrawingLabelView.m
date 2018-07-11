@@ -24,7 +24,6 @@
  */
 
 #import "ACEDrawingLabelView.h"
-#import <QuartzCore/QuartzCore.h>
 
 CG_INLINE CGPoint CGRectGetCenter(CGRect rect)
 {
@@ -57,8 +56,6 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
 
 @interface ACEDrawingLabelView () <UIGestureRecognizerDelegate, UITextFieldDelegate>
 
-@property (nonatomic, assign) CGFloat globalInset;
-
 @property (nonatomic, assign) CGRect initialBounds;
 @property (nonatomic, assign) CGFloat initialDistance;
 
@@ -70,6 +67,7 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
 @property (nonatomic, assign) CGFloat deltaAngle;
 @property (nonatomic, assign) CGRect beginBounds;
 
+@property (nonatomic, assign) CGSize globalInsets;
 @property (nonatomic, strong) CAShapeLayer *border;
 @property (nonatomic, strong) UITextField *labelTextField;
 @property (nonatomic, strong) UIButton *rotateButton;
@@ -116,13 +114,23 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
     
     self = [super initWithFrame:frame];
     if (self) {
-        self.globalInset = 12;
+        self.labelTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+        self.border = [CAShapeLayer layer];
+
+        _globalInsets = CGSizeMake(12, 12);
+        _closeButtonOffset = CGPointZero;
+        _rotateButtonOffset = CGPointZero;
+        _closeButtonSize = CGSizeMake(24, 24);
+        _rotateButtonSize = CGSizeMake(24, 24);
+        _shadowColor = [UIColor blackColor];
+        _shadowOffset = CGSizeMake(0, 5);
+        _shadowOpacity = 1;
+        _shadowRadius = 4;
         
         self.backgroundColor = [UIColor clearColor];
         [self setAutoresizingMask:(UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth)];
         self.borderColor = [UIColor redColor];
-        
-        self.labelTextField = [[UITextField alloc] initWithFrame:CGRectInset(self.bounds, self.globalInset, self.globalInset)];
+
         [self.labelTextField setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)];
         [self.labelTextField setClipsToBounds:YES];
         self.labelTextField.delegate = self;
@@ -131,28 +139,29 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
         self.labelTextField.textColor = [UIColor whiteColor];
         self.labelTextField.text = @"";
         [self.labelTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
-        
-        self.border = [CAShapeLayer layer];
+
         self.border.strokeColor = self.borderColor.CGColor;
         self.border.fillColor = nil;
         self.border.lineDashPattern = @[@4, @3];
         
         [self insertSubview:self.labelTextField atIndex:0];
         
-        self.closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.globalInset * 2, self.globalInset * 2)];
+        self.closeButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [self.closeButton setAutoresizingMask:(UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin)];
         self.closeButton.backgroundColor = [UIColor whiteColor];
-        self.closeButton.layer.cornerRadius = self.globalInset - 5;
+        self.closeButton.layer.cornerRadius = self.globalInsets.width - 5;
         self.closeButton.userInteractionEnabled = YES;
         [self addSubview:self.closeButton];
         
-        self.rotateButton = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width-self.globalInset*2, self.bounds.size.height-self.globalInset*2, self.globalInset*2, self.globalInset*2)];
+        self.rotateButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [self.rotateButton setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin)];
         self.rotateButton.backgroundColor = [UIColor whiteColor];
-        self.rotateButton.layer.cornerRadius = self.globalInset - 5;
+        self.rotateButton.layer.cornerRadius = self.globalInsets.width - 5;
         self.rotateButton.contentMode = UIViewContentModeCenter;
         self.rotateButton.userInteractionEnabled = YES;
         [self addSubview:self.rotateButton];
+
+        [self applyLayout];
         
         UIPanGestureRecognizer *moveGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveGesture:)];
         [self addGestureRecognizer:moveGesture];
@@ -165,7 +174,7 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
         
         UIPanGestureRecognizer *panRotateGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(rotateViewPanGesture:)];
         [self.rotateButton addGestureRecognizer:panRotateGesture];
-        
+
         [moveGesture requireGestureRecognizerToFail:closeTap];
         
         [self setEnableMoveRestriction:NO];
@@ -174,7 +183,6 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
         [self setShowsContentShadow:YES];
         
         [self showEditingHandles];
-        [self.labelTextField becomeFirstResponder];
     }
     return self;
 }
@@ -184,6 +192,37 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
     if (self.labelTextField) {
         self.border.path = [UIBezierPath bezierPathWithRect:self.labelTextField.bounds].CGPath;
         self.border.frame = self.labelTextField.bounds;
+    }
+}
+
+- (void)beginEditing
+{
+    [self.labelTextField becomeFirstResponder];
+}
+
+- (void)applyLayout
+{
+    _labelTextField.frame = CGRectInset(self.bounds, self.globalInsets.width, self.globalInsets.height);
+    _closeButton.frame = CGRectMake(self.closeButtonOffset.x, self.closeButtonOffset.y, self.closeButtonSize.width, self.closeButtonSize.height);
+    _rotateButton.frame = CGRectMake(
+                                     self.bounds.size.width - self.rotateButtonSize.width + self.rotateButtonOffset.x,
+                                     self.bounds.size.height - self.rotateButtonSize.height + self.rotateButtonOffset.y,
+                                     self.rotateButtonSize.width,
+                                     self.rotateButtonSize.height);
+}
+
+- (void)updateShadow
+{
+    if (_showsContentShadow) {
+        [self.layer setShadowColor:self.shadowColor.CGColor];
+        [self.layer setShadowOffset:self.shadowOffset];
+        [self.layer setShadowOpacity:self.shadowOpacity];
+        [self.layer setShadowRadius:self.shadowRadius];
+    } else {
+        [self.layer setShadowColor:[UIColor clearColor].CGColor];
+        [self.layer setShadowOffset:CGSizeZero];
+        [self.layer setShadowOpacity:0.0];
+        [self.layer setShadowRadius:0.0];
     }
 }
 
@@ -203,21 +242,34 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
     [self.rotateButton setUserInteractionEnabled:_enableRotate];
 }
 
+- (void)setShadowColor:(UIColor *)shadowColor
+{
+    _shadowColor = shadowColor;
+    [self updateShadow];
+}
+
+- (void)setShadowOffset:(CGSize)shadowOffset
+{
+    _shadowOffset = shadowOffset;
+    [self updateShadow];
+}
+
+- (void)setShadowOpacity:(CGFloat)shadowOpacity
+{
+    _shadowOpacity = shadowOpacity;
+    [self updateShadow];
+}
+
+- (void)setShadowRadius:(CGFloat)shadowRadius
+{
+    _shadowRadius = shadowRadius;
+    [self updateShadow];
+}
+
 - (void)setShowsContentShadow:(BOOL)showShadow
 {
     _showsContentShadow = showShadow;
-    
-    if (_showsContentShadow) {
-        [self.layer setShadowColor:[UIColor blackColor].CGColor];
-        [self.layer setShadowOffset:CGSizeMake(0, 5)];
-        [self.layer setShadowOpacity:1.0];
-        [self.layer setShadowRadius:4.0];
-    } else {
-        [self.layer setShadowColor:[UIColor clearColor].CGColor];
-        [self.layer setShadowOffset:CGSizeZero];
-        [self.layer setShadowOpacity:0.0];
-        [self.layer setShadowRadius:0.0];
-    }
+    [self updateShadow];
 }
 
 - (void)setCloseImage:(UIImage *)image
@@ -421,9 +473,11 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
         
         CGRect scaleRect = CGRectScale(self.initialBounds, scale, scale);
         
-        if (scaleRect.size.width >= (1+self.globalInset*2 + 20) && scaleRect.size.height >= (1+self.globalInset*2 + 20)) {
+        if (scaleRect.size.width >= (1+self.globalInsets.width*2 + 20) && scaleRect.size.height >= (1+self.globalInsets.height*2 + 20)) {
             if (self.fontSize < 100 || CGRectGetWidth(scaleRect) < CGRectGetWidth(self.bounds)) {
-                [self.labelTextField adjustsFontSizeToFillRect:scaleRect];
+                CGRect boundsCheckRect = scaleRect;
+                boundsCheckRect.size.width -= self.globalInsets.width * 2;
+                [self.labelTextField adjustsFontSizeToFillRect:boundsCheckRect];
                 [self setBounds:scaleRect];
             }
         }
@@ -499,7 +553,7 @@ static const NSUInteger ACELVMinimumFontSize = 9;
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
                                                                              attributes:@{ NSFontAttributeName : font }];
         
-        CGRect rectSize = [attributedText boundingRectWithSize:CGSizeMake(CGRectGetWidth(newBounds)-24, CGFLOAT_MAX)
+        CGRect rectSize = [attributedText boundingRectWithSize:CGSizeMake(CGRectGetWidth(newBounds), CGFLOAT_MAX)
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                        context:nil];
         
@@ -514,7 +568,10 @@ static const NSUInteger ACELVMinimumFontSize = 9;
 {
     NSString *text = (![self.text isEqualToString:@""] || !self.placeholder) ? self.text : self.placeholder;
     UIFont *font = [UIFont fontWithName:self.font.fontName size:self.font.pointSize];
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
+    // Hotfix: despite exact text measurement, label text ends up clipped either on the beginning or the end.
+    // Inserting a couple extra characters here makes the end stick out awkwardly sometimes, but avoids the
+    // issue if you rotate the text.
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[text stringByAppendingString:@"xx"]
                                                                          attributes:@{ NSFontAttributeName : font }];
     
     CGRect rectSize = [attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGRectGetHeight(self.frame)-24)

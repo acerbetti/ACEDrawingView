@@ -24,6 +24,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @protocol ACEDrawingLabelViewDelegate;
 
@@ -120,6 +121,74 @@
 @property (nonatomic, readonly) BOOL isEditing;
 
 /**
+ *  Offset of the close button from the upper left corner
+ *
+ *  Default: CGPointZero
+ */
+@property (nonatomic, assign) CGPoint closeButtonOffset;
+
+/**
+ *  Offset of the rotate button from the bottom right corner
+ *
+ *  Default: CGPointZero
+ */
+@property (nonatomic, assign) CGPoint rotateButtonOffset;
+
+/**
+ *  Size of the close button
+ *
+ *  Default: CGSize(24, 24)
+ */
+@property (nonatomic, assign) CGSize closeButtonSize;
+
+/**
+ *  Size of the rotate button
+ *
+ *  Default: CGSize(24, 24)
+ */
+@property (nonatomic, assign) CGSize rotateButtonSize;
+
+/**
+ *  UIButton instance for the close button so you can configure e.g. the corner
+ *  radius
+ */
+@property (nonatomic, readonly) UIButton *closeButton;
+
+/**
+ *  UIButton instance for the rotate button so you can configure e.g. the corner
+ *  radius
+ */
+@property (nonatomic, readonly) UIButton *rotateButton;
+
+/**
+ *  Layer shadow color
+ *
+ *  Default: UIColor.black
+ */
+@property (nonatomic, retain) UIColor *shadowColor;
+
+/**
+ *  Layer shadow offset
+ *
+ *  Default: CGSize(0, 5)
+ */
+@property (nonatomic, assign) CGSize shadowOffset;
+
+/**
+ *  Layer shadow opacity
+ *
+ *  Default: 1
+ */
+@property (nonatomic, assign) CGFloat shadowOpacity;
+
+/**
+ *  Layer shadow radius
+ *
+ *  Default: 4
+ */
+@property (nonatomic, assign) CGFloat shadowRadius;
+
+/**
  *  Hides border and control buttons.
  */
 - (void)hideEditingHandles;
@@ -142,9 +211,19 @@
 - (CGFloat)textAlpha;
 
 /**
- * Resizes content to fit rect
+ *  Resizes content to fit rect
  */
 - (void)resizeInRect:(CGRect)rect;
+
+/**
+ *  Internal
+ */
+- (void)beginEditing;
+
+/**
+ *  Internal
+ */
+- (void)applyLayout;
 
 @end
 
@@ -207,6 +286,14 @@
  *  @param label    A label object informing the delegate about action.
  */
 - (void)labelViewDidEndEditing:(ACEDrawingLabelView *)label;
+
+/**
+ *  Called just before a label is displayed. Configure values to make it look
+ *  the way you want.
+ *
+ *  @param label A label object informing the delegate about action.
+ */
+- (void)labelViewNeedsConfiguration:(ACEDrawingLabelView *)label;
 
 @end
 

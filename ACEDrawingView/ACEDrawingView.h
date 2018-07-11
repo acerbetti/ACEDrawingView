@@ -112,5 +112,6 @@ typedef NS_ENUM(NSUInteger, ACEDrawingMode) {
 - (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingTool>)tool;
 - (void)drawingView:(ACEDrawingView *)view didRedoDrawUsingTool:(id<ACEDrawingTool>)tool;
 - (void)drawingView:(ACEDrawingView *)view didUndoDrawUsingTool:(id<ACEDrawingTool>)tool;
+- (void)drawingView:(ACEDrawingView *)view configureTextToolLabelView:(ACEDrawingLabelView *)label;
 
 @end
