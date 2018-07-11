@@ -121,13 +121,6 @@
 @property (nonatomic, readonly) BOOL isEditing;
 
 /**
- *  Horizontal and vertical padding between inner text and selection box
- *
- *  Default: CGSize(12, 12)
- */
-@property (nonatomic, assign) CGSize globalInsets;
-
-/**
  *  Offset of the close button from the upper left corner
  *
  *  Default: CGPointZero

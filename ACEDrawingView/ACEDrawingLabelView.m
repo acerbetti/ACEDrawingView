@@ -67,6 +67,7 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
 @property (nonatomic, assign) CGFloat deltaAngle;
 @property (nonatomic, assign) CGRect beginBounds;
 
+@property (nonatomic, assign) CGSize globalInsets;
 @property (nonatomic, strong) CAShapeLayer *border;
 @property (nonatomic, strong) UITextField *labelTextField;
 @property (nonatomic, strong) UIButton *rotateButton;
@@ -208,7 +209,6 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
                                      self.bounds.size.height - self.rotateButtonSize.height + self.rotateButtonOffset.y,
                                      self.rotateButtonSize.width,
                                      self.rotateButtonSize.height);
-    _labelTextField
 }
 
 - (void)updateShadow
@@ -568,7 +568,10 @@ static const NSUInteger ACELVMinimumFontSize = 9;
 {
     NSString *text = (![self.text isEqualToString:@""] || !self.placeholder) ? self.text : self.placeholder;
     UIFont *font = [UIFont fontWithName:self.font.fontName size:self.font.pointSize];
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
+    // Hotfix: despite exact text measurement, label text ends up clipped either on the beginning or the end.
+    // Inserting a couple extra characters here makes the end stick out awkwardly sometimes, but avoids the
+    // issue if you rotate the text.
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[text stringByAppendingString:@"xx"]
                                                                          attributes:@{ NSFontAttributeName : font }];
     
     CGRect rectSize = [attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGRectGetHeight(self.frame)-24)
