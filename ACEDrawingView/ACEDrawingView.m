@@ -318,7 +318,7 @@
     
     // Handle special cases for tool types. The else case handles all the non-text drawing tools.
     // The draggable text tool is purposely left in for better code clarity, even though it does nothing.
-    if ([self.currentTool class] == [ACEDrawingDraggableTextTool class]) {
+    if ([self.currentTool isKindOfClass: [ACEDrawingDraggableTextTool class]]) {
         // do nothing
         
     } else {
