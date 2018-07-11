@@ -128,6 +128,8 @@
 
 - (void)drawingView:(ACEDrawingView *)view configureTextToolLabelView:(ACEDrawingLabelView *)label;
 {
+    // If you don't like the default text control styles, you can tweak them
+    // in this delegate method.
     label.shadowOffset = CGSizeMake(0, 1);
     label.shadowOpacity = 0.5;
     label.shadowRadius = 1;
