@@ -118,8 +118,8 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
         self.border = [CAShapeLayer layer];
 
         _globalInsets = CGSizeMake(12, 12);
-        _closeButtonOffset = CGPointMake(0, 0);
-        _rotateButtonOffset = CGPointMake(0, 0);
+        _closeButtonOffset = CGPointZero;
+        _rotateButtonOffset = CGPointZero;
         _closeButtonSize = CGSizeMake(24, 24);
         _rotateButtonSize = CGSizeMake(24, 24);
         _shadowColor = [UIColor blackColor];
