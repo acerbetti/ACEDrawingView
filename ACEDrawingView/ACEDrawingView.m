@@ -490,7 +490,8 @@
 
 - (void)hideTextToolHandles
 {
-    for (id<ACEDrawingTool> tool in self.pathArray) {
+    NSArray *pathArrayCopy = [self.pathArray copy];  // Avoid runtime error when mutating collection
+    for (id<ACEDrawingTool> tool in pathArrayCopy) {
         if ([tool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
             [(ACEDrawingDraggableTextTool *)tool hideHandle];
         }
