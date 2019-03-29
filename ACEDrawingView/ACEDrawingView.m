@@ -166,8 +166,16 @@
         }
         
     } else {
-        // set the draw point
-        [self.cacheImage drawAtPoint:CGPointZero];
+        // scale if needed (may be view's size is changed)
+        switch (self.drawMode) {
+            case ACEDrawingModeOriginalSize:
+                [self.cacheImage drawAtPoint:CGPointZero];
+                break;
+                
+            case ACEDrawingModeScale:
+                [self.cacheImage drawInRect:self.bounds];
+                break;
+        }
         [self.currentTool draw];
     }
     
