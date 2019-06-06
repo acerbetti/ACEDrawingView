@@ -550,14 +550,14 @@ static const NSUInteger ACELVMinimumFontSize = 9;
     
     for (NSUInteger i = ACELVMaximumFontSize; i > ACELVMinimumFontSize; i--) {
         UIFont *font = [UIFont fontWithName:self.font.fontName size:(CGFloat)i];
-        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[text stringByAppendingString:@"xx"]
                                                                              attributes:@{ NSFontAttributeName : font }];
         
         CGRect rectSize = [attributedText boundingRectWithSize:CGSizeMake(CGRectGetWidth(newBounds), CGFLOAT_MAX)
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                        context:nil];
         
-        if (CGRectGetHeight(rectSize) <= CGRectGetHeight(newBounds)) {
+        if (CGRectGetHeight(rectSize) + 24 <= CGRectGetHeight(newBounds)) {
             ((ACEDrawingLabelView *)self.superview).fontSize = (CGFloat)i-1;
             break;
         }
