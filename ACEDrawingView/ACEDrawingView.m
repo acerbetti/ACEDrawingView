@@ -89,7 +89,7 @@
     self.lineColor = kDefaultLineColor;
     self.lineWidth = kDefaultLineWidth;
     self.lineAlpha = kDefaultLineAlpha;
-
+    
     self.drawMode = ACEDrawingModeOriginalSize;
     
     // set the transparent background
@@ -259,7 +259,7 @@
             tool.drawingView = self;
             return tool;
         }
-
+            
         case ACEDrawingToolTypeRectagleStroke:
         {
             ACEDrawingRectangleTool *tool = ACE_AUTORELEASE([ACEDrawingRectangleTool new]);
@@ -297,6 +297,51 @@
         {
             return self.customDrawTool;
         }
+            
+        case ACEDrawingToolTypeTriangleStroke:
+        {
+            ACEDrawingTriangleTool *tool = ACE_AUTORELEASE([ACEDrawingTriangleTool new]);
+            tool.fill = NO;
+            return tool;
+        }
+            
+        case ACEDrawingToolTypePentagonStroke:
+        {
+            ACEDrawingPentagonTool *tool = ACE_AUTORELEASE([ACEDrawingPentagonTool new]);
+            tool.fill = NO;
+            return tool;
+        }
+            
+        case ACEDrawingToolTypeHexagoneStroke:
+        {
+            ACEDrawingHexagonTool *tool = ACE_AUTORELEASE([ACEDrawingHexagonTool new]);
+            tool.fill = NO;
+            return tool;
+        }
+            
+            
+        case ACEDrawingToolTypeTriangleStrokeFill:
+        {
+            ACEDrawingTriangleTool *tool = ACE_AUTORELEASE([ACEDrawingTriangleTool new]);
+            tool.fill = YES;
+            return tool;
+        }
+            
+        case ACEDrawingToolTypePentagonStrokeFill:
+        {
+            ACEDrawingPentagonTool *tool = ACE_AUTORELEASE([ACEDrawingPentagonTool new]);
+            tool.fill = YES;
+            return tool;
+        }
+            
+        case ACEDrawingToolTypeHexagoneStrokeFill:
+        {
+            ACEDrawingHexagonTool *tool = ACE_AUTORELEASE([ACEDrawingHexagonTool new]);
+            tool.fill = YES;
+            return tool;
+        }
+            
+            
     }
 }
 
@@ -368,7 +413,7 @@
         
     } else if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
         return;
-    
+        
     } else {
         [self.currentTool moveFromPoint:previousPoint1 toPoint:currentPoint];
         [self setNeedsDisplay];
@@ -536,7 +581,7 @@
             
             [self.undoStates removeLastObject];
             
-        // undo for a tools sub states
+            // undo for a tools sub states
         } else {
             [self.undoStates removeLastObject];
             if ([undoState.tool respondsToSelector:@selector(applyToolState:)]) {
@@ -646,7 +691,7 @@
 
 - (void)labelViewDidShowEditingHandles:(ACEDrawingLabelView *)label
 {
-    self.draggableTextView = label;    
+    self.draggableTextView = label;
 }
 
 - (void)labelViewDidHideEditingHandles:(ACEDrawingLabelView *)label
