@@ -39,6 +39,12 @@ typedef enum {
     ACEDrawingToolTypeEraser,
     ACEDrawingToolTypeDraggableText,
     ACEDrawingToolTypeCustom,
+    ACEDrawingToolTypeTriangleStrokeFill,
+    ACEDrawingToolTypeTriangleStroke,
+    ACEDrawingToolTypePentagonStrokeFill,
+    ACEDrawingToolTypePentagonStroke,
+    ACEDrawingToolTypeHexagoneStrokeFill,
+    ACEDrawingToolTypeHexagoneStroke,
 } ACEDrawingToolType;
 
 typedef NS_ENUM(NSUInteger, ACEDrawingMode) {

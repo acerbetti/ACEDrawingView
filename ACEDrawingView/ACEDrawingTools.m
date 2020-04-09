@@ -83,7 +83,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-	CGContextAddPath(context, path);
+    CGContextAddPath(context, path);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
@@ -101,9 +101,9 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     CGPathRelease(path);
     self.lineColor = nil;
-    #if !ACE_HAS_ARC
+#if !ACE_HAS_ARC
     [super dealloc];
-    #endif
+#endif
 }
 
 @end
@@ -117,8 +117,8 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
-
-	CGContextAddPath(context, path);
+    
+    CGContextAddPath(context, path);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineWidth(context, self.lineWidth);
     CGContextSetBlendMode(context, kCGBlendModeClear);
@@ -210,11 +210,11 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 - (void)setInitialPoint:(CGPoint)firstPoint
 {
     CGRect frame = CGRectMake(firstPoint.x, firstPoint.y, 50, 100);
-
+    
     _labelView = [[ACEDrawingLabelView alloc] initWithFrame:frame];
-
+    
     [self configureLabelView];
-
+    
     [_labelView beginEditing];
 }
 
@@ -231,7 +231,7 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     _labelView.fontName     = self.drawingView.draggableTextFontName ?: [UIFont systemFontOfSize:_labelView.fontSize].fontName;
     _labelView.closeImage   = self.drawingView.draggableTextCloseImage;
     _labelView.rotateImage  = self.drawingView.draggableTextRotateImage;
-
+    
     [_labelView.delegate labelViewNeedsConfiguration:_labelView];
     [_labelView applyLayout];
 }
@@ -546,6 +546,253 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
     CGFloat y = distance * sinf(angle);
     
     return CGPointMake(x, y);
+}
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+#if !ACE_HAS_ARC
+    [super dealloc];
+#endif
+}
+
+@end
+
+
+#pragma mark - ACEDrawingTriangleTool
+
+@interface ACEDrawingTriangleTool ()
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingTriangleTool
+
+@synthesize lineColor = _lineColor;
+@synthesize lineAlpha = _lineAlpha;
+@synthesize lineWidth = _lineWidth;
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    self.lastPoint = endPoint;
+}
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the properties
+    CGContextSetAlpha(context, self.lineAlpha);
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+    
+    double dx = (self.lastPoint.x - self.firstPoint.x);
+    double dy = (self.lastPoint.y - self.firstPoint.y);
+    double dist = sqrt(dx*dx + dy*dy);
+    
+    
+    CGPoint center = midPoint(self.firstPoint, self.lastPoint);
+    CGFloat diameter = dist / 2;
+    CGFloat sidesNumber = 3;
+        
+    // Now add the hexagon to the current path
+    CGContextMoveToPoint(context, center.x, center.y + diameter);
+    for(int i = 1; i < sidesNumber+1; ++i)
+    {
+        CGFloat x = diameter * sinf(i * 2.0 * M_PI / sidesNumber);
+        CGFloat y = diameter * cosf(i * 2.0 * M_PI / sidesNumber);
+        CGContextAddLineToPoint(context, center.x + x, center.y + y);
+    }
+    
+    
+    if (self.fill) {
+        CGContextDrawPath(context, kCGPathFillStroke);
+        CGContextSetFillColorWithColor(context, self.lineColor.CGColor);
+    } else {
+        CGContextStrokePath(context);
+    }
+    
+    // And close the subpath.
+    CGContextClosePath(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
+}
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+#if !ACE_HAS_ARC
+    [super dealloc];
+#endif
+}
+
+@end
+
+
+
+#pragma mark - ACEDrawingPentagonTool
+
+@interface ACEDrawingPentagonTool ()
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingPentagonTool
+
+@synthesize lineColor = _lineColor;
+@synthesize lineAlpha = _lineAlpha;
+@synthesize lineWidth = _lineWidth;
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    self.lastPoint = endPoint;
+}
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the properties
+    CGContextSetAlpha(context, self.lineAlpha);
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+    
+    double dx = (self.lastPoint.x - self.firstPoint.x);
+    double dy = (self.lastPoint.y - self.firstPoint.y);
+    double dist = sqrt(dx*dx + dy*dy);
+    
+    
+    CGPoint center = midPoint(self.firstPoint, self.lastPoint);
+    CGFloat diameter = dist / 2;
+    CGFloat sidesNumber = 5;
+        
+    // Now add the hexagon to the current path
+    CGContextMoveToPoint(context, center.x, center.y + diameter);
+    for(int i = 1; i < sidesNumber+1; ++i)
+    {
+        CGFloat x = diameter * sinf(i * 2.0 * M_PI / sidesNumber);
+        CGFloat y = diameter * cosf(i * 2.0 * M_PI / sidesNumber);
+        CGContextAddLineToPoint(context, center.x + x, center.y + y);
+    }
+    
+    
+    if (self.fill) {
+        CGContextDrawPath(context, kCGPathFillStroke);
+        CGContextSetFillColorWithColor(context, self.lineColor.CGColor);
+    } else {
+        CGContextStrokePath(context);
+    }
+    
+    // And close the subpath.
+    CGContextClosePath(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
+}
+
+- (void)dealloc
+{
+    self.lineColor = nil;
+#if !ACE_HAS_ARC
+    [super dealloc];
+#endif
+}
+
+@end
+
+
+#pragma mark - ACEDrawingHexagonTool
+
+@interface ACEDrawingHexagonTool ()
+@property (nonatomic, assign) CGPoint firstPoint;
+@property (nonatomic, assign) CGPoint lastPoint;
+@end
+
+#pragma mark -
+
+@implementation ACEDrawingHexagonTool
+
+@synthesize lineColor = _lineColor;
+@synthesize lineAlpha = _lineAlpha;
+@synthesize lineWidth = _lineWidth;
+
+- (void)setInitialPoint:(CGPoint)firstPoint
+{
+    self.firstPoint = firstPoint;
+}
+
+- (void)moveFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint
+{
+    self.lastPoint = endPoint;
+}
+
+- (void)draw
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // set the properties
+    CGContextSetAlpha(context, self.lineAlpha);
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextSetLineWidth(context, self.lineWidth);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+    
+    double dx = (self.lastPoint.x - self.firstPoint.x);
+    double dy = (self.lastPoint.y - self.firstPoint.y);
+    double dist = sqrt(dx*dx + dy*dy);
+    
+    
+    CGPoint center = midPoint(self.firstPoint, self.lastPoint);
+    CGFloat diameter = dist / 2;
+    CGFloat sidesNumber = 6;
+        
+    // Now add the hexagon to the current path
+    CGContextMoveToPoint(context, center.x, center.y + diameter);
+    for(int i = 1; i < sidesNumber+1; ++i)
+    {
+        CGFloat x = diameter * sinf(i * 2.0 * M_PI / sidesNumber);
+        CGFloat y = diameter * cosf(i * 2.0 * M_PI / sidesNumber);
+        CGContextAddLineToPoint(context, center.x + x, center.y + y);
+    }
+    
+    
+    if (self.fill) {
+        CGContextDrawPath(context, kCGPathFillStroke);
+        CGContextSetFillColorWithColor(context, self.lineColor.CGColor);
+    } else {
+        CGContextStrokePath(context);
+    }
+    
+    // And close the subpath.
+    CGContextClosePath(context);
+}
+
+- (ACEDrawingToolState *)captureToolState
+{
+    return [ACEDrawingToolState stateForTool:self];
 }
 
 - (void)dealloc

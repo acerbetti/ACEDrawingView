@@ -203,6 +203,33 @@
                 case 8:
                     self.drawingView.drawTool = ACEDrawingToolTypeDraggableText;
                     break;
+                    
+                case 9:
+                    self.drawingView.drawTool = ACEDrawingToolTypeTriangleStroke;
+                    break;
+                    
+                    
+                case 10:
+                    self.drawingView.drawTool = ACEDrawingToolTypeTriangleStrokeFill;
+                    break;
+                    
+                case 11:
+                    self.drawingView.drawTool = ACEDrawingToolTypePentagonStroke;
+                    break;
+                    
+                case 12:
+                    self.drawingView.drawTool = ACEDrawingToolTypePentagonStrokeFill;
+                    break;
+                    
+                case 13:
+                    
+                    self.drawingView.drawTool = ACEDrawingToolTypeHexagoneStroke;
+                    break;
+                    
+                case 14:
+                    
+                    self.drawingView.drawTool = ACEDrawingToolTypeHexagoneStrokeFill;
+                    break;
             }
             
             // if eraser, disable color and alpha selection
@@ -235,6 +262,12 @@
                                   @"Rect (Stroke)", @"Rect (Fill)",
                                   @"Ellipse (Stroke)", @"Ellipse (Fill)",
                                   @"Eraser", @"Draggable Text",
+                                  @"Tringle (Stroke)",
+                                  @"Tringle (Fill)",
+                                  @"Pentagon (Stroke)",
+                                  @"Pentagon (Fill)",
+                                  @"Hexagone (Stroke)",
+                                  @"Hexagone (Fill)",
                                   nil];
     
     [actionSheet setTag:kActionSheetTool];

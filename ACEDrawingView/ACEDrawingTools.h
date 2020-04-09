@@ -125,3 +125,24 @@
 
 @interface ACEDrawingArrowTool : NSObject<ACEDrawingTool>
 @end
+
+
+#pragma mark -
+
+@interface ACEDrawingTriangleTool : NSObject<ACEDrawingTool>
+@property (nonatomic, assign) BOOL fill;
+@end
+
+#pragma mark -
+
+@interface ACEDrawingPentagonTool : NSObject<ACEDrawingTool>
+@property (nonatomic, assign) BOOL fill;
+@end
+
+
+#pragma mark -
+
+@interface ACEDrawingHexagonTool : NSObject<ACEDrawingTool>
+@property (nonatomic, assign) BOOL fill;
+@end
+
