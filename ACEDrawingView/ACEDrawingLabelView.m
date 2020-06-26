@@ -138,6 +138,7 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
         self.labelTextField.tintColor = [UIColor redColor];
         self.labelTextField.textColor = [UIColor whiteColor];
         self.labelTextField.text = @"";
+        self.labelTextField.returnKeyType = UIReturnKeyDone;
         [self.labelTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
 
         self.border.strokeColor = self.borderColor.CGColor;
@@ -510,6 +511,14 @@ CG_INLINE CGSize CGAffineTransformGetScale(CGAffineTransform t)
     }
     
     [textField adjustsWidthToFillItsContents];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(labelViewDidReturn:)]) {
+        [self.delegate labelViewDidReturn:self];
+    }
+    return NO;
 }
 
 

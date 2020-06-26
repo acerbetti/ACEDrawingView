@@ -288,6 +288,13 @@
 - (void)labelViewDidEndEditing:(ACEDrawingLabelView *)label;
 
 /**
+ *  Occurs when the user taps the Done button while entering text.
+ *
+ *  @param label    A label object informing the delegate about action.
+ */
+- (void)labelViewDidReturn:(ACEDrawingLabelView *)label;
+
+/**
  *  Called just before a label is displayed. Configure values to make it look
  *  the way you want.
  *

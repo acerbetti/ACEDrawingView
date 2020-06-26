@@ -720,6 +720,11 @@
     }
 }
 
+- (void)labelViewDidReturn:(ACEDrawingLabelView *)label
+{
+    [self.draggableTextView hideEditingHandles];
+}
+
 - (ACEDrawingDraggableTextTool *)draggableTextToolForLabel:(ACEDrawingLabelView *)label
 {
     for (id<ACEDrawingTool> tool in self.pathArray) {
