@@ -3,4 +3,3 @@ osx_image: xcode11.6
 xcode_workspace: ACEDrawingViewDemo.xcworkspace
 xcode_scheme: ACEDrawingViewDemo
 xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 11
-xcode_sdk: iphonesimulator13.6
