@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author       = { 'Stefano Acerbetti' => 'acerbetti@gmail.com' }
   s.source       = { :git => 'https://github.com/acerbetti/ACEDrawingView.git', :tag => 'v2.2.1' }
   s.frameworks   = 'QuartzCore'
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.source_files = 'ACEDrawingView/*.{h,m}'
   s.resource_bundles = {
     'ACEDraggableText' => ['ACEDrawingView/ACEDraggableText/*.png'],
