@@ -1,5 +1,0 @@
-language: objective-c
-osx_image: xcode11.6
-xcode_workspace: ACEDrawingViewDemo.xcworkspace
-xcode_scheme: ACEDrawingViewDemo
-xcode_sdk: iphonesimulator13.6

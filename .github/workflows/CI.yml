@@ -1,0 +1,71 @@
+name: "ACEDrawingView CI"
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  Example:
+    name: Example Project (Latest Stable Xcode)
+    runs-on: macOS-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1.4.0
+        with: 
+          xcode-version: latest-stable
+
+      - name: Run pod install
+        run: pod install
+
+      - name: Build Project
+        uses: sersoft-gmbh/xcodebuild-action@v1.8.0
+        with:
+          workspace: ACEDrawingViewDemo.xcworkspace
+          scheme: ACEDrawingViewDemo
+          destination: name=iPhone 13 Pro
+          action: test
+          
+  Pods:
+    name: Cocoapods Lint (Latest Stable Xcode)
+    runs-on: macOS-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1.4.0
+        with: 
+          xcode-version: latest-stable
+
+      - name: Run pod lib lint dynamic-framework
+        run: pod lib lint --allow-warnings --fail-fast
+
+      - name: Run pod lib lint static-framework
+        run: pod lib lint --allow-warnings --fail-fast --use-libraries --use-modular-headers
+          
+  SwiftPM:
+    name: SwiftPM (Latest Stable Xcode)
+    runs-on: macOS-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Xcode version
+        uses: maxim-lobanov/setup-xcode@v1.4.0
+        with: 
+          xcode-version: latest-stable 
+
+      - name: Build
+        run: | # Move projects files temporarily to avoid interfering with SwiftPM build.
+          mv "ACEDrawingViewDemo.xcodeproj" "ACEDrawingViewDemo.xcodeproj_temp"
+          mv "ACEDrawingViewDemo.xcworkspace" "ACEDrawingViewDemo.xcworkspace_temp"
+          xcodebuild -scheme ACEDrawingView -destination generic/platform=iOS
+          mv "ACEDrawingViewDemo.xcodeproj_temp" "ACEDrawingViewDemo.xcodeproj"
+          mv "ACEDrawingViewDemo.xcworkspace_temp" "ACEDrawingViewDemo.xcworkspace"

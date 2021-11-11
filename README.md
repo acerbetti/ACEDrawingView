@@ -1,4 +1,4 @@
-ACEDrawingView [![Build Status](https://travis-ci.org/acerbetti/ACEDrawingView.svg?branch=master)](https://travis-ci.org/acerbetti/ACEDrawingView) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ACEDrawingView.svg)](http://cocoadocs.org/docsets/ACEDrawingView) [![Platform](https://img.shields.io/cocoapods/p/ACEDrawingView.svg?style=flat)](http://cocoadocs.org/docsets/ACEDrawingView)
+ACEDrawingView [![Build Status](https://github.com/acerbetti/ACEDrawingView/workflows/ACEDrawingView%20CI/badge.svg?branch=master)](https://github.com/acerbetti/ACEDrawingView/actions) [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ACEDrawingView.svg)](http://cocoadocs.org/docsets/ACEDrawingView) [![Platform](https://img.shields.io/cocoapods/p/ACEDrawingView.svg?style=flat)](http://cocoadocs.org/docsets/ACEDrawingView)
 ==============
 
 ![](https://github.com/acerbetti/ACEDrawingView/blob/master/Example.png?raw=true)      ![](https://github.com/deviserRahul/ACEDrawingView/blob/master/Example2.png?raw=true)
@@ -19,6 +19,10 @@ How-To
 
 1. Add `pod 'ACEDrawingView'` to your Podfile.
 2. Run `pod install`
+
+### SwiftPM
+
+Add `.package(url: "https://github.com/acerbetti/ACEDrawingView.git", from: "2.3.0")` to your `package.swift`
 
 
 Features

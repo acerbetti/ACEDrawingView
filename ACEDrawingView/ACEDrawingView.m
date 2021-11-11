@@ -96,7 +96,12 @@
     self.backgroundColor = [UIColor clearColor];
     
     // set the deafault draggable text icons
-    NSURL *bundleURL = [[NSBundle bundleForClass:self.classForCoder] URLForResource:@"ACEDraggableText" withExtension:@"bundle"];
+#ifdef SWIFT_PACKAGE
+    NSString *resourceName = @"ACEDrawingView_ACEDrawingView";
+#else
+    NSString *resourceName = @"ACEDraggableText";
+#endif
+    NSURL *bundleURL = [[NSBundle bundleForClass:self.classForCoder] URLForResource:resourceName withExtension:@"bundle"];
     if (bundleURL != nil) {
         self.draggableTextRotateImage = [UIImage imageWithContentsOfFile:[[NSBundle bundleWithURL:bundleURL] pathForResource:@"sticker_resize" ofType:@"png"]];
         self.draggableTextCloseImage  = [UIImage imageWithContentsOfFile:[[NSBundle bundleWithURL:bundleURL] pathForResource:@"sticker_close" ofType:@"png"]];
