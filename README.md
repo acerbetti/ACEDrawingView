@@ -6,7 +6,7 @@ See it in action
 --------------
 Check out the [Doodle+](https://doodle.caplaz.com/) app to see this powerful library in action
 
-[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/1741946/166181359-78139cc6-4c85-4cee-b783-0c9401ccdaeb.svg)](https://apps.apple.com/us/app/doodle/id1615495712)
+[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/1741946/166181359-78139cc6-4c85-4cee-b783-0c9401ccdaeb.svg)](https://apps.apple.com/app/apple-store/id1615495712?pt=118008813&ct=GitHub&mt=8)
 
 
 Screenshots
