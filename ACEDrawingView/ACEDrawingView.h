@@ -24,7 +24,13 @@
  */
 
 #import <UIKit/UIKit.h>
+
+/**
+ Swift Package Manager uses this header as the umbrella header. Therefore import all public headers here.
+ */
 #import "ACEDrawingLabelView.h"
+#import "ACEDrawingTools.h"
+#import "ACEDrawingToolState.h"
 
 #define ACEDrawingViewVersion   2.0.1
 
