@@ -557,7 +557,7 @@ static const NSUInteger ACELVMinimumFontSize = 9;
                                                        options:NSStringDrawingUsesLineFragmentOrigin
                                                        context:nil];
         
-        if (CGRectGetHeight(rectSize) <= CGRectGetHeight(newBounds)) {
+        if (CGRectGetHeight(rectSize) + 24 <= CGRectGetHeight(newBounds)) {
             ((ACEDrawingLabelView *)self.superview).fontSize = (CGFloat)i-1;
             break;
         }
@@ -571,7 +571,7 @@ static const NSUInteger ACELVMinimumFontSize = 9;
     // Hotfix: despite exact text measurement, label text ends up clipped either on the beginning or the end.
     // Inserting a couple extra characters here makes the end stick out awkwardly sometimes, but avoids the
     // issue if you rotate the text.
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[text stringByAppendingString:@"xx"]
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
                                                                          attributes:@{ NSFontAttributeName : font }];
     
     CGRect rectSize = [attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGRectGetHeight(self.frame)-24)
