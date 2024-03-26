@@ -434,6 +434,7 @@
     if ([self.currentTool isKindOfClass:[ACEDrawingDraggableTextTool class]]) {
         if (self.draggableTextView.isEditing) {
             [self.draggableTextView hideEditingHandles];
+            [self finishDrawing];
         } else {
             CGPoint point = [[touches anyObject] locationInView:self];
             [self.currentTool setInitialPoint:point];
